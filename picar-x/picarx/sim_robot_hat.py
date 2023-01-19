@@ -1,4 +1,5 @@
 # ****************************** From filedb.py ****************************
+import smbus
 import os
 from time import sleep
 
@@ -484,3 +485,321 @@ class PWM(I2C):
             # print(temp)
             pulse_width = temp * timer[self.timer]["arr"]
             self.pulse_width(pulse_width)
+
+
+# ***************************** From pin.py **********************************
+# from .basic import _Basic_class
+# import RPi.GPIO as GPIO
+
+
+class Pin(_Basic_class):
+    # OUT = GPIO.OUT
+    # IN = GPIO.IN
+    # IRQ_FALLING = GPIO.FALLING
+    # IRQ_RISING = GPIO.RISING
+    # IRQ_RISING_FALLING = GPIO.BOTH
+    # PULL_UP = GPIO.PUD_UP
+    # PULL_DOWN = GPIO.PUD_DOWN
+    PULL_NONE = None
+
+    _dict = {
+        "BOARD_TYPE": 12,
+    }
+
+    _dict_1 = {
+        "D0": 17,
+        "D1": 18,
+        "D2": 27,
+        "D3": 22,
+        "D4": 23,
+        "D5": 24,
+        "D6": 25,
+        "D7": 4,
+        "D8": 5,
+        "D9": 6,
+        "D10": 12,
+        "D11": 13,
+        "D12": 19,
+        "D13": 16,
+        "D14": 26,
+        "D15": 20,
+        "D16": 21,
+        "SW": 19,
+        "USER": 19,
+        "LED": 26,
+        "BOARD_TYPE": 12,
+        "RST": 16,
+        "BLEINT": 13,
+        "BLERST": 20,
+        "MCURST": 21,
+
+    }
+
+    _dict_2 = {
+        "D0": 17,
+        "D1": 4,  # Changed
+        "D2": 27,
+        "D3": 22,
+        "D4": 23,
+        "D5": 24,
+        "D6": 25,  # Removed
+        "D7": 4,  # Removed
+        "D8": 5,  # Removed
+        "D9": 6,
+        "D10": 12,
+        "D11": 13,
+        "D12": 19,
+        "D13": 16,
+        "D14": 26,
+        "D15": 20,
+        "D16": 21,
+        "SW": 25,  # Changed
+        "USER": 25,
+        "LED": 26,
+        "BOARD_TYPE": 12,
+        "RST": 16,
+        "BLEINT": 13,
+        "BLERST": 20,
+        "MCURST": 5,  # Changed
+    }
+
+    def __init__(self, *value):
+        super().__init__()
+        # GPIO.setmode(GPIO.BCM)
+        # GPIO.setwarnings(False)
+
+        self.check_board_type()
+
+        if len(value) > 0:
+            pin = value[0]
+        if len(value) > 1:
+            mode = value[1]
+        else:
+            mode = None
+        if len(value) > 2:
+            setup = value[2]
+        else:
+            setup = None
+        if isinstance(pin, str):
+            try:
+                self._board_name = pin
+                self._pin = self.dict()[pin]
+            except Exception as e:
+                print(e)
+                self._error('Pin should be in %s, not %s' % (self._dict.keys(), pin))
+        elif isinstance(pin, int):
+            self._pin = pin
+        else:
+            self._error('Pin should be in %s, not %s' % (self._dict.keys(), pin))
+        self._value = 0
+        self.init(mode, pull=setup)
+        self._info("Pin init finished.")
+
+    def check_board_type(self):
+        type_pin = self.dict()["BOARD_TYPE"]
+        # GPIO.setup(type_pin, GPIO.IN)
+        # if GPIO.input(type_pin) == 0:
+        #     self._dict = self._dict_1
+        # else:
+        #     self._dict = self._dict_2
+
+    def init(self, mode, pull=PULL_NONE):
+        self._pull = pull
+        self._mode = mode
+        if mode != None:
+            if pull != None:
+                GPIO.setup(self._pin, mode, pull_up_down=pull)
+            else:
+                GPIO.setup(self._pin, mode)
+
+    def dict(self, *_dict):
+        if len(_dict) == 0:
+            return self._dict
+        else:
+            if isinstance(_dict, dict):
+                self._dict = _dict
+            else:
+                self._error(
+                    'argument should be a pin dictionary like {"my pin": ezblock.Pin.cpu.GPIO17}, not %s' % _dict)
+
+    def __call__(self, value):
+        return self.value(value)
+
+    def value(self, *value):
+        if len(value) == 0:
+            # if self._mode in [None, self.OUT]:
+            #     self.mode(self.IN)
+            # result = GPIO.input(self._pin)
+            self._debug("read pin %s: %s" % (self._pin, result))
+            return result
+        else:
+            value = value[0]
+            # if self._mode in [None, self.IN]:
+            #     self.mode(self.OUT)
+            # GPIO.output(self._pin, value)
+            return value
+
+    def on(self):
+        return self.value(1)
+
+    def off(self):
+        return self.value(0)
+
+    def high(self):
+        return self.on()
+
+    def low(self):
+        return self.off()
+
+    def mode(self, *value):
+        if len(value) == 0:
+            return (self._mode, self._pull)
+        else:
+            self._mode = value[0]
+            # if len(value) == 1:
+                # GPIO.setup(self._pin, self._mode)
+            # elif len(value) == 2:
+            #     self._pull = value[1]
+                # GPIO.setup(self._pin, self._mode, self._pull)
+
+    def pull(self, *value):
+        return self._pull
+
+    # def irq(self, handler=None, trigger=None, bouncetime=200):
+        # self.mode(self.IN)
+        # GPIO.add_event_detect(self._pin, trigger, callback=handler, bouncetime=bouncetime)
+
+    def name(self):
+        return "GPIO%s" % self._pin
+
+    def names(self):
+        return [self.name, self._board_name]
+
+    class cpu(object):
+        GPIO17 = 17
+        GPIO18 = 18
+        GPIO27 = 27
+        GPIO22 = 22
+        GPIO23 = 23
+        GPIO24 = 24
+        GPIO25 = 25
+        GPIO26 = 26
+        GPIO4 = 4
+        GPIO5 = 5
+        GPIO6 = 6
+        GPIO12 = 12
+        GPIO13 = 13
+        GPIO19 = 19
+        GPIO16 = 16
+        GPIO26 = 26
+        GPIO20 = 20
+        GPIO21 = 21
+
+        def __init__(self):
+            pass
+
+
+# *************************** From adc.py ************************************
+
+class ADC(I2C):
+    ADDR = 0x14  # 扩展板的地址为0x14
+
+    def __init__(self, chn):  # 参数，通道数，树莓派扩展板上有8个adc通道分别为"A0, A1, A2, A3, A4, A5, A6, A7"
+        super().__init__()
+        if isinstance(chn, str):
+            if chn.startswith("A"):  # 判断穿境来的参数是否为A开头，如果是，取A后面的数字出来
+                chn = int(chn[1:])
+            else:
+                raise ValueError("ADC channel should be between [A0, A7], not {0}".format(chn))
+        if chn < 0 or chn > 7:  # 判断取出来的数字是否在0~7的范围内
+            self._error('Incorrect channel range')
+        chn = 7 - chn
+        self.chn = chn | 0x10  # 给从机地址
+        self.reg = 0x40 + self.chn
+        # self.bus = smbus.SMBus(1)
+
+    def read(self):  # adc通道读取数---写一次数据，读取两次数据 （读取的数据范围是0~4095）
+        self._debug("Write 0x%02X to 0x%02X" % (self.chn, self.ADDR))
+        # self.bus.write_byte(self.ADDR, self.chn)      # 写入数据
+        self.send([self.chn, 0, 0], self.ADDR)
+
+        self._debug("Read from 0x%02X" % (self.ADDR))
+        # value_h = self.bus.read_byte(self.ADDR)
+        value_h = self.recv(1, self.ADDR)[0]  # 读取数据
+
+        self._debug("Read from 0x%02X" % (self.ADDR))
+        # value_l = self.bus.read_byte(self.ADDR)
+        value_l = self.recv(1, self.ADDR)[0]  # 读取数据（读两次）
+
+        value = (value_h << 8) + value_l
+        self._debug("Read value: %s" % value)
+        return value
+
+    def read_voltage(self):  # 将读取的数据转化为电压值（0~3.3V）
+        return self.read * 3.3 / 4095
+
+
+# **************************** From modules.py *******************************
+
+class Grayscale_Module(object):
+    def __init__(self, pin0, pin1, pin2, reference=1000):
+        self.chn_0 = ADC(pin0)
+        self.chn_1 = ADC(pin1)
+        self.chn_2 = ADC(pin2)
+        self.reference = reference
+
+    def get_line_status(self, fl_list):
+
+        if fl_list[0] > self.reference and fl_list[1] > self.reference and fl_list[2] > self.reference:
+            return 'stop'
+
+        elif fl_list[1] <= self.reference:
+            return 'forward'
+
+        elif fl_list[0] <= self.reference:
+            return 'right'
+
+        elif fl_list[2] <= self.reference:
+            return 'left'
+
+    def get_grayscale_data(self):
+        adc_value_list = []
+        adc_value_list.append(self.chn_0.read())
+        adc_value_list.append(self.chn_1.read())
+        adc_value_list.append(self.chn_2.read())
+        return adc_value_list
+
+
+class Ultrasonic():
+    def __init__(self, trig, echo, timeout=0.02):
+        self.trig = trig
+        self.echo = echo
+        self.timeout = timeout
+
+    def _read(self):
+        self.trig.low()
+        time.sleep(0.01)
+        self.trig.high()
+        time.sleep(0.00001)
+        self.trig.low()
+        pulse_end = 0
+        pulse_start = 0
+        timeout_start = time.time()
+        while self.echo.value()==0:
+            pulse_start = time.time()
+            if pulse_start - timeout_start > self.timeout:
+                return -1
+        while self.echo.value()==1:
+            pulse_end = time.time()
+            if pulse_end - timeout_start > self.timeout:
+                return -1
+        during = pulse_end - pulse_start
+        cm = round(during * 340 / 2 * 100, 2)
+        return cm
+
+    def read(self, times=10):
+        for i in range(times):
+            a = self._read()
+            if a != -1:
+                return a
+        return -1
