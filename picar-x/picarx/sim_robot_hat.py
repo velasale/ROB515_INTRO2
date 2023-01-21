@@ -600,6 +600,7 @@ class Pin(_Basic_class):
                 self._pin = self.dict()[pin]
             except Exception as e:
                 # This is what is being printed in command line
+                logging.debug("This is where the pin is printed")
                 print(e)
                 self._error('Pin should be in %s, not %s' % (self._dict.keys(), pin))
         elif isinstance(pin, int):
