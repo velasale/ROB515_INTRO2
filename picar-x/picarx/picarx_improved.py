@@ -92,11 +92,10 @@ class Picarx(object):
         tring, echo= ultrasonic_pins
         self.ultrasonic = Ultrasonic(Pin(tring), Pin(echo))
 
-        atexit.register(self.goodbye())
+        atexit.register(self.goodbye)
 
     def goodbye(self):
-        self.set_motor_speed(self.left_rear_pwm_pin, 0)
-        self.set_motor_speed(self.right_rear_pwm_pin, 0)
+        self.set_power(0)
         print("GoodBye.")
 
     def set_motor_speed(self,motor,speed):
