@@ -98,7 +98,7 @@ class Picarx(object):
         self.set_power(0)
         print("GoodBye.")
 
-    def set_motor_speed(self,motor,speed):
+    def set_motor_speed(self, motor, speed):
         # global cali_speed_value,cali_dir_value
         motor -= 1
         if speed >= 0:
@@ -203,16 +203,16 @@ class Picarx(object):
             print("power_scale:", power_scale)
             if (current_angle / abs_current_angle) > 0:
                 self.set_motor_speed(1, speed * power_scale)
-                self.set_motor_speed(2, speed)
+                self.set_motor_speed(2, -speed)
                 # print("current_speed: %s %s"%(1*speed * power_scale, -speed))
             else:
                 self.set_motor_speed(1, speed)
-                self.set_motor_speed(2, speed * power_scale)
+                self.set_motor_speed(2, -speed * power_scale)
                 # print("current_speed: %s %s"%(speed, -1*speed * power_scale))
         else:
             print("I am here")
             self.set_motor_speed(1, speed)
-            self.set_motor_speed(2, speed)
+            self.set_motor_speed(2, -speed)
 
     def stop(self):
         self.set_motor_speed(1, 0)
