@@ -42,7 +42,7 @@ def sample_code(px):
     finally:
         px.forward(0)
 
-def steering(px):
+# def steering(px):
 
 
 
