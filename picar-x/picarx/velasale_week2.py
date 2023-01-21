@@ -55,6 +55,13 @@ def steering(px):
         px.set_dir_servo_angle(angle)
         time.sleep(0.01)
 
+def parallel_parking(px):
+
+
+def k_turning(px):
+
+
+
 
 
 if __name__ == "__main__":
