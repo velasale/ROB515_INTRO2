@@ -42,13 +42,22 @@ def sample_code(px):
     finally:
         px.forward(0)
 
-# def steering(px):
+def steering(px):
+    for angle in range(0, 35):
+        px.set_dir_servo_angle(angle)
+        time.sleep(0.01)
+    time.sleep(2)
+    for angle in range(35, -35, -1):
+        px.set_dir_servo_angle(angle)
+        time.sleep(0.01)
+    time.sleep(2)
+    for angle in range(-35, 0):
+        px.set_dir_servo_angle(angle)
+        time.sleep(0.01)
 
 
 
 if __name__ == "__main__":
     px = picarx_improved.Picarx()
-    px.set_dir_servo_angle(10)
-    print("Current Angle at", str(px.dir_current_angle))
-    # sample_code(px)
+    steering(px)
 
