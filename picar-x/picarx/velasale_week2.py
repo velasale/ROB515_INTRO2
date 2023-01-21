@@ -50,5 +50,5 @@ if __name__ == "__main__":
     px = picarx_improved.Picarx()
     px.set_dir_servo_angle(30)
     print("Current Angle at", str(px.dir_current_angle))
-    sample_code(px)
+    # sample_code(px)
 
