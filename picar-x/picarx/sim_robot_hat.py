@@ -217,14 +217,17 @@ def _retry_wrapper(func):
 
 
 class I2C(_Basic_class):
+
     MASTER = 0
     SLAVE = 1
     RETRY = 5
 
     def __init__(self, *args, **kargs):  # *args表示位置参数（形式参数），可无，； **kargs表示默认值参数，可无。
+        pass
         super().__init__()
         self._bus = 1
         self._smbus = SMBus(self._bus)
+
 
     @_retry_wrapper
     def _i2c_write_byte(self, addr, data):  # i2C 写系列函数
@@ -380,6 +383,7 @@ timer = [
 
 
 class PWM(I2C):
+
     REG_CHN = 0x20
     REG_FRE = 0x30
     REG_PSC = 0x40

@@ -1,3 +1,7 @@
+import logging
+import atexit
+from logdecorator import log_on_start , log_on_end , log_on_error
+
 import time
 try:
     from robot_hat import *
@@ -8,6 +12,10 @@ except ImportError:
     print("This computer does not appear to be a PiCar-X system (robot is not present). Shadowing hardware calls with substitute functions")
     from sim_robot_hat import *
 
+# For Debugging
+logging_format = "%(asctime)s: %(message)s"
+logging.basicConfig(format=logging_format, level=logging.INFO, datefmt="%H:%M:%S")
+logging.getLogger().setLevel(logging.DEBUG)
 
 # from robot_hat import Pin, PWM, Servo, fileDB
 # from robot_hat import Grayscale_Module, Ultrasonic
@@ -27,6 +35,9 @@ UserHome = os.popen('getent passwd %s | cut -d: -f 6'%User).readline().strip()
 config_file = '%s/.config/picar-x/picar-x.conf'%UserHome
 
 
+@log_on_start(logging.DEBUG , "Picarx Class Starts ")
+@log_on_error(logging.DEBUG , "Picarx Class error ")
+@log_on_end(logging.DEBUG , "Picarx Class ends successfully ")
 class Picarx(object):
     PERIOD = 4095
     PRESCALER = 10
@@ -215,3 +226,4 @@ if __name__ == "__main__":
     px.forward(50)
     time.sleep(1)
     px.stop()
+    logging.debug("success")
