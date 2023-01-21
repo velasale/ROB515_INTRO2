@@ -167,8 +167,8 @@ class Servo(_Basic_class):
         super().__init__()
         self.pwm = pwm
         self.pwm.period(4095)
-        prescaler = int(float(self.pwm.CLOCK) /self.pwm._freq/self.pwm.period())
-        self.pwm.prescaler(prescaler)
+        # prescaler = int(float(self.pwm.CLOCK) /self.pwm._freq/self.pwm.period())
+        # self.pwm.prescaler(prescaler)
         # self.angle(90)
 
     # angle ranges -90 to 90 degrees
