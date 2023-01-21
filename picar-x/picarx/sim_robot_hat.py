@@ -609,11 +609,11 @@ class Pin(_Basic_class):
     def check_board_type(self):
         pass
         type_pin = self.dict()["BOARD_TYPE"]
-        GPIO.setup(type_pin, GPIO.IN)
-        if GPIO.input(type_pin) == 0:
-            self._dict = self._dict_1
-        else:
-            self._dict = self._dict_2
+        # GPIO.setup(type_pin, GPIO.IN)
+        # if GPIO.input(type_pin) == 0:
+        #     self._dict = self._dict_1
+        # else:
+        #     self._dict = self._dict_2
 
     def init(self, mode, pull=PULL_NONE):
         pass
