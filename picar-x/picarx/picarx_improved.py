@@ -233,7 +233,11 @@ class Picarx(object):
 
 if __name__ == "__main__":
     px = Picarx()
-    px.forward(100)
-    time.sleep(5)
+    px.forward(10)
+    time.sleep(2)
     px.stop()
+    px.forward(50)
+    time.sleep(2)
+    px.forward(100)
+    time.sleep(2)
     logging.debug("success")
