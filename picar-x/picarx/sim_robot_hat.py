@@ -173,6 +173,7 @@ class Servo(_Basic_class):
 
     # angle ranges -90 to 90 degrees
     def angle(self, angle):
+        pass
         if not (isinstance(angle, int) or isinstance(angle, float)):
             raise ValueError("Angle value should be int or float value, not %s"%type(angle))
         if angle < -90:
@@ -189,6 +190,7 @@ class Servo(_Basic_class):
 
     # pwm_value ranges MIN_PW 500 to MAX_PW 2500 degrees
     def set_pwm(self,pwm_value):
+        pass
         if pwm_value > self.MAX_PW:
             pwm_value =  self.MAX_PW
         if pwm_value < self.MIN_PW:
@@ -287,6 +289,7 @@ class I2C(_Basic_class):
         return addresses
 
     def send(self, send, addr, timeout=0):  # 发送数据，addr为从机地址，send为数据
+        pass
         if isinstance(send, bytearray):
             data_all = list(send)
         elif isinstance(send, int):
@@ -334,6 +337,7 @@ class I2C(_Basic_class):
         return result
 
     def mem_write(self, data, addr, memaddr, timeout=5000, addr_size=8):  # memaddr match to chn
+        pass
         if isinstance(data, bytearray):
             data_all = list(data)
         elif isinstance(data, list):
@@ -368,6 +372,7 @@ class I2C(_Basic_class):
         return buf
 
     def writeto_mem(self, addr, memaddr, data):
+        pass
         self.mem_write(data, addr, memaddr)
 
 
@@ -419,6 +424,7 @@ class PWM(I2C):
         self.freq(50)
 
     def i2c_write(self, reg, value):
+        pass
         value_h = value >> 8
         value_l = value & 0xff
         self._debug("i2c write: [0x%02X, 0x%02X, 0x%02X, 0x%02X]"%(self.ADDR, reg, value_h, value_l))
@@ -426,6 +432,7 @@ class PWM(I2C):
         self.send([reg, value_h, value_l], self.ADDR)
 
     def freq(self, *freq):
+        pass
         if len(freq) == 0:
             return self._freq
         else:
@@ -600,14 +607,16 @@ class Pin(_Basic_class):
         self._info("Pin init finished.")
 
     def check_board_type(self):
+        pass
         type_pin = self.dict()["BOARD_TYPE"]
-        # GPIO.setup(type_pin, GPIO.IN)
-        # if GPIO.input(type_pin) == 0:
-        #     self._dict = self._dict_1
-        # else:
-        #     self._dict = self._dict_2
+        GPIO.setup(type_pin, GPIO.IN)
+        if GPIO.input(type_pin) == 0:
+            self._dict = self._dict_1
+        else:
+            self._dict = self._dict_2
 
     def init(self, mode, pull=PULL_NONE):
+        pass
         self._pull = pull
         self._mode = mode
         if mode != None:
@@ -669,9 +678,10 @@ class Pin(_Basic_class):
     def pull(self, *value):
         return self._pull
 
-    # def irq(self, handler=None, trigger=None, bouncetime=200):
-        # self.mode(self.IN)
-        # GPIO.add_event_detect(self._pin, trigger, callback=handler, bouncetime=bouncetime)
+    def irq(self, handler=None, trigger=None, bouncetime=200):
+        pass
+        self.mode(self.IN)
+        GPIO.add_event_detect(self._pin, trigger, callback=handler, bouncetime=bouncetime)
 
     def name(self):
         return "GPIO%s" % self._pin
