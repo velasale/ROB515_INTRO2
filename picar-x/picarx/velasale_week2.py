@@ -2,6 +2,8 @@ import picarx_improved
 import time
 
 def sample_code(px):
+    """ Sample code from https://docs.sunfounder.com/projects/picar-x/en/latest/python/python_move.html
+    """
     try:
 
         px.forward(30)
@@ -40,8 +42,13 @@ def sample_code(px):
     finally:
         px.forward(0)
 
+def steering(px):
+
+
 
 if __name__ == "__main__":
     px = picarx_improved.Picarx()
+    px.set_dir_servo_angle()
+    print("Current Angle at", str(px.dir_current_angle))
     sample_code(px)
 
