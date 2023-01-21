@@ -13,7 +13,7 @@ def sample_code():
             px.set_dir_servo_angle(angle)
             time.sleep(0.01)
         for angle in range(-35,0):
-            px.set_dir_from picarx import Picarxservo_angle(angle)
+            px.set_dir_servo_angle(angle)
             time.sleep(0.01)
         px.forward(0)
         time.sleep(1)
