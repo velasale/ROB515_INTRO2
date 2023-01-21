@@ -1,9 +1,9 @@
 import picarx_improved
 import time
 
-def sample_code():
+def sample_code(px):
     try:
-        px = picarx_improved.Picarx()
+
         px.forward(30)
         time.sleep(0.5)
         for angle in range(0,35):
@@ -41,8 +41,7 @@ def sample_code():
         px.forward(0)
 
 
-
 if __name__ == "__main__":
-
-    sample_code()
+    px = picarx_improved.Picarx()
+    sample_code(px)
 
