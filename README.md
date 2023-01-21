@@ -10,7 +10,6 @@ run python file at the picar:
 ```console
 sudo python3 ~/RobotSystems/picar-x/picarx/picarx_improved.py
 ```
-dfdf
 
 
 run calibration:
