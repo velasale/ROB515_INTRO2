@@ -15,7 +15,7 @@ except ImportError:
 # For Debugging
 logging_format = "%(asctime)s: %(message)s"
 logging.basicConfig(format=logging_format, level=logging.INFO, datefmt="%H:%M:%S")
-# logging.getLogger().setLevel(logging.DEBUG)
+logging.getLogger().setLevel(logging.DEBUG)
 
 # from robot_hat import Pin, PWM, Servo, fileDB
 # from robot_hat import Grayscale_Module, Ultrasonic
@@ -191,7 +191,7 @@ class Picarx(object):
 
     def forward(self, speed):
         current_angle = self.dir_current_angle
-        logging.debug("Current Angle", current_angle)
+        logging.debug("Current Angle: " + str(current_angle))
 
         if current_angle != 0:
             abs_current_angle = abs(current_angle)
