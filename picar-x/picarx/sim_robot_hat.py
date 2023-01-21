@@ -200,6 +200,7 @@ class Servo(_Basic_class):
 
 
 # ****************************** From i2c.py ********************************
+
 # from .basic import _Basic_class
 import smbus
 from smbus import SMBus
@@ -499,6 +500,7 @@ class PWM(I2C):
 
 
 # ***************************** From pin.py **********************************
+
 # from .basic import _Basic_class
 # import RPi.GPIO as GPIO
 
@@ -576,6 +578,7 @@ class Pin(_Basic_class):
 
     def __init__(self, *value):
         super().__init__()
+
         # GPIO.setmode(GPIO.BCM)
         # GPIO.setwarnings(False)
 
@@ -596,6 +599,7 @@ class Pin(_Basic_class):
                 self._board_name = pin
                 self._pin = self.dict()[pin]
             except Exception as e:
+                # This is what is being printed in command line
                 print(e)
                 self._error('Pin should be in %s, not %s' % (self._dict.keys(), pin))
         elif isinstance(pin, int):
