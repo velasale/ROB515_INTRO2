@@ -1,6 +1,6 @@
 import logging
 import atexit
-from logdecorator import log_on_start , log_on_end , log_on_error
+# from logdecorator import log_on_start , log_on_end , log_on_error
 
 import time
 try:
@@ -15,7 +15,7 @@ except ImportError:
 # For Debugging
 logging_format = "%(asctime)s: %(message)s"
 logging.basicConfig(format=logging_format, level=logging.INFO, datefmt="%H:%M:%S")
-logging.getLogger().setLevel(logging.DEBUG)
+# logging.getLogger().setLevel(logging.DEBUG)
 
 # from robot_hat import Pin, PWM, Servo, fileDB
 # from robot_hat import Grayscale_Module, Ultrasonic
@@ -35,9 +35,10 @@ UserHome = os.popen('getent passwd %s | cut -d: -f 6'%User).readline().strip()
 config_file = '%s/.config/picar-x/picar-x.conf'%UserHome
 
 
-@log_on_start(logging.DEBUG , "Picarx Class Starts ")
-@log_on_error(logging.DEBUG , "Picarx Class error ")
-@log_on_end(logging.DEBUG , "Picarx Class ends successfully ")
+
+# @log_on_start(logging.DEBUG , "Picarx Class Starts ")
+# @log_on_error(logging.DEBUG , "Picarx Class error ")
+# @log_on_end(logging.DEBUG , "Picarx Class ends successfully ")
 class Picarx(object):
     PERIOD = 4095
     PRESCALER = 10
@@ -90,7 +91,12 @@ class Picarx(object):
         # usage: distance = self.ultrasonic.read()
         tring, echo= ultrasonic_pins
         self.ultrasonic = Ultrasonic(Pin(tring), Pin(echo))
-        
+
+    @atexit.register
+    def goodbye(self):
+        self.set_motor_speed(self.left_rear_pwm_pin, 0)
+        self.set_motor_speed(self.right_rear_pwm_pin, 0)
+        print("GoodBye.")
 
     def set_motor_speed(self,motor,speed):
         # global cali_speed_value,cali_dir_value
