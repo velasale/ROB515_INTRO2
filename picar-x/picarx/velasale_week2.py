@@ -1,8 +1,7 @@
 import picarx_improved
 import time
 
-
-if __name__ == "__main__":
+def sample_code():
     try:
         px = picarx_improved.Picarx()
         px.forward(30)
@@ -14,7 +13,7 @@ if __name__ == "__main__":
             px.set_dir_servo_angle(angle)
             time.sleep(0.01)
         for angle in range(-35,0):
-            px.set_dir_servo_angle(angle)
+            px.set_dir_from picarx import Picarxservo_angle(angle)
             time.sleep(0.01)
         px.forward(0)
         time.sleep(1)
@@ -40,3 +39,10 @@ if __name__ == "__main__":
 
     finally:
         px.forward(0)
+
+
+
+if __name__ == "__main__":
+
+    sample_code()
+
