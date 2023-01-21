@@ -11,3 +11,9 @@ run python file at the picar:
 sudo python3 ~/RobotSystems/picar-x/picarx/picarx_improved.py
 ```
 dfdf
+
+
+run calibration:
+```console
+sudo python3 ~/RobotSystems/picar-x/example/calibration/calibration.py
+```
