@@ -210,7 +210,7 @@ class Picarx(object):
                 self.set_motor_speed(2, speed * power_scale)
                 # print("current_speed: %s %s"%(speed, -1*speed * power_scale))
         else:
-
+            print("I am here")
             self.set_motor_speed(1, -speed)
             self.set_motor_speed(2, speed)
 
