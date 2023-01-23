@@ -42,6 +42,7 @@ def sample_code(px):
     finally:
         px.forward(0)
 
+
 def steering(px):
     for angle in range(0, 35):
         px.set_dir_servo_angle(angle)
@@ -54,6 +55,7 @@ def steering(px):
     for angle in range(-35, 0):
         px.set_dir_servo_angle(angle)
         time.sleep(0.01)
+
 
 def parallel_parking_left(px):
     # Move Forward a bit
@@ -72,13 +74,43 @@ def parallel_parking_left(px):
     time.sleep(2)
 
 
-def k_turning(px):
+def k_turning_left(px):
+    """
+    Three point turn (sometimes called Y-turn, K-turn, or broken U-turn)
+    """
+    # 1st Point: Steer left and move forward
+    px.set_dir_servo_angle(35)
+    px.forward(5)
+    time.sleep(4)
+    px.stop()
 
+    # 2nd Point: Steer Right and move backward
+    px.set_dir_servo_angle(-35)
+    px.backward(5)
+    time.sleep(4)
+    px.stop()
 
+    # 3rd Point: Steer Left and move forward
+    px.set_dir_servo_angle(35)
+    while px.dir_current_angle > 0:
+        px.forward(5)
+        time.sleep(0.1)
+        angle = px.dir_current_angle - 5
+        px.set_dir_servo_angle(angle)
 
+    time.sleep(2)
 
 
 if __name__ == "__main__":
     px = picarx_improved.Picarx()
-    steering(px)
+    while True:
+        # Ask user
+        maneuver = input("Enter desired maneuver (1: k-turning, 2:parallel)")
 
+        # Execute
+        if maneuver == "1":
+            k_turning_left(px)
+        elif maneuver == "2":
+            parallel_parking_left(px)
+        else:
+            pass
