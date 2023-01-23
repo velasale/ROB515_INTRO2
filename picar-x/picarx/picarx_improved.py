@@ -1,5 +1,6 @@
 import logging
 import atexit
+import math
 # from logdecorator import log_on_start , log_on_end , log_on_error
 
 import time
@@ -92,9 +93,13 @@ class Picarx(object):
         tring, echo= ultrasonic_pins
         self.ultrasonic = Ultrasonic(Pin(tring), Pin(echo))
 
-        atexit.register(self.goodbye)
+        atexit.register(self.cleanup)
 
-    def goodbye(self):
+        # Picarx Parameters
+        self.car_length = 95    # distance between front and rear wheels in [mm]
+        self.car_width = 80     # distance between front wheels in [mm]
+
+    def cleanup(self):
         self.set_power(0)
         print("GoodBye.")
 
@@ -192,24 +197,46 @@ class Picarx(object):
         current_angle = self.dir_current_angle
         logging.debug("Current Angle: " + str(current_angle))
 
-        if current_angle != 0:
-            abs_current_angle = abs(current_angle)
-            # if abs_current_angle >= 0:
-            if abs_current_angle > 40:
-                abs_current_angle = 40
-            # power_scale = (100 - abs_current_angle) / 100.0
-            power_scale = 1
-            print("power_scale:", power_scale)
-            if (current_angle / abs_current_angle) > 0:
-                self.set_motor_speed(1, -1*speed * power_scale)
-                self.set_motor_speed(2, speed)
-                # print("current_speed: %s %s"%(1*speed * power_scale, -speed))
-            else:
-                self.set_motor_speed(1, -1*speed)
-                self.set_motor_speed(2, speed * power_scale)
-                # print("current_speed: %s %s"%(speed, -1*speed * power_scale))
-        else:
+        # if current_angle != 0:
+        #     abs_current_angle = abs(current_angle)
+        #     # if abs_current_angle >= 0:
+        #     if abs_current_angle > 40:
+        #         abs_current_angle = 40
+        #     # power_scale = (100 - abs_current_angle) / 100.0
+        #     power_scale = 1
+        #     print("power_scale:", power_scale)
+        #     if (current_angle / abs_current_angle) > 0:
+        #         self.set_motor_speed(1, -1*speed * power_scale)
+        #         self.set_motor_speed(2, speed)
+        #         # print("current_speed: %s %s"%(1*speed * power_scale, -speed))
+        #     else:
+        #         self.set_motor_speed(1, -1*speed)
+        #         self.set_motor_speed(2, speed * power_scale)
+        #         # print("current_speed: %s %s"%(speed, -1*speed * power_scale))
 
+        if current_angle > 0:
+            # Center of Rotation (COR) of each front wheel
+            cor_left = self.car_length / math.tan(math.radians(current_angle)) - self.car_width / 2
+            cor_right = self.car_length / math.tan(math.radians(current_angle)) + self.car_width / 2
+            # Front wheel's speed ratio required to match the curve
+            ratio = cor_left / cor_right
+            print("Current angle: ", str(current_angle), " and speed ratio: ", str(ratio))
+
+            self.set_motor_speed(1, -1 * ratio * speed)
+            self.set_motor_speed(2, speed)
+
+        elif current_angle < 0:
+            # Center of Rotation (COR) of each front wheel
+            cor_left = self.car_length / math.tan(math.radians(current_angle)) + self.car_width / 2
+            cor_right = self.car_length / math.tan(math.radians(current_angle)) - self.car_width / 2
+            # Front wheel's speed ratio required to match the curve
+            ratio = cor_right / cor_left
+            print("Current angle: ", str(current_angle), " and speed ratio: ", str(ratio))
+
+            self.set_motor_speed(2, ratio * speed)
+            self.set_motor_speed(1, -1 * speed)
+
+        else:
             self.set_motor_speed(1, -1*speed)
             self.set_motor_speed(2, speed)
 
