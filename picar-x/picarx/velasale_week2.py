@@ -74,6 +74,10 @@ def parallel_parking_left(px):
     time.sleep(2)
 
 
+def parallel_parking_right():
+    pass
+
+
 def k_turning_left(px):
     """
     Three point turn (sometimes called Y-turn, K-turn, or broken U-turn)
@@ -101,16 +105,29 @@ def k_turning_left(px):
     time.sleep(2)
 
 
+def k_turning_right(px):
+    pass
+
+
 if __name__ == "__main__":
     px = picarx_improved.Picarx()
     while True:
         # Ask user
+        side = input("In what direction do you want to maneuver: Left or Right")
         maneuver = input("Enter desired maneuver (1: k-turning, 2:parallel, 3:)")
 
-        # Execute
-        if maneuver == "1":
-            k_turning_left(px)
-        elif maneuver == "2":
-            parallel_parking_left(px)
+        if side == "Left":
+            if maneuver == "1":
+                k_turning_left(px)
+            elif maneuver == "2":
+                parallel_parking_left(px)
+            else:
+                pass
         else:
-            pass
+            if maneuver == "1":
+                k_turning_right(px)
+            elif maneuver == "2":
+                parallel_parking_right(px)
+            else:
+                pass
+
