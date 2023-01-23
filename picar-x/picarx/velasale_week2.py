@@ -74,7 +74,7 @@ def parallel_parking_left(px):
     time.sleep(2)
 
 
-def parallel_parking_right():
+def parallel_parking_right(px):
     pass
 
 
