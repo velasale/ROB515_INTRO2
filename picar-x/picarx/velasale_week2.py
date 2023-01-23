@@ -105,7 +105,7 @@ if __name__ == "__main__":
     px = picarx_improved.Picarx()
     while True:
         # Ask user
-        maneuver = input("Enter desired maneuver (1: k-turning, 2:parallel)")
+        maneuver = input("Enter desired maneuver (1: k-turning, 2:parallel, 3:)")
 
         # Execute
         if maneuver == "1":
