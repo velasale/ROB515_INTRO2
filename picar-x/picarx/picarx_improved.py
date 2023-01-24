@@ -219,8 +219,8 @@ class Picarx(object):
 
         if current_angle > 0:
             # Center of Rotation (COR) of each front wheel
-            cor_left = self.car_length / math.tan(math.radians(current_angle)) - self.car_width / 2
-            cor_right = self.car_length / math.tan(math.radians(current_angle)) + self.car_width / 2
+            cor_left = math.abs(self.car_length / math.tan(math.radians(current_angle))) - self.car_width / 2
+            cor_right = math.abs(self.car_length / math.tan(math.radians(current_angle))) + self.car_width / 2
             # Front wheel's speed ratio required to match the curve
             ratio = cor_left / cor_right
             print("Current angle: ", str(current_angle), " and speed ratio: ", str(ratio))
@@ -230,8 +230,8 @@ class Picarx(object):
 
         elif current_angle < 0:
             # Center of Rotation (COR) of each front wheel
-            cor_left = self.car_length / math.tan(math.radians(current_angle)) + self.car_width / 2
-            cor_right = self.car_length / math.tan(math.radians(current_angle)) - self.car_width / 2
+            cor_left = math.abs(self.car_length / math.tan(math.radians(current_angle))) + self.car_width / 2
+            cor_right = math.asb(self.car_length / math.tan(math.radians(current_angle))) - self.car_width / 2
             # Front wheel's speed ratio required to match the curve
             ratio = cor_right / cor_left
             print("Current angle: ", str(current_angle), " and speed ratio: ", str(ratio))
