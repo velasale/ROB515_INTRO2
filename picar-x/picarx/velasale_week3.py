@@ -27,6 +27,12 @@ class gray_interpreter():
         ## It should be robust to different lighting conditions, with an option
         ## to have the "target" darker or lighter than the surrounding floor
 
+    def position(self):
+        """
+        This method outputs the location of the robot relative to the line as a value
+        on the interval [-1, 1], with positive values being to the left of the robot.
+        """
+
 
 class gray_controller():
 
@@ -250,9 +256,12 @@ def week_2(px):
 
 
 def week_3(px):
+    """ Sensor-control integration"""
+
     sensors = px.get_grayscale_data()
     time.sleep(0.1)
     print(sensors)
+
 
 if __name__ == "__main__":
     px = picarx_improved.Picarx()
