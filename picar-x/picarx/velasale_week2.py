@@ -109,18 +109,35 @@ def k_turning_right(px):
     pass
 
 
+def fw_bw_straight(px):
+    goal_speed = 100
+    speed = 0
+    dt = 0.01
+    while speed < goal_speed:
+        print("...accelerating...")
+        speed += px.car_accel * dt
+        px.forward(speed)
+        time.sleep(dt)
+
+    print("... goal speed reached...")
+    time.sleep(3)
+    px.stop()
+
+
 if __name__ == "__main__":
     px = picarx_improved.Picarx()
     while True:
         # Ask user
         side = input("In what direction do you want to maneuver: Left or Right")
-        maneuver = input("Enter desired maneuver (1: k-turning, 2:parallel, 3:)")
+        maneuver = input("Enter desired maneuver (1: k-turning, 2:parallel, 3:fw_bw)")
 
         if side == "Left":
             if maneuver == "1":
                 k_turning_left(px)
             elif maneuver == "2":
                 parallel_parking_left(px)
+            elif maneuver == "3":
+                fw_bw_straight(px)
             else:
                 pass
         else:
@@ -128,6 +145,8 @@ if __name__ == "__main__":
                 k_turning_right(px)
             elif maneuver == "2":
                 parallel_parking_right(px)
+            elif maneuver == "3":
+                fw_bw_straight(px)
             else:
                 pass
 
