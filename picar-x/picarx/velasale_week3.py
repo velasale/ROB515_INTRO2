@@ -212,5 +212,6 @@ if __name__ == "__main__":
 
     # Week 3:
         sensors = px.get_grayscale_data()
+        time.sleep(0.1)
         print (sensors)
 
