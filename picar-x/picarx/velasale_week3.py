@@ -2,6 +2,48 @@ import picarx_improved
 import time
 
 
+class gray_interpreter():
+
+    def __init__(self, dark_threshold=1000, light_threshold=1500, polarity=100):
+
+        self.dark_threshold = dark_threshold
+        self.light_threshold = light_threshold
+        self.polarity = polarity
+
+    def sharp_edge(self, gray_list):
+        """
+        Method to identify a change in the sensor values
+        """
+
+        ## Identify if there is a sharp change in the sensor values
+        ## (indicative of an edge)
+
+
+        ## Using the edge location and sign, to determine both:
+        ## (a) whether the system is to the left or right
+        ## (b) and whether it is very off-center or only slightly off-center
+
+
+        ## It should be robust to different lighting conditions, with an option
+        ## to have the "target" darker or lighter than the surrounding floor
+
+
+class gray_controller():
+
+    def __init__(self, scale_factor=1.0):
+
+        self.scale_factor = scale_factor
+
+    def steer_towards_line(self, ):
+        """
+        Method to steer var towards the center of the line
+        """
+
+        steering_angle = 00
+
+        return steering_angle
+
+
 def sample_code(px):
     """ Sample code from https://docs.sunfounder.com/projects/picar-x/en/latest/python/python_move.html
     """
@@ -182,36 +224,41 @@ def fw_bw(px, speed, angle):
     px.stop()
 
 
+def week_2(px):
+    # Ask user
+    side = input("In what direction do you want to maneuver (L: Left, R: Right)\n")
+    maneuver = input("Enter desired maneuver (1: k-turning, 2:parallel, 3:fw_bw)\n")
+
+    if side == "L":
+        if maneuver == "1":
+            k_turning(px, side)
+        elif maneuver == "2":
+            parallel_parking(px, side)
+        elif maneuver == "3":
+            fw_bw(px, 40, -5)
+        else:
+            pass
+    else:
+        if maneuver == "1":
+            k_turning(px, side)
+        elif maneuver == "2":
+            parallel_parking(px, side)
+        elif maneuver == "3":
+            fw_bw(px, 40, 5)
+        else:
+            pass
+
+
+def week_3(px):
+    sensors = px.get_grayscale_data()
+    time.sleep(0.1)
+    print(sensors)
+
 if __name__ == "__main__":
     px = picarx_improved.Picarx()
 
-
     while True:
-        # Ask user
-        # side = input("In what direction do you want to maneuver (L: Left, R: Right)\n")
-        # maneuver = input("Enter desired maneuver (1: k-turning, 2:parallel, 3:fw_bw)\n")
-        #
-        # if side == "L":
-        #     if maneuver == "1":
-        #         k_turning(px, side)
-        #     elif maneuver == "2":
-        #         parallel_parking(px, side)
-        #     elif maneuver == "3":
-        #         fw_bw(px, 40, -5)
-        #     else:
-        #         pass
-        # else:
-        #     if maneuver == "1":
-        #         k_turning(px, side)
-        #     elif maneuver == "2":
-        #         parallel_parking(px, side)
-        #     elif maneuver == "3":
-        #         fw_bw(px, 40, 5)
-        #     else:
-        #         pass
+        # week_2(px)
+        week_3(px)
 
-    # Week 3:
-        sensors = px.get_grayscale_data()
-        time.sleep(0.1)
-        print (sensors)
 
