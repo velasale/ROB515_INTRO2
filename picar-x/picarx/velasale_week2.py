@@ -109,10 +109,11 @@ def k_turning_right(px):
     pass
 
 
-def fw_bw_straight(px):
+def fw_bw(px, speed, angle):
 
+    px.set_dir_servo_angle(angle)
     # First Move Forward
-    goal_speed = 40
+    goal_speed = speed
     speed = 0
     dt = 0.005
 
@@ -159,6 +160,10 @@ def fw_bw_straight(px):
     px.stop()
 
 
+def circle(px):
+
+
+
 
 if __name__ == "__main__":
     px = picarx_improved.Picarx()
@@ -173,7 +178,7 @@ if __name__ == "__main__":
             elif maneuver == "2":
                 parallel_parking_left(px)
             elif maneuver == "3":
-                fw_bw_straight(px)
+                fw_bw(px, 40, 35)
             else:
                 pass
         else:
@@ -182,7 +187,7 @@ if __name__ == "__main__":
             elif maneuver == "2":
                 parallel_parking_right(px)
             elif maneuver == "3":
-                fw_bw_straight(px)
+                fw_bw(px, 40, -35)
             else:
                 pass
 
