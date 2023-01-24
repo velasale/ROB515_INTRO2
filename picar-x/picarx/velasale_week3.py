@@ -258,7 +258,7 @@ if __name__ == "__main__":
     px = picarx_improved.Picarx()
 
     while True:
-        week_2(px)
-        # week_3(px)
+        # week_2(px)
+        week_3(px)
 
 
