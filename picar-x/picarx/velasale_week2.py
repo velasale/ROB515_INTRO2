@@ -89,22 +89,28 @@ def k_turning(px, side):
     """
     Three point turn (sometimes called Y-turn, K-turn, or broken U-turn)
     """
+    factor = 1
+    if side == "L":
+        factor = 1
+    elif side == "R":
+        factor = -1
+
     # 1st Point: Steer left and move forward
-    px.set_dir_servo_angle(px.car_max_dir_angle)
+    px.set_dir_servo_angle(px.car_max_dir_angle * factor)
     px.forward(5)
     time.sleep(1)
     px.stop()
     time.sleep(1)
 
     # 2nd Point: Steer Right and move backward
-    px.set_dir_servo_angle(-px.car_max_dir_angle)
+    px.set_dir_servo_angle(-px.car_max_dir_angle * factor)
     px.forward(-5)
     time.sleep(1)
     px.stop()
     time.sleep(1)
 
     # 3rd Point: Steer Left and move forward
-    px.set_dir_servo_angle(px.car_max_dir_angle)
+    px.set_dir_servo_angle(px.car_max_dir_angle * factor)
     while px.dir_current_angle > 0:
         px.forward(5)
         time.sleep(0.1)
