@@ -5,9 +5,9 @@
 ## 1.1 Shell the picar-x
 Open one terminal and secure shell (ssh) the picar-x from your host pc.
 
-Choice 1: If you are in within OSU campus
+Choice 1: If you are within OSU campus (ssh user@PiCar#.engr.oregonstate.edu)
 ```console
-ssh alejo@PiCar19.engr.oregonstate.edu (ssh user@PiCar#.engr.oregonstate.edu)
+ssh alejo@PiCar19.engr.oregonstate.edu 
 ```
 
 Choice 2: If you are in another wireless network (ssh user@piname.local)
