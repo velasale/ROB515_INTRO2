@@ -1,6 +1,7 @@
 import picarx_improved
 import time
 
+
 def sample_code(px):
     """ Sample code from https://docs.sunfounder.com/projects/picar-x/en/latest/python/python_move.html
     """
@@ -178,12 +179,6 @@ def fw_bw(px, speed, angle):
         time.sleep(dt)
 
     px.stop()
-
-
-def circle(px):
-    pass
-
-
 
 
 if __name__ == "__main__":
