@@ -150,7 +150,7 @@ def fw_bw_straight(px):
     print("-------- Phase 2: Coasting at goal speed --------")
     time.sleep(3)
 
-    while speed > 0:
+    while speed < 0:
         print("------------- Phase 3: Decelerating -------------")
         speed += px.car_accel * dt
         px.forward(speed)
