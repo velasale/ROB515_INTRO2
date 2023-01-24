@@ -112,6 +112,7 @@ def k_turning(px, side):
 
     # 3rd Point: Steer Left and move forward
     px.set_dir_servo_angle(-1 * px.car_max_dir_angle * factor)
+    # Gradually adjust the steering angle to zero
     if side == "R":
         while px.dir_current_angle > 0:
             px.forward(5)
