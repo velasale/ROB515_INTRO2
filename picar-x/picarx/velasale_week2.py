@@ -63,6 +63,9 @@ def parallel_parking(px, side):
     px.forward(5)
     time.sleep(1)
 
+    px.stop()
+    time.sleep(1)
+
     if side == "L":
         factor = 1
     elif side == "R":
