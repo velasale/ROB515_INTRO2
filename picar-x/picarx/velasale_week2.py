@@ -110,9 +110,12 @@ def k_turning_right(px):
 
 
 def fw_bw_straight(px):
-    goal_speed = 4
+
+    # First Move Forward
+    goal_speed = 40
     speed = 0
     dt = 0.005
+
     while speed < goal_speed:
         print("Phase 1: Accelerating...")
         speed += px.car_accel * dt
@@ -129,6 +132,28 @@ def fw_bw_straight(px):
         time.sleep(dt)
 
     px.stop()
+
+    # Then Move Backward
+    goal_speed = -40
+    speed = 0
+
+    while speed > goal_speed:
+        print("Phase 1: Accelerating...")
+        speed -= px.car_accel * dt
+        px.forward(speed)
+        time.sleep(dt)
+
+    print("Phase 2: Coasting at goal speed...")
+    time.sleep(3)
+
+    while speed > 0:
+        print("Phase 3: Decelerating...")
+        speed += px.car_accel * dt
+        px.forward(speed)
+        time.sleep(dt)
+
+    px.stop()
+
 
 
 if __name__ == "__main__":
