@@ -67,11 +67,11 @@ def parallel_parking_left(px):
     # Steer wheels one direction
     px.set_dir_servo_angle(-25)
     px.forward(-5)
-    time.sleep(2)
+    time.sleep(1)
     # Steer wheels opposite direction
     px.set_dir_servo_angle(25)
     px.forward(-5)
-    time.sleep(2)
+    time.sleep(1)
     px.stop()
 
 
