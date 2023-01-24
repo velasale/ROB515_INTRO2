@@ -57,26 +57,27 @@ def steering(px):
         time.sleep(0.01)
 
 
-def parallel_parking_left(px):
+def parallel_parking(px, side):
     # Move Forward a bit
     px.set_dir_servo_angle(0)
     px.forward(5)
     time.sleep(1)
 
+    if side == "L":
+        factor = 1
+    elif side == "R":
+        factor = -1
+
     # Move Backward
     # Steer wheels one direction
-    px.set_dir_servo_angle(-25)
+    px.set_dir_servo_angle(factor * -25)
     px.forward(-5)
     time.sleep(0.8)
     # Steer wheels opposite direction
-    px.set_dir_servo_angle(25)
+    px.set_dir_servo_angle(factor * 25)
     px.forward(-5)
     time.sleep(0.8)
     px.stop()
-
-
-def parallel_parking_right(px):
-    pass
 
 
 def k_turning_left(px):
@@ -178,7 +179,7 @@ if __name__ == "__main__":
             if maneuver == "1":
                 k_turning_left(px)
             elif maneuver == "2":
-                parallel_parking_left(px)
+                parallel_parking(px, side)
             elif maneuver == "3":
                 fw_bw(px, 40, -5)
             else:
@@ -187,7 +188,7 @@ if __name__ == "__main__":
             if maneuver == "1":
                 k_turning_right(px)
             elif maneuver == "2":
-                parallel_parking_right(px)
+                parallel_parking(px, side)
             elif maneuver == "3":
                 fw_bw(px, 40, 5)
             else:
