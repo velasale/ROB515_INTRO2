@@ -69,14 +69,16 @@ def parallel_parking(px, side):
         factor = -1
 
     # Move Backward
-    # Steer wheels one direction
+    # Steer wheels in one direction
     px.set_dir_servo_angle(factor * -25)
     px.forward(-5)
     time.sleep(0.8)
-    # Steer wheels opposite direction
+    # Steer wheels in the opposite direction
     px.set_dir_servo_angle(factor * 25)
     px.forward(-5)
     time.sleep(0.8)
+
+    px.set_dir_servo_angle(0)
     px.stop()
 
 
