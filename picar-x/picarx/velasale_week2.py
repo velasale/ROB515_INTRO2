@@ -134,6 +134,7 @@ def fw_bw_straight(px):
         time.sleep(dt)
 
     px.stop()
+    time.sleep(4)
 
     # Then Move Backward
     goal_speed = -40
