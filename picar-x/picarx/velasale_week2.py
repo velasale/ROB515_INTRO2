@@ -112,6 +112,7 @@ def k_turning(px, side):
         px.set_dir_servo_angle(angle)
 
     time.sleep(2)
+    px.stop()
 
 
 def fw_bw(px, speed, angle):
