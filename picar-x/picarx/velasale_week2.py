@@ -179,7 +179,7 @@ if __name__ == "__main__":
             elif maneuver == "2":
                 parallel_parking_left(px)
             elif maneuver == "3":
-                fw_bw(px, 40, -35)
+                fw_bw(px, 40, -30)
             else:
                 pass
         else:
@@ -188,7 +188,7 @@ if __name__ == "__main__":
             elif maneuver == "2":
                 parallel_parking_right(px)
             elif maneuver == "3":
-                fw_bw(px, 40, 35)
+                fw_bw(px, 40, 30)
             else:
                 pass
 
