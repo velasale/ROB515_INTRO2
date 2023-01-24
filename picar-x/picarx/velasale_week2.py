@@ -96,21 +96,21 @@ def k_turning(px, side):
         factor = -1
 
     # 1st Point: Steer left and move forward
-    px.set_dir_servo_angle(px.car_max_dir_angle * factor)
+    px.set_dir_servo_angle(-1 * px.car_max_dir_angle * factor)
     px.forward(5)
     time.sleep(1)
     px.stop()
     time.sleep(1)
 
     # 2nd Point: Steer Right and move backward
-    px.set_dir_servo_angle(-px.car_max_dir_angle * factor)
+    px.set_dir_servo_angle(px.car_max_dir_angle * factor)
     px.forward(-5)
     time.sleep(1)
     px.stop()
     time.sleep(1)
 
     # 3rd Point: Steer Left and move forward
-    px.set_dir_servo_angle(px.car_max_dir_angle * factor)
+    px.set_dir_servo_angle(-1 * px.car_max_dir_angle * factor)
     while px.dir_current_angle > 0:
         px.forward(5)
         time.sleep(0.1)
