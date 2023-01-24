@@ -115,13 +115,13 @@ def k_turning(px, side):
     if side == "R":
         while px.dir_current_angle > 0:
             px.forward(5)
-            time.sleep(0.1)
+            time.sleep(0.2)
             angle = px.dir_current_angle - 5
             px.set_dir_servo_angle(angle)
     elif side == "L":
         while px.dir_current_angle < 0:
             px.forward(5)
-            time.sleep(0.1)
+            time.sleep(0.2)
             angle = px.dir_current_angle + 5
             px.set_dir_servo_angle(angle)
 
