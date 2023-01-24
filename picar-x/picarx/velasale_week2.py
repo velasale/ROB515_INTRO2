@@ -128,10 +128,10 @@ if __name__ == "__main__":
     px = picarx_improved.Picarx()
     while True:
         # Ask user
-        side = input("In what direction do you want to maneuver: Left or Right")
-        maneuver = input("Enter desired maneuver (1: k-turning, 2:parallel, 3:fw_bw)")
+        side = input("In what direction do you want to maneuver (L: Left, R: Right)\n")
+        maneuver = input("Enter desired maneuver (1: k-turning, 2:parallel, 3:fw_bw)\n")
 
-        if side == "Left":
+        if side == "L":
             if maneuver == "1":
                 k_turning_left(px)
             elif maneuver == "2":
