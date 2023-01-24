@@ -73,11 +73,11 @@ def parallel_parking(px, side):
 
     # Move Backward
     # Steer wheels in one direction
-    px.set_dir_servo_angle(factor * -25)
+    px.set_dir_servo_angle(factor * -1 * px.car_max_dir_angle)
     px.forward(-5)
     time.sleep(0.8)
     # Steer wheels in the opposite direction
-    px.set_dir_servo_angle(factor * 25)
+    px.set_dir_servo_angle(factor * px.car_max_dir_angle)
     px.forward(-5)
     time.sleep(0.8)
 
@@ -85,24 +85,26 @@ def parallel_parking(px, side):
     px.stop()
 
 
-def k_turning_left(px):
+def k_turning(px, side):
     """
     Three point turn (sometimes called Y-turn, K-turn, or broken U-turn)
     """
     # 1st Point: Steer left and move forward
-    px.set_dir_servo_angle(35)
+    px.set_dir_servo_angle(px.car_max_dir_angle)
     px.forward(5)
-    time.sleep(4)
+    time.sleep(1)
     px.stop()
+    time.sleep(1)
 
     # 2nd Point: Steer Right and move backward
-    px.set_dir_servo_angle(-35)
+    px.set_dir_servo_angle(-px.car_max_dir_angle)
     px.backward(5)
-    time.sleep(4)
+    time.sleep(1)
     px.stop()
+    time.sleep(1)
 
     # 3rd Point: Steer Left and move forward
-    px.set_dir_servo_angle(35)
+    px.set_dir_servo_angle(px.car_max_dir_angle)
     while px.dir_current_angle > 0:
         px.forward(5)
         time.sleep(0.1)
@@ -110,10 +112,6 @@ def k_turning_left(px):
         px.set_dir_servo_angle(angle)
 
     time.sleep(2)
-
-
-def k_turning_right(px):
-    pass
 
 
 def fw_bw(px, speed, angle):
@@ -182,7 +180,7 @@ if __name__ == "__main__":
 
         if side == "L":
             if maneuver == "1":
-                k_turning_left(px)
+                k_turning(px, side)
             elif maneuver == "2":
                 parallel_parking(px, side)
             elif maneuver == "3":
@@ -191,7 +189,7 @@ if __name__ == "__main__":
                 pass
         else:
             if maneuver == "1":
-                k_turning_right(px)
+                k_turning(px, side)
             elif maneuver == "2":
                 parallel_parking(px, side)
             elif maneuver == "3":
