@@ -211,6 +211,6 @@ if __name__ == "__main__":
         #         pass
 
     # Week 3:
-    sensors = px.get_grayscale_data()
-    print (sensors)
+        sensors = px.get_grayscale_data()
+        print (sensors)
 
