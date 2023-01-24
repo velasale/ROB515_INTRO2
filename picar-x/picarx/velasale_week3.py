@@ -184,27 +184,33 @@ def fw_bw(px, speed, angle):
 
 if __name__ == "__main__":
     px = picarx_improved.Picarx()
+
+
     while True:
         # Ask user
-        side = input("In what direction do you want to maneuver (L: Left, R: Right)\n")
-        maneuver = input("Enter desired maneuver (1: k-turning, 2:parallel, 3:fw_bw)\n")
+        # side = input("In what direction do you want to maneuver (L: Left, R: Right)\n")
+        # maneuver = input("Enter desired maneuver (1: k-turning, 2:parallel, 3:fw_bw)\n")
+        #
+        # if side == "L":
+        #     if maneuver == "1":
+        #         k_turning(px, side)
+        #     elif maneuver == "2":
+        #         parallel_parking(px, side)
+        #     elif maneuver == "3":
+        #         fw_bw(px, 40, -5)
+        #     else:
+        #         pass
+        # else:
+        #     if maneuver == "1":
+        #         k_turning(px, side)
+        #     elif maneuver == "2":
+        #         parallel_parking(px, side)
+        #     elif maneuver == "3":
+        #         fw_bw(px, 40, 5)
+        #     else:
+        #         pass
 
-        if side == "L":
-            if maneuver == "1":
-                k_turning(px, side)
-            elif maneuver == "2":
-                parallel_parking(px, side)
-            elif maneuver == "3":
-                fw_bw(px, 40, -5)
-            else:
-                pass
-        else:
-            if maneuver == "1":
-                k_turning(px, side)
-            elif maneuver == "2":
-                parallel_parking(px, side)
-            elif maneuver == "3":
-                fw_bw(px, 40, 5)
-            else:
-                pass
+    # Week 3:
+    sensors = px.get_grayscale_data()
+    print (sensors)
 
