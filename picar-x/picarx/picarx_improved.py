@@ -98,6 +98,7 @@ class Picarx(object):
         # Picarx Parameters
         self.car_length = 95    # distance between front and rear wheels in [mm]
         self.car_width = 80     # distance between front wheels in [mm]
+        self.car_accel = 50
 
     def cleanup(self):
         self.set_power(0)
