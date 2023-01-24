@@ -116,17 +116,19 @@ def fw_bw_straight(px):
     speed = 0
     dt = 0.005
 
+    print("------------- Phase 1: Accelerating -------------")
     while speed < goal_speed:
-        print("Phase 1: Accelerating...")
+        print("Current Speed: ", str(speed))
         speed += px.car_accel * dt
         px.forward(speed)
         time.sleep(dt)
 
-    print("Phase 2: Coasting at goal speed...")
+    print("-------- Phase 2: Coasting at goal speed --------")
     time.sleep(3)
 
+    print("------------- Phase 3: Decelerating -------------")
     while speed > 0:
-        print("Phase 3: Decelerating...")
+        print("Current Speed: ", str(speed))
         speed -= px.car_accel * dt
         px.forward(speed)
         time.sleep(dt)
@@ -137,17 +139,18 @@ def fw_bw_straight(px):
     goal_speed = -40
     speed = 0
 
+    print("------------- Phase 1: Accelerating -------------")
     while speed > goal_speed:
-        print("Phase 1: Accelerating...")
+        print("Current Speed: ", str(speed))
         speed -= px.car_accel * dt
         px.forward(speed)
         time.sleep(dt)
 
-    print("Phase 2: Coasting at goal speed...")
+    print("-------- Phase 2: Coasting at goal speed --------")
     time.sleep(3)
 
     while speed > 0:
-        print("Phase 3: Decelerating...")
+        print("------------- Phase 3: Decelerating -------------")
         speed += px.car_accel * dt
         px.forward(speed)
         time.sleep(dt)
