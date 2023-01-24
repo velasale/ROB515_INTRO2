@@ -110,9 +110,9 @@ def k_turning_right(px):
 
 
 def fw_bw_straight(px):
-    goal_speed = 100
+    goal_speed = 50
     speed = 0
-    dt = 0.01
+    dt = 0.005
     while speed < goal_speed:
         print("Phase 1: Accelerating...")
         speed += px.car_accel * dt

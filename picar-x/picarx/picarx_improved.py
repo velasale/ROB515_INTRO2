@@ -101,6 +101,7 @@ class Picarx(object):
         self.car_accel = 200
 
     def cleanup(self):
+
         self.set_power(0)
         print("GoodBye.")
 
