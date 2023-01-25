@@ -36,16 +36,17 @@ class gray_interpreter():
 
 class gray_controller():
 
-    def __init__(self, scale_factor=1.0):
+    def __init__(self, scale_factor=-25):
 
+        # K for a proportional controller, it maps [-1,1] into [25,-25]deg
         self.scale_factor = scale_factor
 
     def steer_towards_line(self, ):
         """
-        Method to steer var towards the center of the line
+        Method to steer car towards the center of the line
         """
 
-        steering_angle = 00
+        steering_angle = self.scale_factor * error
 
         return steering_angle
 

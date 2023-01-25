@@ -15,7 +15,7 @@ Choice 2: If you are in another wireless network (ssh user@piname.local)
 ssh alejo@alejopi.local
 ```
 ## 1.2 Update from Github
-Terminal 1: Keep one terminal opened at the repository directory
+Terminal 1: Keep one terminal opened at the repository directory to be able to pull the updates when needed.
 ```console
 git pull
 ```
