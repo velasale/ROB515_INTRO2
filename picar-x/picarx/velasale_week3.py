@@ -2,7 +2,7 @@ import picarx_improved
 import time
 
 
-class gray_interpreter():
+class Gray_interpreter():
 
     def __init__(self, dark_threshold=1000, light_threshold=1500, polarity=100):
 
@@ -34,21 +34,15 @@ class gray_interpreter():
         """
 
 
-class gray_controller():
+class Gray_controller():
 
     def __init__(self, scale_factor=-25):
 
         # K for a proportional controller, it maps [-1,1] into [25,-25]deg
         self.scale_factor = scale_factor
 
-    def steer_towards_line(self, ):
-        """
-        Method to steer car towards the center of the line
-        """
-
-        steering_angle = self.scale_factor * error
-
-        return steering_angle
+    def steer_towards_line(self, error):
+        return self.scale_factor * error
 
 
 def sample_code(px):
@@ -232,43 +226,65 @@ def fw_bw(px, speed, angle):
 
 
 def week_2(px):
-    # Ask user
-    side = input("In what direction do you want to maneuver (L: Left, R: Right)\n")
-    maneuver = input("Enter desired maneuver (1: k-turning, 2:parallel, 3:fw_bw)\n")
+    while True:
+        # Ask user
+        side = input("In what direction do you want to maneuver (L: Left, R: Right)\n")
+        maneuver = input("Enter desired maneuver (1: k-turning, 2:parallel, 3:fw_bw)\n")
 
-    if side == "L":
-        if maneuver == "1":
-            k_turning(px, side)
-        elif maneuver == "2":
-            parallel_parking(px, side)
-        elif maneuver == "3":
-            fw_bw(px, 40, -5)
+        if side == "L":
+            if maneuver == "1":
+                k_turning(px, side)
+            elif maneuver == "2":
+                parallel_parking(px, side)
+            elif maneuver == "3":
+                fw_bw(px, 40, -5)
+            else:
+                pass
         else:
-            pass
-    else:
-        if maneuver == "1":
-            k_turning(px, side)
-        elif maneuver == "2":
-            parallel_parking(px, side)
-        elif maneuver == "3":
-            fw_bw(px, 40, 5)
-        else:
-            pass
+            if maneuver == "1":
+                k_turning(px, side)
+            elif maneuver == "2":
+                parallel_parking(px, side)
+            elif maneuver == "3":
+                fw_bw(px, 40, 5)
+            else:
+                pass
 
 
 def week_3(px):
     """ Sensor-control integration"""
+    trial = Gray_controller()
+    while True:
 
-    sensors = px.get_grayscale_data()
-    time.sleep(0.1)
-    print(sensors)
+        # -------------- Sense ----------------
+        sensors = px.get_grayscale_data()
+        time.sleep(0.1)
+        print(sensors)
+        trend = px.get_line_status()
+
+        # -------------- Interpreter ----------
+        error = 0
+        if trend == "left":
+            error = +1.0
+        elif trend == "right":
+            error = -1.0
+        elif trend == "forward":
+            error = 0
+        else:
+            print("Stop")
+
+        angle = trial.steer_towards_line(error)
+
+        # -------------- Control --------------
+        px.set_dir_servo_angle(angle)
+        px.forward(20)
+
 
 
 if __name__ == "__main__":
     px = picarx_improved.Picarx()
 
-    while True:
-        # week_2(px)
-        week_3(px)
+    # week_2(px)
+    week_3(px)
 
 
