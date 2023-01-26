@@ -1,6 +1,6 @@
 import picarx_improved
 import time
-import csv
+import pandas as pd
 
 class Gray_interpreter():
 
@@ -299,7 +299,7 @@ if __name__ == "__main__":
 
     with open('signal1', 'w') as f:
         write = csv.writer(f)
-        write.writerows(signal_1)
+        write.writerow(signal_1)
 
     print(signal_1)
 
