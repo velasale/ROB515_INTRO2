@@ -287,4 +287,8 @@ if __name__ == "__main__":
     # week_2(px)
     week_3(px)
 
+    while True:
+        print(px.get_grayscale_data())
+        time.sleep(0.1)
+
 
