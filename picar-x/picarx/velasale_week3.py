@@ -280,8 +280,6 @@ def week_3(px):
         px.forward(20)
 
 
-
-
 if __name__ == "__main__":
     px = picarx_improved.Picarx()
 
