@@ -1,6 +1,6 @@
 import picarx_improved
 import time
-
+import csv
 
 class Gray_interpreter():
 
@@ -296,6 +296,10 @@ if __name__ == "__main__":
         signal_1.append(data[0])
         signal_2.append(data[1])
         signal_3.append(data[2])
+
+    with open('signal1', 'w') as f:
+        write = csv.writer(f)
+        write.writerows(signal_1)
 
     print(signal_1)
 
