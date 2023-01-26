@@ -281,14 +281,23 @@ def week_3(px):
 
 
 
+
 if __name__ == "__main__":
     px = picarx_improved.Picarx()
 
     # week_2(px)
     # week_3(px)
 
-    while True:
-        print(px.get_grayscale_data())
-        time.sleep(0.1)
+    signal_1 = []
+    signal_2 = []
+    signal_3 = []
 
+    for n in range(1000):
+        # Read signal
+        data = px.get_grayscale_data()
+        signal_1.append(data[0])
+        signal_2.append(data[1])
+        signal_3.append(data[2])
+
+    print(signal_1)
 
