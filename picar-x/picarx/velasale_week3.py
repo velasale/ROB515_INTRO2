@@ -285,7 +285,7 @@ if __name__ == "__main__":
     px = picarx_improved.Picarx()
 
     # week_2(px)
-    week_3(px)
+    # week_3(px)
 
     while True:
         print(px.get_grayscale_data())
