@@ -260,7 +260,7 @@ def week_3(px):
         sensors = px.get_grayscale_data()
         time.sleep(0.1)
         print(sensors)
-        trend = px.get_line_status()
+        trend = px.get_line_status(sensors)
 
         # -------------- Interpreter ----------
         error = 0
