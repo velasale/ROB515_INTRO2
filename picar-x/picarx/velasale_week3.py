@@ -305,17 +305,17 @@ if __name__ == "__main__":
             signal_2.append(data[1])
             signal_3.append(data[2])
 
-    mean1 = st.mean(signal_1)
-    mean2 = st.mean(signal_2)
-    mean3 = st.mean(signal_3)
+        mean1 = st.mean(signal_1)
+        mean2 = st.mean(signal_2)
+        mean3 = st.mean(signal_3)
 
-    print(mean1, "  ", mean2, "  ", mean3)
+        print(mean1, "  ", mean2, "  ", mean3)
 
-    with open('signals.csv', 'w') as f:
-        write = csv.writer(f)
-        write.writerow(signals)
-
-    print(signals)
-    print("\n\n")
-    print(executionTime)
+        # with open('signals.csv', 'w') as f:
+        #     write = csv.writer(f)
+        #     write.writerow(signals)
+        #
+        # print(signals)
+        # print("\n\n")
+        # print(executionTime)
 
