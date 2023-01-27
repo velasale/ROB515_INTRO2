@@ -298,9 +298,7 @@ if __name__ == "__main__":
         signals.append(data)
         time.sleep(0.001)
 
-
-
-    with open('/home/RobotSystems/signals.csv', 'w') as f:
+    with open('~/home/RobotSystems/signals.csv', 'w') as f:
         write = csv.writer(f)
         write.writerow(signals)
 
