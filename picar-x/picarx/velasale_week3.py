@@ -22,7 +22,7 @@ class GrayInterpreter():
         self.window = 50
 
         # Normalizing value
-        self.normalizer = 0.5
+        self.normalizer = 0.45
 
     def sharp_edge(self, data):
         """
