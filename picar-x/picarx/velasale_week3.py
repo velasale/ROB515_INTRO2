@@ -1,7 +1,6 @@
 import picarx_improved
 import time
-import numpy.fft import fft, ifft
-import pandas as pd
+
 
 class Gray_interpreter():
 
