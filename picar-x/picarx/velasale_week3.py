@@ -5,7 +5,7 @@ import time
 import statistics as st
 
 
-class Gray_interpreter():
+class GrayInterpreter():
 
     def __init__(self, dark_threshold=600, light_threshold=1400, polarity="line_darker"):
 
@@ -13,10 +13,36 @@ class Gray_interpreter():
         self.light_threshold = light_threshold
         self.polarity = polarity
 
+        self.left_signal = []
+        self.center_signal = []
+        self.right_signal = []
+        self.means = []
+
+        # Moving average window
+        self.window = 50
+
     def sharp_edge(self, gray_list):
         """
         Method to identify a change in the sensor values
         """
+
+        self.left_signal.append(int(data[0]))
+        self.center_signal.append(int(data[1]))
+        self.right_signal.append(int(data[2]))
+
+        if len(self.left_signal) > self.window:
+            self.left_signal.pop(0)
+            self.center_signal.pop(0)
+            self.right_signal.pop(0)
+
+        mean1 = int(st.mean(self.left_signal))
+        mean2 = int(st.mean(self.center_signal))
+        mean3 = int(st.mean(self.right_signal))
+
+        means = [int(mean1), int(mean2), int(mean3)]
+
+        return means
+
 
         ## Identify if there is a sharp change in the sensor values
         ## (indicative of an edge)
@@ -37,7 +63,7 @@ class Gray_interpreter():
         """
 
 
-class Gray_controller():
+class GrayController():
 
     def __init__(self, scale_factor=-25):
 
@@ -286,33 +312,15 @@ def week_3(px):
 if __name__ == "__main__":
     px = picarx_improved.Picarx()
 
+    int = GrayInterpreter()
     # week_2(px)
     # week_3(px)
-
-    signal_1 = []
-    signal_2 = []
-    signal_3 = []
-    means = []
-
-    window = 50
 
     while True:
 
         data = px.get_grayscale_data()
-        signal_1.append(int(data[0]))
-        signal_2.append(int(data[1]))
-        signal_3.append(int(data[2]))
 
-        if len(signal_1) > window:
-            signal_1.pop(0)
-            signal_2.pop(0)
-            signal_3.pop(0)
+        sensors = int.sharp_edge(data)
 
-        mean1 = int(st.mean(signal_1))
-        mean2 = int(st.mean(signal_2))
-        mean3 = int(st.mean(signal_3))
-
-        means = [int(mean1), int(mean2), int(mean3)]
-
-        print("\nThe signals are ", means)
+        print("\nThe signals are ", sensors)
         time.sleep(0.01)
