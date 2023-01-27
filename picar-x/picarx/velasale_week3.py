@@ -289,48 +289,24 @@ def week_2(px):
 
 def week_3(px):
     """ Sensor-control integration"""
-    trial = Gray_controller()
-    while True:
-
-        # -------------- Sense ----------------
-        sensors = px.get_grayscale_data()
-        time.sleep(0.1)
-        print(sensors)
-        trend = px.get_line_status(sensors)
-
-        # -------------- Interpreter ----------
-        error = 0
-        if trend == "left":
-            error = +1.0
-        elif trend == "right":
-            error = -1.0
-        elif trend == "forward":
-            error = 0
-        else:
-            print("Stop")
-
-        angle = trial.steer_towards_line(error)
-
-        # -------------- Control --------------
-        px.set_dir_servo_angle(angle)
-        px.forward(20)
-
-
-if __name__ == "__main__":
-    px = picarx_improved.Picarx()
-
-    photos = GrayInterpreter()
+    photosensors = GrayInterpreter()
     control = GrayController()
-    # week_2(px)
-    # week_3(px)
 
     while True:
-
         data = px.get_grayscale_data()
-
-        sensors = photos.sharp_edge(data)
+        # Interpreter
+        sensors = photosensors.sharp_edge(data)
+        # Controller
         px.set_dir_servo_angle(control.steer_towards_line(sensors))
 
         print("\nThe signals are: ", sensors)
         print("\nThe steering angle is: ", sensors)
         time.sleep(0.001)
+
+
+if __name__ == "__main__":
+    px = picarx_improved.Picarx()
+
+    # week_2(px)
+    week_3(px)
+
