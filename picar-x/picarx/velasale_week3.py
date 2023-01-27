@@ -302,9 +302,9 @@ if __name__ == "__main__":
 
 
 
-    with open('signal1', 'w') as f:
+    with open('signals', 'w') as f:
         write = csv.writer(f)
-        write.writerow(signal_1)
+        write.writerow(signals)
 
     print(signals)
 
