@@ -21,7 +21,7 @@ class GrayInterpreter():
         # Moving average window
         self.window = 50
 
-    def sharp_edge(self, gray_list):
+    def sharp_edge(self, data):
         """
         Method to identify a change in the sensor values
         """
