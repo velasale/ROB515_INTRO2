@@ -313,7 +313,7 @@ if __name__ == "__main__":
 
         # with open('signals.csv', 'w') as f:
         #     write = csv.writer(f)
-        #     write.writerow(signals)
+        #     write.writerow(signals)c
         #
         # print(signals)
         # print("\n\n")
