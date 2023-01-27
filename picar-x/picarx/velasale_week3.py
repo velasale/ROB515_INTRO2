@@ -294,20 +294,22 @@ if __name__ == "__main__":
     signal_3 = []
     signals = []
 
+    window = 50
+
     while True:
 
-        signal_1 = []
-        signal_2 = []
-        signal_3 = []
-        for n in range(20):
-            data = px.get_grayscale_data()
-            signal_1.append(int(data[0]))
-            signal_2.append(int(data[1]))
-            signal_3.append(int(data[2]))
-            # print(signal_1)
-            time.sleep(0.01)
+        data = px.get_grayscale_data()
+        signal_1.append(int(data[0]))
+        signal_2.append(int(data[1]))
+        signal_3.append(int(data[2]))
+
+        if len(signal_1) > window:
+            signal_1.pop(0)
+            signal_2.pop(0)
+            signal_3.pop(0)
 
         print("\nThe signals are " + str(st.mean(signal_1)) + " " + str(st.mean(signal_2)) + " " + str(st.mean(signal_3)))
+        time.sleep(0.01)
 
         # print(st.mean(signal_1))
         # with open('signals.csv', 'w') as f:
