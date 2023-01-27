@@ -7,7 +7,7 @@ import statistics as st
 
 class Gray_interpreter():
 
-    def __init__(self, dark_threshold=1000, light_threshold=1500, polarity=100):
+    def __init__(self, dark_threshold=600, light_threshold=1400, polarity="line_darker"):
 
         self.dark_threshold = dark_threshold
         self.light_threshold = light_threshold
@@ -292,6 +292,7 @@ if __name__ == "__main__":
     signal_1 = []
     signal_2 = []
     signal_3 = []
+    means = []
 
     window = 50
 
@@ -311,5 +312,7 @@ if __name__ == "__main__":
         mean2 = int(st.mean(signal_2))
         mean3 = int(st.mean(signal_3))
 
-        print("\nThe signals are " + str(mean1) + " " + str(mean2) + " " + str(mean3))
+        means = [int(mean1), int(mean2), int(mean3)]
+
+        print("\nThe signals are ", means)
         time.sleep(0.01)
