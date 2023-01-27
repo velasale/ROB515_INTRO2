@@ -23,6 +23,7 @@ class GrayInterpreter():
 
     def sharp_edge(self, data):
         """
+        Method to smooth the ADC readings with a moving average, and
         Method to identify a change in the sensor values
         """
 
@@ -41,7 +42,9 @@ class GrayInterpreter():
 
         means = [int(mean1), int(mean2), int(mean3)]
 
-        return means
+        centroid = (mean1 - mean3) / (mean1 + mean2 + mean3)
+
+        return centroid
 
 
         ## Identify if there is a sharp change in the sensor values
