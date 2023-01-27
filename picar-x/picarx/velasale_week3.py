@@ -299,7 +299,7 @@ if __name__ == "__main__":
         signal_1 = []
         signal_2 = []
         signal_3 = []
-        for n in range(100):
+        for n in range(20):
             data = px.get_grayscale_data()
             signal_1.append(int(data[0]))
             signal_2.append(int(data[1]))
@@ -307,8 +307,9 @@ if __name__ == "__main__":
             # print(signal_1)
             time.sleep(0.01)
 
-        print(signal_1)
-        print(st.mean(signal_1))
+        print("\nThe signals are " + str(st.mean(signal_1)) + " " + str(st.mean(signal_2)) + " " + str(st.mean(signal_3)))
+
+        # print(st.mean(signal_1))
         # with open('signals.csv', 'w') as f:
         #     write = csv.writer(f)
         #     write.writerow(signals)c
