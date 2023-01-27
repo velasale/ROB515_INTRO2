@@ -2,6 +2,7 @@ import picarx_improved
 import time
 import csv
 import time
+import statistics as st
 
 
 class Gray_interpreter():
@@ -293,13 +294,22 @@ if __name__ == "__main__":
     signal_3 = []
     signals = []
 
-    startTime = time.time()
-    for n in range(1000):
-        # Read signal
-        data = px.get_grayscale_data()
-        signals.append(data)
-    executionTime = time.time() - startTime
+    while True:
 
+        signal_1 = []
+        signal_2 = []
+        signal_3 = []
+        for n in range(100):
+            data = px.get_grayscale_data()
+            signal_1.append(data[0])
+            signal_2.append(data[1])
+            signal_3.append(data[2])
+
+    mean1 = st.mean(signal_1)
+    mean2 = st.mean(signal_2)
+    mean3 = st.mean(signal_3)
+
+    print(mean1, "  ", mean2, "  ", mean3)
 
     with open('signals.csv', 'w') as f:
         write = csv.writer(f)
