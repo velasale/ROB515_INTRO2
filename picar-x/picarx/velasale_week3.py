@@ -312,7 +312,7 @@ def week_3(px):
 if __name__ == "__main__":
     px = picarx_improved.Picarx()
 
-    int = GrayInterpreter()
+    photos = GrayInterpreter()
     # week_2(px)
     # week_3(px)
 
@@ -320,7 +320,7 @@ if __name__ == "__main__":
 
         data = px.get_grayscale_data()
 
-        sensors = int.sharp_edge(data)
+        sensors = photos.sharp_edge(data)
 
         print("\nThe signals are ", sensors)
         time.sleep(0.01)
