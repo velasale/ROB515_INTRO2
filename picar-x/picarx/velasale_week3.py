@@ -295,10 +295,8 @@ if __name__ == "__main__":
     for n in range(1000):
         # Read signal
         data = px.get_grayscale_data()
-        # signal_1.append(data[0])
-        # signal_2.append(data[1])
-        # signal_3.append(data[2])
         signals.append(data)
+        time.sleep(0.001)
 
 
 
