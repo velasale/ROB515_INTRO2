@@ -1,6 +1,7 @@
 import picarx_improved
 import time
 import csv
+import time
 
 
 class Gray_interpreter():
@@ -292,15 +293,19 @@ if __name__ == "__main__":
     signal_3 = []
     signals = []
 
+    startTime = time.time()
     for n in range(1000):
         # Read signal
         data = px.get_grayscale_data()
         signals.append(data)
-        time.sleep(0.001)
+    executionTime = time.time() - startTime
+
 
     with open('signals.csv', 'w') as f:
         write = csv.writer(f)
         write.writerow(signals)
 
     print(signals)
+    print("\n\n")
+    print(executionTime)
 
