@@ -300,7 +300,7 @@ if __name__ == "__main__":
 
 
 
-    with open('signals.csv', 'w') as f:
+    with open('~/RobotSystems/signals.csv', 'w') as f:
         write = csv.writer(f)
         write.writerow(signals)
 
