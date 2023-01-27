@@ -21,6 +21,9 @@ class GrayInterpreter():
         # Moving average window
         self.window = 50
 
+        # Normalizing value
+        self.normalizer = 0.5
+
     def sharp_edge(self, data):
         """
         Method to smooth the ADC readings with a moving average, and
@@ -43,6 +46,7 @@ class GrayInterpreter():
         means = [int(mean1), int(mean2), int(mean3)]
 
         centroid = (mean3 - mean1) / (mean1 + mean2 + mean3)
+        centroid = centroid / self.normalizer
 
         return centroid
 
