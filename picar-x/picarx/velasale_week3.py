@@ -1,5 +1,6 @@
 import picarx_improved
 import time
+import numpy.fft import fft, ifft
 import pandas as pd
 
 class Gray_interpreter():
@@ -289,17 +290,21 @@ if __name__ == "__main__":
     signal_1 = []
     signal_2 = []
     signal_3 = []
+    signals = []
 
     for n in range(1000):
         # Read signal
         data = px.get_grayscale_data()
-        signal_1.append(data[0])
-        signal_2.append(data[1])
-        signal_3.append(data[2])
+        # signal_1.append(data[0])
+        # signal_2.append(data[1])
+        # signal_3.append(data[2])
+        signals.append(data)
+
+
 
     with open('signal1', 'w') as f:
         write = csv.writer(f)
         write.writerow(signal_1)
 
-    print(signal_1)
+    print(signals)
 
