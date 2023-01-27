@@ -42,7 +42,7 @@ class GrayInterpreter():
 
         means = [int(mean1), int(mean2), int(mean3)]
 
-        centroid = (mean1 - mean3) / (mean1 + mean2 + mean3)
+        centroid = (mean3 - mean1) / (mean1 + mean2 + mean3)
 
         return centroid
 
