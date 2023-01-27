@@ -304,6 +304,8 @@ if __name__ == "__main__":
             signal_1.append(data[0])
             signal_2.append(data[1])
             signal_3.append(data[2])
+            print(signal_1)
+            time.sleep(0.01)
 
         mean1 = st.mean(signal_1)
         mean2 = st.mean(signal_2)
