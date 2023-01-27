@@ -292,7 +292,6 @@ if __name__ == "__main__":
     signal_1 = []
     signal_2 = []
     signal_3 = []
-    signals = []
 
     window = 50
 
@@ -308,15 +307,9 @@ if __name__ == "__main__":
             signal_2.pop(0)
             signal_3.pop(0)
 
-        print("\nThe signals are " + str(st.mean(signal_1)) + " " + str(st.mean(signal_2)) + " " + str(st.mean(signal_3)))
+        mean1 = int(st.mean(signal_1))
+        mean2 = int(st.mean(signal_2))
+        mean3 = int(st.mean(signal_3))
+
+        print("\nThe signals are " + str(mean1) + " " + str(mean2) + " " + str(mean3))
         time.sleep(0.01)
-
-        # print(st.mean(signal_1))
-        # with open('signals.csv', 'w') as f:
-        #     write = csv.writer(f)
-        #     write.writerow(signals)c
-        #
-        # print(signals)
-        # print("\n\n")
-        # print(executionTime)
-
