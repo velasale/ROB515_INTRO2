@@ -289,19 +289,20 @@ def week_2(px):
 
 def week_3(px):
     """ Sensor-control integration"""
+
+    # Interpreter
     photosensors = GrayInterpreter()
+    # Controller
     control = GrayController()
 
     while True:
         data = px.get_grayscale_data()
-        # Interpreter
         sensors = photosensors.sharp_edge(data)
-        # Controller
         px.set_dir_servo_angle(control.steer_towards_line(sensors))
 
-        print("\nThe signals are: ", sensors)
-        print("\nThe steering angle is: ", sensors)
-        time.sleep(0.001)
+        # print("\nThe signals are: ", sensors)
+        # print("\nThe steering angle is: ", sensors)
+
 
 
 if __name__ == "__main__":
