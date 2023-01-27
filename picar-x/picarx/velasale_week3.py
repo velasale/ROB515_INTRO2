@@ -320,6 +320,7 @@ if __name__ == "__main__":
     px = picarx_improved.Picarx()
 
     photos = GrayInterpreter()
+    control = GrayController()
     # week_2(px)
     # week_3(px)
 
@@ -328,6 +329,8 @@ if __name__ == "__main__":
         data = px.get_grayscale_data()
 
         sensors = photos.sharp_edge(data)
+        px.set_dir_servo_angle(control.steer_towards_line(sensors))
 
-        print("\nThe signals are ", sensors)
-        time.sleep(0.01)
+        print("\nThe signals are: ", sensors)
+        print("\nThe steering angle is: ", sensors)
+        time.sleep(0.001)
