@@ -302,7 +302,7 @@ if __name__ == "__main__":
 
 
 
-    with open('signals', 'w') as f:
+    with open('signals.csv', 'w') as f:
         write = csv.writer(f)
         write.writerow(signals)
 
