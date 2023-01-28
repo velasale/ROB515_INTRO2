@@ -298,10 +298,12 @@ def week_3(px):
     while True:
         data = px.get_grayscale_data()
         sensors = photosensors.sharp_edge(data)
+
         px.set_dir_servo_angle(control.steer_towards_line(sensors))
 
-        # print("\nThe signals are: ", sensors)
+        print("\nThe signals are: ", sensors)
         # print("\nThe steering angle is: ", sensors)
+        px.forward(10)
 
 
 
