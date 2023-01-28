@@ -72,7 +72,7 @@ class GrayInterpreter():
 
 class GrayController():
 
-    def __init__(self, scale_factor=25):
+    def __init__(self, scale_factor=15):
 
         # K for a proportional controller, it maps [-1,1] into [25,-25]deg
         self.scale_factor = scale_factor
@@ -303,7 +303,7 @@ def week_3(px):
 
         print("\nThe signals are: ", sensors)
         # print("\nThe steering angle is: ", sensors)
-        px.forward(10)
+        px.forward(5)
 
 
 
