@@ -72,7 +72,7 @@ class GrayInterpreter():
 
 class GrayController():
 
-    def __init__(self, scale_factor=15):
+    def __init__(self, scale_factor=10):
 
         # K for a proportional controller, it maps [-1,1] into [25,-25]deg
         self.scale_factor = scale_factor
