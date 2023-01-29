@@ -23,7 +23,7 @@ class GrayInterpreter():
         self.window = 10
 
         # Normalizing value
-        self.normalizer = 0.45
+        self.normalizer = 0.6
 
     def sharp_edge(self, data: list):
         """
@@ -50,17 +50,19 @@ class GrayInterpreter():
 
         # Trying to make it more robust for different light conditions
         min_reading = min(means)
+        max_reading = max(means)
         print(min_reading)
 
-        n_mean1 = mean1 - min_reading
-        n_mean2 = mean2 - min_reading
-        n_mean3 = mean3 - min_reading
+        n_mean1 = (mean1 - min_reading) / (max_reading - min_reading)
+        n_mean2 = (mean2 - min_reading) / (max_reading - min_reading)
+        n_mean3 = (mean3 - min_reading) / (max_reading - min_reading)
 
         # Calculates the centroid of the means with respect to the center
         centroid = (mean3 - mean1) / (mean1 + mean2 + mean3)
         centroid = centroid / self.normalizer
 
         n_centroid = (n_mean3 - n_mean1) / (n_mean1 + n_mean2 + n_mean3)
+        n_centroid = n_centroid
 
         return means, centroid, n_centroid
 
