@@ -314,7 +314,7 @@ def week_3(px):
     e_time = 0
     start = time.time()
 
-    while e_time < 5:
+    while e_time < 4:
         data = px.get_grayscale_data()
 
         # Step 1: Read and Interpret
