@@ -48,6 +48,9 @@ class GrayInterpreter():
         # Mean values of the ADC channels
         means = [int(mean1), int(mean2), int(mean3)]
 
+        min_reading = min(means)
+        print(min_reading)
+
         # Calculates the centroid of the means with respect to the center
         centroid = (mean3 - mean1) / (mean1 + mean2 + mean3)
         centroid = centroid / self.normalizer
