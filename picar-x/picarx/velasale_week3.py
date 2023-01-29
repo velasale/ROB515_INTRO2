@@ -303,7 +303,7 @@ def week_3(px):
 
         print("\nThe signals are: ", sensors)
         # print("\nThe steering angle is: ", sensors)
-        px.forward(5)
+        # px.forward(5)
 
 
 
