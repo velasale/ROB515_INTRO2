@@ -97,6 +97,8 @@ class PicarCamera():
                       'purple': [115, 165],
                       'red_2': [165, 180]}  # Here is the range of H in the HSV color space represented by the color
         self.kernel_5 = np.ones((5, 5), np.uint8)  # Define a 5×5 convolution kernel with element values of all 1.
+        self.line_location = 0
+        self.SCREEN_CENTER = 80
 
     def color_detect(self, img, color_name):
 
@@ -131,6 +133,8 @@ class PicarCamera():
                 x, y, w, h = cv2.boundingRect(
                     i)  # Decompose the contour into the coordinates of the upper left corner and the width and height of the recognition object
 
+                self.line_location = x + w / 2
+
                 print("X location is:  ", (x + w / 2))
 
                 # Draw a rectangle on the image (picture, upper left corner coordinate, lower right corner coordinate, color, line width)
@@ -144,6 +148,9 @@ class PicarCamera():
                                 2)  # Add character description
 
         return img, mask, morphologyEx_img
+
+    def mapping(self, screen_location):
+        return (screen_location - self.SCREEN_CENTER) / self.SCREEN_CENTER
     
     
 def sample_code(px):
@@ -405,6 +412,10 @@ if __name__ == "__main__":
             cv2.imshow("mask", img_2)  # OpenCV image show
             cv2.imshow("morphologyEx_img", img_3)  # OpenCV image show
             rawCapture.truncate(0)  # Release cache
+
+            #
+
+
 
             k = cv2.waitKey(1) & 0xFF
             # 27 is the ESC key, which means that if you press the ESC key to exit
