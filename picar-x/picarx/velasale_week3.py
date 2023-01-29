@@ -3,6 +3,7 @@ import time
 import csv
 import time
 import statistics as st
+import os
 
 
 class GrayInterpreter():
@@ -304,6 +305,8 @@ def week_3(px):
         # Step 1: Read and Interpret
         adc_means, adc_centroid = photosensors.sharp_edge(data)
         steer_angle = control.steer_towards_line(adc_centroid)
+
+        os.system('cls||clear')
         print("\nThe signals are: ", adc_means)
         print("The line is located at: %.2f " % adc_centroid)
 
