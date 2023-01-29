@@ -308,10 +308,11 @@ def week_3(px):
 
         os.system('clear')
         print("\nThe signals are: ", adc_means)
-        print("The center line is located at: %.2f " % adc_centroid)
+        print("The center line is located at: %.2f" % adc_centroid)
 
         # Step 2: Control
-        # px.set_dir_servo_angle(control.steer_towards_line(adc_centroid))
+        px.set_dir_servo_angle(steer_angle)
+        print("The commanded steer angle is: %.2f" % steer_angle)
         # px.forward(5)
 
 
