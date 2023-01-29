@@ -313,7 +313,7 @@ def week_3(px):
         # Step 2: Control
         px.set_dir_servo_angle(steer_angle)
         print("The commanded steer angle is: %.2f" % steer_angle)
-        px.forward(5)
+        # px.forward(5)
 
 
 if __name__ == "__main__":
