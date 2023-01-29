@@ -48,7 +48,13 @@ class GrayInterpreter():
         # Mean values of the ADC channels
         means = [int(mean1), int(mean2), int(mean3)]
 
-        # Trying to make it more robust for different light conditions
+        # --- Approach 1: Calculates the centroid of the means with respect to the center
+        centroid = (mean3 - mean1) / (mean1 + mean2 + mean3)
+        centroid = centroid / self.normalizer
+
+        # --- Approach 2: Trying to make it more robust for different light conditions
+        # It calculates the centroid w.r.t the min and max readings, and therefore is more robust
+        # different lighting conditions
         min_reading = min(means)
         max_reading = max(means)
         print(min_reading)
@@ -57,27 +63,10 @@ class GrayInterpreter():
         n_mean2 = (mean2 - min_reading) / (max_reading - min_reading)
         n_mean3 = (mean3 - min_reading) / (max_reading - min_reading)
 
-        # Calculates the centroid of the means with respect to the center
-        centroid = (mean3 - mean1) / (mean1 + mean2 + mean3)
-        centroid = centroid / self.normalizer
-
         n_centroid = (n_mean3 - n_mean1) / (n_mean1 + n_mean2 + n_mean3)
         n_centroid = n_centroid
 
         return means, centroid, n_centroid
-
-
-        ## Identify if there is a sharp change in the sensor values
-        ## (indicative of an edge)
-
-
-        ## Using the edge location and sign, to determine both:
-        ## (a) whether the system is to the left or right
-        ## (b) and whether it is very off-center or only slightly off-center
-
-
-        ## It should be robust to different lighting conditions, with an option
-        ## to have the "target" darker or lighter than the surrounding floor
 
     def position(self):
         """
@@ -306,24 +295,24 @@ def week_2(px):
 def week_3(px):
     """ Sensor-control integration"""
 
-    # Interpreter
+    # Instance of an Interpreter
     photosensors = GrayInterpreter()
-    # Controller
+    # Instance of a Controller
     control = GrayController()
 
     e_time = 0
     start = time.time()
 
     while e_time < 4:
+        os.system('clear')
         data = px.get_grayscale_data()
 
         # Step 1: Read and Interpret
         adc_means, adc_centroid, adc_ncentroid = photosensors.sharp_edge(data)
         steer_angle = control.steer_towards_line(adc_ncentroid)
 
-        os.system('clear')
         print("\nThe signals are: ", adc_means)
-        print("The center line is located at: %.2f" % adc_centroid)
+        # print("The center line is located at: %.2f" % adc_centroid)
         print("The n_center line is located at: %.2f" % adc_ncentroid)
 
         # Step 2: Control
