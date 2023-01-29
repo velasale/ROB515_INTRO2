@@ -76,7 +76,7 @@ def color_detect(img, color_name):
         for i in contours:    # Traverse all contours
             x, y, w, h = cv2.boundingRect(i)      # Decompose the contour into the coordinates of the upper left corner and the width and height of the recognition object
 
-            print("X location is:  ", x)
+            print("X location is:  ", (x + w/2))
 
             # Draw a rectangle on the image (picture, upper left corner coordinate, lower right corner coordinate, color, line width)
             if w >= 8 and h >= 8: # Because the picture is reduced to a quarter of the original size, if you want to draw a rectangle on the original picture to circle the target, you have to multiply x, y, w, h by 4.
