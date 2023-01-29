@@ -305,7 +305,7 @@ def week_3(px):
         adc_means, adc_centroid = photosensors.sharp_edge(data)
         steer_angle = control.steer_towards_line(adc_centroid)
         print("\nThe signals are: ", adc_means)
-        print("The line is located at: ", adc_centroid)
+        print("The line is located at: %.2f " % adc_centroid)
 
         # Step 2: Control
         # px.set_dir_servo_angle(control.steer_towards_line(adc_centroid))
