@@ -311,7 +311,10 @@ def week_3(px):
     # Controller
     control = GrayController()
 
-    while True:
+    e_time = 0
+    start = time.time()
+
+    while e_time < 5:
         data = px.get_grayscale_data()
 
         # Step 1: Read and Interpret
@@ -327,6 +330,8 @@ def week_3(px):
         px.set_dir_servo_angle(steer_angle)
         print("The commanded steer angle is: %.2f" % steer_angle)
         px.forward(1)
+
+        e_time = time.time() - start
 
 
 if __name__ == "__main__":
