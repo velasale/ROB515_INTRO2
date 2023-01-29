@@ -48,14 +48,21 @@ class GrayInterpreter():
         # Mean values of the ADC channels
         means = [int(mean1), int(mean2), int(mean3)]
 
+        # Trying to make it more robust for different light conditions
         min_reading = min(means)
         print(min_reading)
+
+        n_mean1 = mean1 - min_reading
+        n_mean2 = mean2 - min_reading
+        n_mean3 = mean3 - min_reading
 
         # Calculates the centroid of the means with respect to the center
         centroid = (mean3 - mean1) / (mean1 + mean2 + mean3)
         centroid = centroid / self.normalizer
 
-        return means, centroid
+        n_centroid = (n_mean3 - n_mean1) / (n_mean1 + n_mean2 + n_mean3)
+
+        return means, centroid, n_centroid
 
 
         ## Identify if there is a sharp change in the sensor values
@@ -306,12 +313,13 @@ def week_3(px):
         data = px.get_grayscale_data()
 
         # Step 1: Read and Interpret
-        adc_means, adc_centroid = photosensors.sharp_edge(data)
+        adc_means, adc_centroid, adc_ncentroid = photosensors.sharp_edge(data)
         steer_angle = control.steer_towards_line(adc_centroid)
 
         os.system('clear')
         print("\nThe signals are: ", adc_means)
         print("The center line is located at: %.2f" % adc_centroid)
+        print("The n_center line is located at: %.2f" % adc_ncentroid)
 
         # Step 2: Control
         px.set_dir_servo_angle(steer_angle)
