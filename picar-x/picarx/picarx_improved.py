@@ -96,10 +96,10 @@ class Picarx(object):
         atexit.register(self.cleanup)
 
         # Picarx Parameters
-        self.car_length = 95    # distance between front and rear wheels in [mm]
-        self.car_width = 80     # distance between front wheels in [mm]
-        self.car_accel = 200
-        self.car_max_dir_angle = 25
+        self.CAR_LENGTH = 95    # distance between front and rear wheels in [mm]
+        self.CAR_WIDTH = 80     # distance between front wheels in [mm]
+        self.CAR_ACCEL = 200
+        self.CAR_MAX_STEERING_ANGLE = 25
 
     def cleanup(self):
 
@@ -219,8 +219,8 @@ class Picarx(object):
 
         if current_angle > 0:
             # Center of Rotation (COR) of each front wheel
-            cor_left = abs(self.car_length / math.tan(math.radians(current_angle))) - self.car_width / 2
-            cor_right = abs(self.car_length / math.tan(math.radians(current_angle))) + self.car_width / 2
+            cor_left = abs(self.CAR_LENGTH / math.tan(math.radians(current_angle))) - self.CAR_WIDTH / 2
+            cor_right = abs(self.CAR_LENGTH / math.tan(math.radians(current_angle))) + self.CAR_WIDTH / 2
             # Front wheel's speed ratio required to match the curve
             ratio = cor_left / cor_right
             print("Current angle: ", str(current_angle), " and speed ratio: ", str(ratio))
@@ -230,8 +230,8 @@ class Picarx(object):
 
         elif current_angle < 0:
             # Center of Rotation (COR) of each front wheel
-            cor_left = abs(self.car_length / math.tan(math.radians(current_angle))) + self.car_width / 2
-            cor_right = abs(self.car_length / math.tan(math.radians(current_angle))) - self.car_width / 2
+            cor_left = abs(self.CAR_LENGTH / math.tan(math.radians(current_angle))) + self.CAR_WIDTH / 2
+            cor_right = abs(self.CAR_LENGTH / math.tan(math.radians(current_angle))) - self.CAR_WIDTH / 2
             # Front wheel's speed ratio required to match the curve
             ratio = cor_right / cor_left
             print("Current angle: ", str(current_angle), " and speed ratio: ", str(ratio))

@@ -74,11 +74,11 @@ def parallel_parking(px, side):
 
     # Move Backward
     # Steer wheels in one direction
-    px.set_dir_servo_angle(factor * -1 * px.car_max_dir_angle)
+    px.set_dir_servo_angle(factor * -1 * px.CAR_MAX_STEERING_ANGLE)
     px.forward(-5)
     time.sleep(0.8)
     # Steer wheels in the opposite direction
-    px.set_dir_servo_angle(factor * px.car_max_dir_angle)
+    px.set_dir_servo_angle(factor * px.CAR_MAX_STEERING_ANGLE)
     px.forward(-5)
     time.sleep(0.8)
 
@@ -97,21 +97,21 @@ def k_turning(px, side):
         factor = -1
 
     # 1st Point: Steer left and move forward
-    px.set_dir_servo_angle(-1 * px.car_max_dir_angle * factor)
+    px.set_dir_servo_angle(-1 * px.CAR_MAX_STEERING_ANGLE * factor)
     px.forward(5)
     time.sleep(1)
     px.stop()
     time.sleep(1)
 
     # 2nd Point: Steer Right and move backward
-    px.set_dir_servo_angle(px.car_max_dir_angle * factor)
+    px.set_dir_servo_angle(px.CAR_MAX_STEERING_ANGLE * factor)
     px.forward(-5)
     time.sleep(1)
     px.stop()
     time.sleep(1)
 
     # 3rd Point: Steer Left and move forward
-    px.set_dir_servo_angle(-1 * px.car_max_dir_angle * factor)
+    px.set_dir_servo_angle(-1 * px.CAR_MAX_STEERING_ANGLE * factor)
     # Gradually adjust the steering angle to zero
     if side == "R":
         while px.dir_current_angle > 0:
@@ -142,7 +142,7 @@ def fw_bw(px, speed, angle):
     print("------------- Phase 1: Accelerating -------------")
     while speed < goal_speed:
         print("Current Speed: ", str(speed))
-        speed += px.car_accel * dt
+        speed += px.CAR_ACCEL * dt
         px.forward(speed)
         time.sleep(dt)
 
@@ -152,7 +152,7 @@ def fw_bw(px, speed, angle):
     print("------------- Phase 3: Decelerating -------------")
     while speed > 0:
         print("Current Speed: ", str(speed))
-        speed -= px.car_accel * dt
+        speed -= px.CAR_ACCEL * dt
         px.forward(speed)
         time.sleep(dt)
 
@@ -166,7 +166,7 @@ def fw_bw(px, speed, angle):
     print("------------- Phase 1: Accelerating -------------")
     while speed > goal_speed:
         print("Current Speed: ", str(speed))
-        speed -= px.car_accel * dt
+        speed -= px.CAR_ACCEL * dt
         px.forward(speed)
         time.sleep(dt)
 
@@ -175,7 +175,7 @@ def fw_bw(px, speed, angle):
 
     while speed < 0:
         print("------------- Phase 3: Decelerating -------------")
-        speed += px.car_accel * dt
+        speed += px.CAR_ACCEL * dt
         px.forward(speed)
         time.sleep(dt)
 
