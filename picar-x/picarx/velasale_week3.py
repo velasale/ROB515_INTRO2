@@ -24,10 +24,11 @@ class GrayInterpreter():
         # Normalizing value
         self.normalizer = 0.45
 
-    def sharp_edge(self, data):
+    def sharp_edge(self, data: list):
         """
         Method to smooth the ADC readings with a moving average, and
         Method to identify a change in the sensor values
+        @type data: list of three ADC signals
         """
 
         self.left_signal.append(int(data[0]))
@@ -43,12 +44,14 @@ class GrayInterpreter():
         mean2 = int(st.mean(self.center_signal))
         mean3 = int(st.mean(self.right_signal))
 
+        # Mean values of the ADC channels
         means = [int(mean1), int(mean2), int(mean3)]
 
+        # Calculates the centroid of the means with respect to the center
         centroid = (mean3 - mean1) / (mean1 + mean2 + mean3)
         centroid = centroid / self.normalizer
 
-        return centroid
+        return means, centroid
 
 
         ## Identify if there is a sharp change in the sensor values
@@ -297,14 +300,16 @@ def week_3(px):
 
     while True:
         data = px.get_grayscale_data()
-        sensors = photosensors.sharp_edge(data)
 
-        px.set_dir_servo_angle(control.steer_towards_line(sensors))
+        # Step 1: Read and Interpret
+        adc_means, adc_centroid = photosensors.sharp_edge(data)
+        steer_angle = control.steer_towards_line(adc_centroid)
+        print("\nThe signals are: ", adc_means)
+        print("The line is located at: ", adc_centroid)
 
-        print("\nThe signals are: ", sensors)
-        # print("\nThe steering angle is: ", sensors)
+        # Step 2: Control
+        # px.set_dir_servo_angle(control.steer_towards_line(adc_centroid))
         # px.forward(5)
-
 
 
 if __name__ == "__main__":
