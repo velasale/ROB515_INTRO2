@@ -20,7 +20,7 @@ class GrayInterpreter():
         self.means = []
 
         # Moving average window
-        self.window = 50
+        self.window = 25
 
         # Normalizing value
         self.normalizer = 0.45
