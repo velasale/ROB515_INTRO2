@@ -316,7 +316,7 @@ def week_3(px):
 
         # Step 1: Read and Interpret
         adc_means, adc_centroid, adc_ncentroid = photosensors.sharp_edge(data)
-        steer_angle = control.steer_towards_line(adc_centroid)
+        steer_angle = control.steer_towards_line(adc_ncentroid)
 
         os.system('clear')
         print("\nThe signals are: ", adc_means)
