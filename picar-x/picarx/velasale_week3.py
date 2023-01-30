@@ -393,42 +393,48 @@ def week_3(px, sensor="photosensor"):
             e_time = time.time() - start
 
     elif sensor == "camera":
+        e_time = 0
+        start = time.time()
 
-        with PiCamera() as camera:
-            print("start color detect")
-            camera.resolution = (640, 480)
-            camera.framerate = 24
-            rawCapture = PiRGBArray(camera, size=camera.resolution)
-            time.sleep(2)
+        while e_time < 4:
 
-            for frame in camera.capture_continuous(rawCapture, format="bgr",
-                                                   use_video_port=True):  # use_video_port=True
-                img = frame.array
-                img, img_2, img_3 = cam_class.color_detect(img, 'purple')  # Color detection function
-                cv2.imshow("video", img)  # OpenCV image show
-                cv2.imshow("mask", img_2)  # OpenCV image show
-                cv2.imshow("morphologyEx_img", img_3)  # OpenCV image show
-                rawCapture.truncate(0)  # Release cache
+            with PiCamera() as camera:
+                print("start color detect")
+                camera.resolution = (640, 480)
+                camera.framerate = 24
+                rawCapture = PiRGBArray(camera, size=camera.resolution)
+                time.sleep(2)
 
-                # Map the location of the line to [-1,1]
-                location = cam_class.mapping(cam_class.line_location)
-                steer_angle = control.steer_towards_line(location)
-                print("The line is located at %.2f and the steering angle is %.2f" % (location, steer_angle))
+                for frame in camera.capture_continuous(rawCapture, format="bgr",
+                                                       use_video_port=True):  # use_video_port=True
+                    img = frame.array
+                    img, img_2, img_3 = cam_class.color_detect(img, 'purple')  # Color detection function
+                    cv2.imshow("video", img)  # OpenCV image show
+                    cv2.imshow("mask", img_2)  # OpenCV image show
+                    cv2.imshow("morphologyEx_img", img_3)  # OpenCV image show
+                    rawCapture.truncate(0)  # Release cache
 
-                # Steer the wheels
-                px.set_dir_servo_angle(steer_angle)
+                    # Map the location of the line to [-1,1]
+                    location = cam_class.mapping(cam_class.line_location)
+                    steer_angle = control.steer_towards_line(location)
+                    print("The line is located at %.2f and the steering angle is %.2f" % (location, steer_angle))
 
-                # Drive
-                px.forward(1)
+                    # Steer the wheels
+                    px.set_dir_servo_angle(steer_angle)
 
-                k = cv2.waitKey(1) & 0xFF
-                # 27 is the ESC key, which means that if you press the ESC key to exit
-                if k == 27:
-                    break
+                    # Drive
+                    px.forward(1)
 
-            print('quit ...')
-            cv2.destroyAllWindows()
-            camera.close()
+                    k = cv2.waitKey(1) & 0xFF
+                    # 27 is the ESC key, which means that if you press the ESC key to exit
+                    if k == 27:
+                        break
+
+                print('quit ...')
+                cv2.destroyAllWindows()
+                camera.close()
+
+            e_time = time.time() - start
 
 
 if __name__ == "__main__":
