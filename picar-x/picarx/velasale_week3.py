@@ -413,9 +413,9 @@ if __name__ == "__main__":
             cv2.imshow("morphologyEx_img", img_3)  # OpenCV image show
             rawCapture.truncate(0)  # Release cache
 
-            #
-
-
+            # Location
+            location = cam_class.mapping(cam_class.line_location)
+            print(location)
 
             k = cv2.waitKey(1) & 0xFF
             # 27 is the ESC key, which means that if you press the ESC key to exit
