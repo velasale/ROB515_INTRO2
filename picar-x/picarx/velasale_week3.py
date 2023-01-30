@@ -394,6 +394,7 @@ if __name__ == "__main__":
     px = picarx_improved.Picarx()
 
     cam_class = PicarCamera()
+    control = GrayController()
 
     # week_2(px)
     # week_3(px)
@@ -413,9 +414,12 @@ if __name__ == "__main__":
             cv2.imshow("morphologyEx_img", img_3)  # OpenCV image show
             rawCapture.truncate(0)  # Release cache
 
-            # Location
+            # Map the location of the line to [-1,1]
             location = cam_class.mapping(cam_class.line_location)
-            print(location)
+            steer_angle = control.steer_towards_line(location)
+            print("The line is located at %.2f and the steering angle is %.2f" % (location, steer_angle)
+
+
 
             k = cv2.waitKey(1) & 0xFF
             # 27 is the ESC key, which means that if you press the ESC key to exit
