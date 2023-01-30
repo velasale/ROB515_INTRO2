@@ -418,6 +418,9 @@ def week_3(px, sensor="photosensor"):
                 # Steer the wheels
                 px.set_dir_servo_angle(steer_angle)
 
+                # Drive
+                px.forward(1)
+
                 k = cv2.waitKey(1) & 0xFF
                 # 27 is the ESC key, which means that if you press the ESC key to exit
                 if k == 27:

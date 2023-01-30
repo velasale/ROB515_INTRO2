@@ -173,7 +173,7 @@ class Picarx(object):
     def set_camera_servo2_angle(self,value):
         self.camera_servo_pin2.angle(-1*(value + -1*self.cam_cal_value_2))
 
-    def set_power(self,speed):
+    def set_power(self, speed):
         self.set_motor_speed(1, speed)
         self.set_motor_speed(2, speed) 
 
@@ -196,7 +196,7 @@ class Picarx(object):
             self.set_motor_speed(1, -1*speed)
             self.set_motor_speed(2, speed)  
 
-    def forward(self, speed):
+    def forward(self, speed=5):
         current_angle = self.dir_current_angle
         logging.debug("Current Angle: " + str(current_angle))
 
