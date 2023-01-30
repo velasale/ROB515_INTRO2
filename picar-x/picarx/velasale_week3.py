@@ -419,6 +419,8 @@ if __name__ == "__main__":
             steer_angle = control.steer_towards_line(location)
             print("The line is located at %.2f and the steering angle is %.2f" % (location, steer_angle))
 
+            # Steer the wheels
+            px.set_dir_servo_angle(steer_angle)
 
 
             k = cv2.waitKey(1) & 0xFF
