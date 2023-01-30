@@ -150,7 +150,7 @@ class PicarCamera():
         return img, mask, morphologyEx_img
 
     def mapping(self, screen_location):
-        return (self.SCREEN_CENTER - screen_location) / self.SCREEN_CENTER
+        return (screen_location - self.SCREEN_CENTER) / self.SCREEN_CENTER
     
     
 def sample_code(px):
