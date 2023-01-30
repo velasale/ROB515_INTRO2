@@ -359,76 +359,80 @@ def week_2(px):
                 pass
 
 
-def week_3(px):
+def week_3(px, sensor="photosensor"):
     """ Sensor-control integration"""
 
-    # Instance of an Interpreter
+    # Instance of Photosensor Interpreter
     photosensors = GrayInterpreter()
+    # Instance of Camera Interpreter
+    cam_class = PicarCamera()
     # Instance of a Controller
     control = GrayController()
 
-    e_time = 0
-    start = time.time()
+    if sensor == "photosensor":
+        e_time = 0
+        start = time.time()
 
-    while e_time < 4:
-        os.system('clear')
-        data = px.get_grayscale_data()
+        while e_time < 4:
+            os.system('clear')
+            data = px.get_grayscale_data()
 
-        # Step 1: Read and Interpret
-        adc_means, adc_centroid, adc_ncentroid = photosensors.sharp_edge(data)
-        steer_angle = control.steer_towards_line(adc_ncentroid)
+            # Step 1: Read and Interpret
+            adc_means, adc_centroid, adc_ncentroid = photosensors.sharp_edge(data)
+            steer_angle = control.steer_towards_line(adc_ncentroid)
 
-        print("\nThe signals are: ", adc_means)
-        # print("The center line is located at: %.2f" % adc_centroid)
-        print("The n_center line is located at: %.2f" % adc_ncentroid)
+            print("\nThe signals are: ", adc_means)
+            # print("The center line is located at: %.2f" % adc_centroid)
+            print("The n_center line is located at: %.2f" % adc_ncentroid)
 
-        # Step 2: Control
-        px.set_dir_servo_angle(steer_angle)
-        print("The commanded steer angle is: %.2f" % steer_angle)
-        px.forward(1)
+            # Step 2: Control
+            px.set_dir_servo_angle(steer_angle)
+            print("The commanded steer angle is: %.2f" % steer_angle)
+            px.forward(1)
 
-        e_time = time.time() - start
-        
+            e_time = time.time() - start
+
+    elif sensor == "camera":
+
+        with PiCamera() as camera:
+            print("start color detect")
+            camera.resolution = (640, 480)
+            camera.framerate = 24
+            rawCapture = PiRGBArray(camera, size=camera.resolution)
+            time.sleep(2)
+
+            for frame in camera.capture_continuous(rawCapture, format="bgr",
+                                                   use_video_port=True):  # use_video_port=True
+                img = frame.array
+                img, img_2, img_3 = cam_class.color_detect(img, 'purple')  # Color detection function
+                cv2.imshow("video", img)  # OpenCV image show
+                cv2.imshow("mask", img_2)  # OpenCV image show
+                cv2.imshow("morphologyEx_img", img_3)  # OpenCV image show
+                rawCapture.truncate(0)  # Release cache
+
+                # Map the location of the line to [-1,1]
+                location = cam_class.mapping(cam_class.line_location)
+                steer_angle = control.steer_towards_line(location)
+                print("The line is located at %.2f and the steering angle is %.2f" % (location, steer_angle))
+
+                # Steer the wheels
+                px.set_dir_servo_angle(steer_angle)
+
+                k = cv2.waitKey(1) & 0xFF
+                # 27 is the ESC key, which means that if you press the ESC key to exit
+                if k == 27:
+                    break
+
+            print('quit ...')
+            cv2.destroyAllWindows()
+            camera.close()
+
 
 if __name__ == "__main__":
     px = picarx_improved.Picarx()
 
-    cam_class = PicarCamera()
-    control = GrayController()
-
     # week_2(px)
-    # week_3(px)
-
-    with PiCamera() as camera:
-        print("start color detect")
-        camera.resolution = (640, 480)
-        camera.framerate = 24
-        rawCapture = PiRGBArray(camera, size=camera.resolution)
-        time.sleep(2)
-
-        for frame in camera.capture_continuous(rawCapture, format="bgr", use_video_port=True):  # use_video_port=True
-            img = frame.array
-            img, img_2, img_3 = cam_class.color_detect(img, 'purple')  # Color detection function
-            cv2.imshow("video", img)  # OpenCV image show
-            cv2.imshow("mask", img_2)  # OpenCV image show
-            cv2.imshow("morphologyEx_img", img_3)  # OpenCV image show
-            rawCapture.truncate(0)  # Release cache
-
-            # Map the location of the line to [-1,1]
-            location = cam_class.mapping(cam_class.line_location)
-            steer_angle = control.steer_towards_line(location)
-            print("The line is located at %.2f and the steering angle is %.2f" % (location, steer_angle))
-
-            # Steer the wheels
-            px.set_dir_servo_angle(steer_angle)
+    week_3(px, "camera")
 
 
-            k = cv2.waitKey(1) & 0xFF
-            # 27 is the ESC key, which means that if you press the ESC key to exit
-            if k == 27:
-                break
-
-        print('quit ...')
-        cv2.destroyAllWindows()
-        camera.close()
 
