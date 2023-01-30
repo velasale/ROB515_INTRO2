@@ -417,7 +417,7 @@ if __name__ == "__main__":
             # Map the location of the line to [-1,1]
             location = cam_class.mapping(cam_class.line_location)
             steer_angle = control.steer_towards_line(location)
-            print("The line is located at %.2f and the steering angle is %.2f" % (location, steer_angle)
+            print("The line is located at %.2f and the steering angle is %.2f" % (location, steer_angle))
 
 
 
