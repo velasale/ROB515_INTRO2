@@ -3,7 +3,7 @@ import numpy as np
 import matplotlib.pyplot as plt
 from numpy.fft import fft, ifft
 
-with open('signals.csv', newline='') as f:
+with open('videos/week3/signals.csv', newline='') as f:
     reader = csv.reader(f)
     data = list(reader)
 
