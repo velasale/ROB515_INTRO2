@@ -8,6 +8,7 @@ import cv2
 from picamera.array import PiRGBArray
 from picamera import PiCamera
 import numpy as np
+import concurrent.futures
 
 
 class GrayInterpreter():
@@ -78,6 +79,9 @@ class GrayInterpreter():
         on the interval [-1, 1], with positive values being to the left of the robot.
         """
 
+    def consumer_producer(self):
+        ...
+
 
 class GrayController():
 
@@ -89,6 +93,8 @@ class GrayController():
     def steer_towards_line(self, error):
         return self.scale_factor * error
 
+    def consumer(self):
+        ...
 
 class PicarCamera():
     
@@ -164,7 +170,6 @@ class PiBus():
 
     def read(self):
         value = self.message.pop()
-
         return value
 
 
@@ -452,11 +457,21 @@ def week_3(px, sensor="photosensor"):
             camera.close()
 
 
+def week_4():
+
+
+    with concurrent.futures.ThreadPoolExecutor(max_workers= 2) as executor:
+
+        eSensor = executor.submit()
+        eInterpreter = executor.submit()
+
+
+
 if __name__ == "__main__":
     px = picarx_improved.Picarx()
 
     # week_2(px)
-    week_3(px, "camera")
-
+    # week_3(px, "camera")
+    week_4()
 
 
