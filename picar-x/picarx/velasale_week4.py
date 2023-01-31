@@ -152,7 +152,22 @@ class PicarCamera():
     def mapping(self, screen_location):
         return (screen_location - self.SCREEN_CENTER) / self.SCREEN_CENTER
     
-    
+
+class PiBus():
+    """Bus Structure"""
+
+    def __init__(self):
+        self.message = []
+
+    def write(self, signal):
+        self.message.append(signal)
+
+    def read(self):
+        value = self.message.pop()
+
+        return value
+
+
 def sample_code(px):
     """ Sample code from https://docs.sunfounder.com/projects/picar-x/en/latest/python/python_move.html
     """
