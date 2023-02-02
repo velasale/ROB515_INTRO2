@@ -8,10 +8,32 @@ import cv2
 from picamera.array import PiRGBArray
 from picamera import PiCamera
 import numpy as np
+# Concurrent Execution packages
 import concurrent.futures
+from readerwriterlock import rwlock
+
+
+class GraySensing():
+    """Producer Class"""
+
+    def __init__(self, grayscale_pins:list=['A0,A1,A2']):
+
+        adc0, adc1, adc2 = grayscale_pins
+        self.grayscale = Grayscale_Module(adc0, adc1, adc2, reference=1000)
+
+    def adc_list(self):
+        """This function reads the three adc channels and puts them in a list"""
+        sensor_list = list.copy(self.grayscale.get_grayscale_data())
+        return sensor_list
+
+    def producer(self, message, time_delay):
+        while True:
+            self.adc_list(message)
+            time.sleep(time_delay)
 
 
 class GrayInterpreter():
+    """ Consumer - Producer Class """
 
     def __init__(self, dark_threshold=600, light_threshold=1400, polarity="line_darker"):
 
@@ -79,24 +101,32 @@ class GrayInterpreter():
         on the interval [-1, 1], with positive values being to the left of the robot.
         """
 
-    def consumer_producer(self):
-        ...
+    def consumer_producer(self, message, time_delay):
+        while True:
+            self.sharp_edge(message)
+            time.sleep(time_delay)
 
 
 class GrayController():
+    """Consumer class"""
 
     def __init__(self, scale_factor=20):
 
         # K for a proportional controller, it maps [-1,1] into [25,-25]deg
         self.scale_factor = scale_factor
 
+
     def steer_towards_line(self, error):
         return self.scale_factor * error
 
-    def consumer(self):
-        ...
+    def consumer(self, message, time_delay):
+        while True:
+            self.steer_towards_line(message)
+            time.sleep(time_delay)
+
 
 class PicarCamera():
+    """Consumer-Producer Class"""
     
     def __init__(self):
         self.color_dict = {'red': [0, 4], 'orange': [5, 18], 'yellow': [22, 37], 'green': [42, 85], 'blue': [92, 110],
@@ -163,14 +193,17 @@ class PiBus():
     """Bus Structure"""
 
     def __init__(self):
-        self.message = []
+        self.message = 0
+        self.lock = rwlock.RWLockWriteD()
 
     def write(self, signal):
-        self.message.append(signal)
+        with self.lock.gen_wlock():
+            self.message = signal
 
     def read(self):
-        value = self.message.pop()
-        return value
+        with self.lock.gen_rlock():
+            message = self.message
+        return message
 
 
 def sample_code(px):
@@ -459,12 +492,16 @@ def week_3(px, sensor="photosensor"):
 
 def week_4():
 
+    controllerBus = PiBus()
+    cameraBus = PiBus()
+    lineInterpreterBus = PiBus()
+    sensorBus = PiBus()
 
     with concurrent.futures.ThreadPoolExecutor(max_workers= 2) as executor:
+        eSensor = executor.submit(GraySensing.producer(sensorBus.message), sensorBus(), 1)
+        eInterpreter = executor.submit(GrayInterpreter.consumer_producer())
 
-        eSensor = executor.submit()
-        eInterpreter = executor.submit()
-
+    eSensor.result()
 
 
 if __name__ == "__main__":
