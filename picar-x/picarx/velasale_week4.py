@@ -522,23 +522,30 @@ def week_3(px, sensor="photosensor"):
 
 def week_4():
 
+    # Instances of Busses
     controllerBus = PiBus()
     cameraBus = PiBus()
     lineInterpreterBus = PiBus()
     sensorBus = PiBus()
 
+    # Instances of sensor, interpreter and controller
     sensor = GraySensing()
     interpreter = GrayInterpreter()
+    controller = GrayController()
 
+    # Time delays
     sensor_delay = 1
     interpreter_delay = 2
+    controller_delay = 1
 
     with concurrent.futures.ThreadPoolExecutor(max_workers=2) as executor:
         eSensor = executor.submit(sensor.producer, sensorBus, sensor_delay)
         eInterpreter = executor.submit(interpreter.consumer_producer, sensorBus, lineInterpreterBus, interpreter_delay)
+        eController = executor.submit(controller.consumer, lineInterpreterBus, controller_delay)
 
     eSensor.result()
     eInterpreter.result()
+    eController.result()
 
 
 if __name__ == "__main__":
