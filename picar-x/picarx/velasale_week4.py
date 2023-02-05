@@ -140,13 +140,13 @@ class GrayController():
                  servo_pins:list=['P0', 'P1', 'P2'],
                  scale_factor=20):
         # config_flie
-        self.config_flie = fileDB(config, 774, User)
+        # self.config_flie = fileDB(config, 774, User)
         # K for a proportional controller, it maps [-1,1] into [25,-25]deg
         self.scale_factor = scale_factor
         # servos init
-        self.dir_servo_pin = Servo(PWM(servo_pins[2]))
-        self.dir_cal_value = int(self.config_flie.get("picarx_dir_servo", default_value=0))
-        self.dir_servo_pin.angle(self.dir_cal_value)
+        # self.dir_servo_pin = Servo(PWM(servo_pins[2]))
+        # self.dir_cal_value = int(self.config_flie.get("picarx_dir_servo", default_value=0))
+        # self.dir_servo_pin.angle(self.dir_cal_value)
         self.picar_object = picar_object
 
     def steer_towards_line(self, error):
