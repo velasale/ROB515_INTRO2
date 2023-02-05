@@ -29,7 +29,7 @@ class GraySensing():
     def __init__(self, grayscale_pins:list=['A0,A1,A2']):
 
         adc0, adc1, adc2 = grayscale_pins
-        self.grayscale = Grayscale_Module(adc0, adc1, adc2, reference=1000)
+        self.grayscale = Grayscale_Module('A0', 'A1', 'A2', reference=1000)
 
     def adc_list(self):
         """This function reads the three adc channels and puts them in a list"""
