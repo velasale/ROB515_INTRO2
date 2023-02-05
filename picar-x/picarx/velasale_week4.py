@@ -543,7 +543,7 @@ def week_4(px):
     # Instances of sensor, interpreter and controller
     sensor = GraySensing()
     interpreter = GrayInterpreter()
-    controller = GrayController(px, 20)
+    controller = GrayController(px)
 
     # Time delays
     sensor_delay = 1
@@ -564,7 +564,7 @@ if __name__ == "__main__":
 
     px = picarx_improved.Picarx()
     # week_2(px)
-    week_3(px, "photosensor")
-    # week_4(px)
+    # week_3(px, "photosensor")
+    week_4(px)
 
 
