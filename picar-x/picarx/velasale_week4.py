@@ -33,7 +33,7 @@ class GraySensing():
     def adc_list(self):
         """This function reads the three adc channels and puts them in a list"""
         sensor_list = list.copy(self.grayscale.get_grayscale_data())
-        print("Sensor - ADC list:", sensor_list)
+        # print("Sensor - ADC list:", sensor_list)
         return sensor_list
 
     def producer(self, sensor_bus, time_delay):
@@ -107,7 +107,7 @@ class GrayInterpreter():
         n_mean3 = (mean3 - min_reading) / (max_reading - min_reading)
 
         n_centroid = (n_mean3 - n_mean1) / (n_mean1 + n_mean2 + n_mean3)
-        print("Interpreter - Position of the line:", n_centroid)
+        # print("Interpreter - Position of the line:", n_centroid)
 
         return means, centroid, n_centroid
 
@@ -139,16 +139,8 @@ class GrayController():
                  picar_object,
                  scale_factor=20):
 
-        # config_flie
-        # self.config_flie = fileDB(config, 774, User)
         # K for a proportional controller, it maps [-1,1] into [25,-25]deg
-
         self.scale_factor = scale_factor
-
-        # servos init
-        # self.dir_servo_pin = Servo(PWM(servo_pins[2]))
-        # self.dir_cal_value = int(self.config_flie.get("picarx_dir_servo", default_value=0))
-        # self.dir_servo_pin.angle(self.dir_cal_value)
         self.picar_object = picar_object
 
     def steer_towards_line(self, error):
@@ -535,7 +527,6 @@ def week_3(px, sensor="photosensor"):
 def week_4(px):
 
     # Instances of Busses
-    controllerBus = PiBus()
     cameraBus = PiBus()
     lineInterpreterBus = PiBus()
     sensorBus = PiBus()
@@ -546,9 +537,9 @@ def week_4(px):
     controller = GrayController(px, 20)
 
     # Time delays
-    sensor_delay = 0.001
+    sensor_delay = 0.01
     interpreter_delay = 0.01
-    controller_delay = 0.1
+    controller_delay = 0.01
 
     with concurrent.futures.ThreadPoolExecutor(max_workers=3) as executor:
         eSensor = executor.submit(sensor.producer, sensorBus, sensor_delay)
