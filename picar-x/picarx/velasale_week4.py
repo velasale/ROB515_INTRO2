@@ -483,7 +483,7 @@ def week_3(px, sensor="photosensor"):
             # Step 2: Control
             px.set_dir_servo_angle(steer_angle)
             print("The commanded steer angle is: %.2f" % steer_angle)
-            px.forward(1)
+            # px.forward(1)
 
             e_time = time.time() - start
 
