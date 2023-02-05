@@ -546,9 +546,9 @@ def week_4(px):
     controller = GrayController(px)
 
     # Time delays
-    sensor_delay = 1
-    interpreter_delay = 2
-    controller_delay = 1
+    sensor_delay = 0.01
+    interpreter_delay = 0.01
+    controller_delay = 0.01
 
     with concurrent.futures.ThreadPoolExecutor(max_workers=2) as executor:
         eSensor = executor.submit(sensor.producer, sensorBus, sensor_delay)
