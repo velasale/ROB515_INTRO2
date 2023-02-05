@@ -462,7 +462,7 @@ def week_3(px, sensor="photosensor"):
     # Instance of Camera Interpreter
     cam_class = PicarCamera()
     # Instance of a Controller
-    control = GrayController()
+    control = GrayController(px)
 
     if sensor == "photosensor":
         e_time = 0
