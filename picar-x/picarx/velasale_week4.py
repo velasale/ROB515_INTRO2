@@ -550,7 +550,7 @@ def week_4(px):
     interpreter_delay = 0.01
     controller_delay = 0.1
 
-    with concurrent.futures.ThreadPoolExecutor(max_workers=2) as executor:
+    with concurrent.futures.ThreadPoolExecutor(max_workers=3) as executor:
         eSensor = executor.submit(sensor.producer, sensorBus, sensor_delay)
         eInterpreter = executor.submit(interpreter.consumer_producer, sensorBus, lineInterpreterBus, interpreter_delay)
         eController = executor.submit(controller.consumer, lineInterpreterBus, controller_delay)
