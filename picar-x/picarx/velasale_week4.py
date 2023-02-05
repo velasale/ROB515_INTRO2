@@ -107,7 +107,7 @@ class GrayInterpreter():
         n_mean3 = (mean3 - min_reading) / (max_reading - min_reading)
 
         n_centroid = (n_mean3 - n_mean1) / (n_mean1 + n_mean2 + n_mean3)
-        print("Interpreter - Position of the line:", n_centroid)
+        # print("Interpreter - Position of the line:", n_centroid)
 
         return means, centroid, n_centroid
 
