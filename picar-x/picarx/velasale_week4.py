@@ -543,7 +543,7 @@ def week_4(px):
     # Instances of sensor, interpreter and controller
     sensor = GraySensing()
     interpreter = GrayInterpreter()
-    controller = GrayController(px)
+    controller = GrayController(px, 20)
 
     # Time delays
     sensor_delay = 0.01
