@@ -137,7 +137,6 @@ class GrayController():
 
     def __init__(self,
                  picar_object,
-                 servo_pins:list=['P0', 'P1', 'P2'],
                  scale_factor=20):
         # config_flie
         # self.config_flie = fileDB(config, 774, User)
@@ -541,7 +540,7 @@ def week_4(px):
     # Instances of sensor, interpreter and controller
     sensor = GraySensing()
     interpreter = GrayInterpreter()
-    controller = GrayController(px)
+    controller = GrayController(px, 20)
 
     # Time delays
     sensor_delay = 1
