@@ -33,7 +33,7 @@ class GraySensing():
     def adc_list(self):
         """This function reads the three adc channels and puts them in a list"""
         sensor_list = list.copy(self.grayscale.get_grayscale_data())
-        print("Sensor - ADC list:", sensor_list)
+        print("Sensor - A DC list:", sensor_list)
         return sensor_list
 
     def producer(self, sensor_bus, time_delay):
