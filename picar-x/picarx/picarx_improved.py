@@ -125,7 +125,7 @@ class Picarx(object):
             self.motor_direction_pins[motor].low()
             self.motor_speed_pins[motor].pulse_width_percent(speed)
 
-    def motor_speed_calibration(self,value):
+    def motor_speed_calibration(self, value):
         # global cali_speed_value,cali_dir_value
         self.cali_speed_value = value
         if value < 0:
@@ -135,7 +135,7 @@ class Picarx(object):
             self.cali_speed_value[0] = abs(self.cali_speed_value)
             self.cali_speed_value[1] = 0
 
-    def motor_direction_calibration(self,motor, value):
+    def motor_direction_calibration(self, motor, value):
         # 1: positive direction
         # -1:negative direction
         motor -= 1
@@ -148,14 +148,14 @@ class Picarx(object):
             self.cali_dir_value[motor] = -1
         self.config_flie.set("picarx_dir_motor", self.cali_dir_value)
 
-    def dir_servo_angle_calibration(self,value):
+    def dir_servo_angle_calibration(self, value):
         self.dir_cal_value = value
         self.config_flie.set("picarx_dir_servo", "%s"%value)
         self.dir_servo_pin.angle(value)
 
     def set_dir_servo_angle(self,value):
         self.dir_current_angle = value
-        angle_value  = value + self.dir_cal_value
+        angle_value = value + self.dir_cal_value
         self.dir_servo_pin.angle(angle_value)
 
     def camera_servo1_angle_calibration(self,value):

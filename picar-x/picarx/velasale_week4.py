@@ -135,10 +135,19 @@ class GrayInterpreter():
 class GrayController():
     """Consumer class"""
 
-    def __init__(self, scale_factor=20):
-
+    def __init__(self,
+                 picar_object,
+                 servo_pins:list=['P0', 'P1', 'P2'],
+                 scale_factor=20):
+        # config_flie
+        self.config_flie = fileDB(config, 774, User)
         # K for a proportional controller, it maps [-1,1] into [25,-25]deg
         self.scale_factor = scale_factor
+        # servos init
+        self.dir_servo_pin = Servo(PWM(servo_pins[2]))
+        self.dir_cal_value = int(self.config_flie.get("picarx_dir_servo", default_value=0))
+        self.dir_servo_pin.angle(self.dir_cal_value)
+        self.picar_object = picar_object
 
     def steer_towards_line(self, error):
         return self.scale_factor * error
@@ -149,7 +158,8 @@ class GrayController():
             message = line_interpreter_bus.read()
 
             # 2nd - Execute function
-            self.steer_towards_line(message)
+            angle = self.steer_towards_line(message)
+            self.picar_object.set_dir_servo_angle(angle)
 
             # 3rd - sleep
             time.sleep(time_delay)
@@ -520,7 +530,7 @@ def week_3(px, sensor="photosensor"):
             camera.close()
 
 
-def week_4():
+def week_4(px):
 
     # Instances of Busses
     controllerBus = PiBus()
@@ -531,7 +541,7 @@ def week_4():
     # Instances of sensor, interpreter and controller
     sensor = GraySensing()
     interpreter = GrayInterpreter()
-    controller = GrayController()
+    controller = GrayController(px)
 
     # Time delays
     sensor_delay = 1
@@ -553,6 +563,6 @@ if __name__ == "__main__":
     px = picarx_improved.Picarx()
     # week_2(px)
     # week_3(px, "camera")
-    week_4()
+    week_4(px)
 
 
