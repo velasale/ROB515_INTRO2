@@ -37,7 +37,7 @@ class GraySensing():
         print(sensor_list)
         return sensor_list
 
-    def producer(self, sensor_bus, tome_delay):
+    def producer(self, sensor_bus, time_delay):
         while True:
             # 1st - execute function
             list = self.adc_list()
