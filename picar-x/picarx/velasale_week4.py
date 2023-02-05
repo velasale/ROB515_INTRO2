@@ -27,14 +27,13 @@ class GraySensing():
     """Producer Class"""
 
     def __init__(self, grayscale_pins: list = ['A0', 'A1', 'A2']):
-
         adc0, adc1, adc2 = grayscale_pins
         self.grayscale = Grayscale_Module(adc0, adc1, adc2, reference=1000)
 
     def adc_list(self):
         """This function reads the three adc channels and puts them in a list"""
         sensor_list = list.copy(self.grayscale.get_grayscale_data())
-        print(sensor_list)
+        print("Sensor - ADC list:", sensor_list)
         return sensor_list
 
     def producer(self, sensor_bus, time_delay):
@@ -108,7 +107,7 @@ class GrayInterpreter():
         n_mean3 = (mean3 - min_reading) / (max_reading - min_reading)
 
         n_centroid = (n_mean3 - n_mean1) / (n_mean1 + n_mean2 + n_mean3)
-        print(n_centroid)
+        print("Interpreter - Position of the line:", n_centroid)
 
         return means, centroid, n_centroid
 
