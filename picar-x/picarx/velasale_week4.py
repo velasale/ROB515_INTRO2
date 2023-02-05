@@ -8,9 +8,19 @@ import cv2
 from picamera.array import PiRGBArray
 from picamera import PiCamera
 import numpy as np
+
 # Concurrent Execution packages
 import concurrent.futures
 from readerwriterlock import rwlock
+
+try:
+    from robot_hat import *
+    from robot_hat import reset_mcu
+    reset_mcu()
+    time.sleep(0.01)
+except ImportError:
+    print("This computer does not appear to be a PiCar-X system (robot is not present). Shadowing hardware calls with substitute functions")
+    from sim_robot_hat import *
 
 
 class GraySensing():
@@ -24,11 +34,18 @@ class GraySensing():
     def adc_list(self):
         """This function reads the three adc channels and puts them in a list"""
         sensor_list = list.copy(self.grayscale.get_grayscale_data())
+        print(sensor_list)
         return sensor_list
 
-    def producer(self, message, time_delay):
+    def producer(self, sensor_bus, time_delay):
         while True:
-            self.adc_list(message)
+            # 1st - execute function
+            list = self.adc_list()
+
+            # 2nd - write into the sensor bus
+            sensor_bus.write(list)
+
+            # 3rd - Sleep
             time.sleep(time_delay)
 
 
@@ -84,14 +101,14 @@ class GrayInterpreter():
         # different lighting conditions
         min_reading = min(means)
         max_reading = max(means)
-        print(min_reading)
+        # print(min_reading)
 
         n_mean1 = (mean1 - min_reading) / (max_reading - min_reading)
         n_mean2 = (mean2 - min_reading) / (max_reading - min_reading)
         n_mean3 = (mean3 - min_reading) / (max_reading - min_reading)
 
         n_centroid = (n_mean3 - n_mean1) / (n_mean1 + n_mean2 + n_mean3)
-        n_centroid = n_centroid
+        print(n_centroid)
 
         return means, centroid, n_centroid
 
@@ -101,9 +118,18 @@ class GrayInterpreter():
         on the interval [-1, 1], with positive values being to the left of the robot.
         """
 
-    def consumer_producer(self, message, time_delay):
+    def consumer_producer(self, sensor_bus, lineInterpreter_bus, time_delay):
         while True:
-            self.sharp_edge(message)
+            # 1st - Read data from Sensor Bus
+            message = sensor_bus.read()
+
+            # 2nd - Execute function
+            means, centroid, n_centroid = self.sharp_edge(message)
+
+            # 3rd - Write data in the interpreter bus
+            lineInterpreter_bus.write(n_centroid)
+
+            # 4th - sleep
             time.sleep(time_delay)
 
 
@@ -115,13 +141,18 @@ class GrayController():
         # K for a proportional controller, it maps [-1,1] into [25,-25]deg
         self.scale_factor = scale_factor
 
-
     def steer_towards_line(self, error):
         return self.scale_factor * error
 
-    def consumer(self, message, time_delay):
+    def consumer(self, line_interpreter_bus, time_delay):
         while True:
+            # 1st - Read data from Interpreter Bus
+            message = line_interpreter_bus.read()
+
+            # 2nd - Execute function
             self.steer_towards_line(message)
+
+            # 3rd - sleep
             time.sleep(time_delay)
 
 
@@ -497,16 +528,20 @@ def week_4():
     lineInterpreterBus = PiBus()
     sensorBus = PiBus()
 
-    with concurrent.futures.ThreadPoolExecutor(max_workers= 2) as executor:
-        eSensor = executor.submit(GraySensing.producer(sensorBus.message), sensorBus(), 1)
-        eInterpreter = executor.submit(GrayInterpreter.consumer_producer())
+    sensor_delay = 1
+    interpreter_delay = 2
+
+    with concurrent.futures.ThreadPoolExecutor(max_workers=2) as executor:
+        eSensor = executor.submit(GraySensing.producer, sensorBus, sensor_delay)
+        eInterpreter = executor.submit(GrayInterpreter.consumer_producer, sensorBus, lineInterpreterBus, interpreter_delay)
 
     eSensor.result()
+    eInterpreter.result()
 
 
 if __name__ == "__main__":
-    px = picarx_improved.Picarx()
 
+    px = picarx_improved.Picarx()
     # week_2(px)
     # week_3(px, "camera")
     week_4()
