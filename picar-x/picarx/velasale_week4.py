@@ -26,10 +26,10 @@ except ImportError:
 class GraySensing():
     """Producer Class"""
 
-    def __init__(self, grayscale_pins:list=['A0,A1,A2']):
+    def __init__(self, grayscale_pins: list = ['A0', 'A1', 'A2']):
 
-        # adc0, adc1, adc2 = grayscale_pins
-        self.grayscale = Grayscale_Module('A0', 'A1', 'A2', reference=1000)
+        adc0, adc1, adc2 = grayscale_pins
+        self.grayscale = Grayscale_Module(adc0, adc1, adc2, reference=1000)
 
     def adc_list(self):
         """This function reads the three adc channels and puts them in a list"""
@@ -531,8 +531,8 @@ def week_4():
     sensor = GraySensing()
     interpreter = GrayInterpreter()
 
-    sensor_delay = 1
-    interpreter_delay = 2
+    sensor_delay = 0.5
+    interpreter_delay = 1
 
     with concurrent.futures.ThreadPoolExecutor(max_workers=2) as executor:
         eSensor = executor.submit(sensor.producer, sensorBus, sensor_delay)
