@@ -532,7 +532,7 @@ def week_4():
     interpreter_delay = 2
 
     with concurrent.futures.ThreadPoolExecutor(max_workers=2) as executor:
-        eSensor = executor.submit(GraySensing.producer, sensorBus, sensor_delay)
+        eSensor = executor.submit(GraySensing.producer, sensorBus, 4)
         eInterpreter = executor.submit(GrayInterpreter.consumer_producer, sensorBus, lineInterpreterBus, interpreter_delay)
 
     eSensor.result()
