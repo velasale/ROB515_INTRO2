@@ -112,7 +112,7 @@ class GrayInterpreter():
         n_mean3 = (mean3 - min_reading) / (max_reading - min_reading)
 
         n_centroid = (n_mean3 - n_mean1) / (n_mean1 + n_mean2 + n_mean3)
-        print("Interpreter - Position of the line:", n_centroid)
+        print("\nInterpreter - Position of the line: %.2f \n" % n_centroid)
 
         # return means, centroid, n_centroid
         return n_centroid
@@ -569,7 +569,7 @@ def week_5(px):
     graySensor = rr.Producer(
         sensor.adc_list,                # function that will generate data
         bGraySensor,                    # output data bus
-        0.05,                           # delay between data generation
+        0.01,                           # delay between data generation
         bTerminate,                     # bus to watch for termination signal
         "Read GrayScale sensor signal")
 
@@ -577,7 +577,7 @@ def week_5(px):
         interpreter.sharp_edge,     # function that processes data
         bGraySensor,                    # input data bus
         bGrayInterpreter,               # output data bus
-        0.05,                           # delay
+        0.01,                           # delay
         bTerminate,                     # bus to watch for termination signal
         "Interpret Grayscale into line position")
 
@@ -591,7 +591,7 @@ def week_5(px):
     """ Part 3: Create RossROS Timer object """
     terminationTimer = rr.Timer(
         bTerminate,         # Output data bus
-        3,                  # Duration
+        20,                  # Duration
         0.01,               # Delay between checking termination time
         bTerminate,         # Bus to check for termination signal
         "Termination Timer")
@@ -600,7 +600,7 @@ def week_5(px):
     # Create list of producer-consumers to execute concurrently
     producer_consumer_list = [graySensor,
                               grayInterpreter,
-                              dirController,
+                              # dirController,
                               terminationTimer]
 
     # Execute the list of producer-consumers concurrently
