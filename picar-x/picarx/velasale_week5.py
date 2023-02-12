@@ -560,8 +560,8 @@ def week_5(px):
 
     """ Part 1: Initiate instances of Buses"""
     bCamera = rr.Bus(0, "Camera bus")
-    bGrayInterpreter = rr.Bus(interpreter.sharp_edge(), "Grayscale Interpreter bus")
     bGraySensor = rr.Bus(sensor.adc_list(), "Grayscale Sensor Bus")
+    bGrayInterpreter = rr.Bus(interpreter.sharp_edge(), "Grayscale Interpreter bus")
     bTerminate = rr.Bus(0, "Termination Bus")
 
     """ Part 2: Wrap sensor, interpreter and controller functions into RossROS objects"""

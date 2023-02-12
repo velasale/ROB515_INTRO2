@@ -1,5 +1,11 @@
 # ROB515_INTRO2
 
+# 0. Required Packages
+
+```console
+pip3 install logdecorator
+```
+
 # 1. Running the program
 
 ## 1.1 Shell the picar-x
