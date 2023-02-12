@@ -114,7 +114,8 @@ class GrayInterpreter():
         n_centroid = (n_mean3 - n_mean1) / (n_mean1 + n_mean2 + n_mean3)
         print("Interpreter - Position of the line:", n_centroid)
 
-        return means, centroid, n_centroid
+        # return means, centroid, n_centroid
+        return n_centroid
 
     def consumer_producer(self, sensor_bus, lineInterpreter_bus, time_delay):
         while True:
@@ -122,7 +123,7 @@ class GrayInterpreter():
             message = sensor_bus.read()
 
             # 2nd - Execute function
-            means, centroid, n_centroid = self.sharp_edge(message)
+            n_centroid = self.sharp_edge(message)
 
             # 3rd - Write data in the interpreter bus
             lineInterpreter_bus.write(n_centroid)
