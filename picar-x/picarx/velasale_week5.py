@@ -564,7 +564,7 @@ def week_5(px):
     # Create list of producer-consumers to execute concurrently
     producer_consumer_list = [graySensor,
                               grayInterpreter,
-                              # dirController,
+                              dirController,
                               terminationTimer]
 
     # Execute the list of producer-consumers concurrently
