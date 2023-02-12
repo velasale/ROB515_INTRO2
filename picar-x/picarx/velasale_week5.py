@@ -1,17 +1,22 @@
-import picarx_improved
+# --- Packages from Python Standard Library
 import time
 import csv
 import time
-import statistics as st
 import os
+import concurrent.futures
+from readerwriterlock import rwlock
+
+# --- Packages from 3rd party developers
+import math
+import statistics as st
+import numpy as np
 import cv2
 from picamera.array import PiRGBArray
 from picamera import PiCamera
-import numpy as np
 
-# Concurrent Execution packages
-import concurrent.futures
-from readerwriterlock import rwlock
+# --- Packages from own development
+import picarx_improved
+import rossros as rr
 
 try:
     from robot_hat import *
@@ -110,12 +115,6 @@ class GrayInterpreter():
         print("Interpreter - Position of the line:", n_centroid)
 
         return means, centroid, n_centroid
-
-    def position(self):
-        """
-        This method outputs the location of the robot relative to the line as a value
-        on the interval [-1, 1], with positive values being to the left of the robot.
-        """
 
     def consumer_producer(self, sensor_bus, lineInterpreter_bus, time_delay):
         while True:
@@ -526,7 +525,7 @@ def week_3(px, sensor="photosensor"):
 
 def week_4(px):
 
-    # Instances of Busses
+    # Instances of Buses
     cameraBus = PiBus()
     lineInterpreterBus = PiBus()
     sensorBus = PiBus()
@@ -551,11 +550,65 @@ def week_4(px):
     eController.result()
 
 
+def week_5():
+    """This week we implement RossROS"""
+
+    """ Part 1: Initiate instances of Buses"""
+    bCamera = rr.Bus(0, "Camera bus")
+    bGrayInterpreter = rr.Bus(GrayInterpreter.sharp_edge(), "Grayscale Interpreter bus")
+    bGraySensor = rr.Bus(GraySensing.adc_list(), "Grayscale Sensor Bus")
+    bTerminate = rr.Bus(0, "Termination Bus")
+
+    """ Part 2: Wrap sensor, interpreter and controller functions into RossROS objects"""
+    graySensor = rr.Producer(
+        GraySensing.adc_list,           # function that will generate data
+        bGraySensor,                    # output data bus
+        0.05,                           # delay between data generation
+        bTerminate,                     # bus to watch for termination signal
+        "Read GrayScale sensor signal")
+
+    grayInterpreter = rr.ConsumerProducer(
+        GrayInterpreter.sharp_edge,     # function that processes data
+        bGraySensor,                    # input data bus
+        bGrayInterpreter,               # output data bus
+        0.05,                           # delay
+        bTerminate,                     # bus to watch for termination signal
+        "Interpret Grayscale into line position")
+
+    dirController = rr.Consumer(
+        GrayController.steer_towards_line,
+        bGrayInterpreter,
+        0.05,
+        bTerminate,
+        "Control steering angle")
+
+    """ Part 3: Create RossROS Timer object """
+    terminationTimer = rr.Timer(
+        bTerminate,         # Output data bus
+        3,                  # Duration
+        0.01,               # Delay between checking termination time
+        bTerminate,         # Bus to check for termination signal
+        "Termination Timer")
+
+    """ Part 4: Concurrent execution """
+    # Create list of producer-consumers to execute concurrently
+    producer_consumer_list = [graySensor,
+                              grayInterpreter,
+                              dirController,
+                              terminationTimer]
+
+    # Execute the list of producer-consumers concurrently
+    rr.runConcurrently(producer_consumer_list)
+
+
+
+
 if __name__ == "__main__":
 
     px = picarx_improved.Picarx()
     # week_2(px)
     # week_3(px, "photosensor")
-    week_4(px)
+    # week_4(px)
+    week_5()
 
 
