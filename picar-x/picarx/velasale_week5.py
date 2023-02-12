@@ -41,17 +41,6 @@ class GraySensing():
         print("Sensor - A DC list:", sensor_list)
         return sensor_list
 
-    def producer(self, sensor_bus, time_delay):
-        while True:
-            # 1st - execute function
-            list = self.adc_list()
-
-            # 2nd - write into the sensor bus
-            sensor_bus.write(list)
-
-            # 3rd - Sleep
-            time.sleep(time_delay)
-
 
 class GrayInterpreter():
     """ Consumer - Producer Class """
@@ -117,20 +106,6 @@ class GrayInterpreter():
         # return means, centroid, n_centroid
         return n_centroid
 
-    def consumer_producer(self, sensor_bus, lineInterpreter_bus, time_delay):
-        while True:
-            # 1st - Read data from Sensor Bus
-            message = sensor_bus.read()
-
-            # 2nd - Execute function
-            n_centroid = self.sharp_edge(message)
-
-            # 3rd - Write data in the interpreter bus
-            lineInterpreter_bus.write(n_centroid)
-
-            # 4th - sleep
-            time.sleep(time_delay)
-
 
 class GrayController():
     """Consumer class"""
@@ -144,19 +119,8 @@ class GrayController():
         self.picar_object = picar_object
 
     def steer_towards_line(self, error):
-        return self.scale_factor * error
-
-    def consumer(self, line_interpreter_bus, time_delay):
-        while True:
-            # 1st - Read data from Interpreter Bus
-            message = line_interpreter_bus.read()
-
-            # 2nd - Execute function
-            angle = self.steer_towards_line(message)
-            self.picar_object.set_dir_servo_angle(angle)
-
-            # 3rd - sleep
-            time.sleep(time_delay)
+        angle = self.scale_factor * error
+        self.picar_object.set_dir_servo_angle(angle)
 
 
 class PicarCamera():
