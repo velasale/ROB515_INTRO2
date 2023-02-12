@@ -569,7 +569,7 @@ def week_5(px):
     graySensor = rr.Producer(
         sensor.adc_list,                # function that will generate data
         bGraySensor,                    # output data bus
-        0.01,                           # delay between data generation
+        0.05,                           # delay between data generation
         bTerminate,                     # bus to watch for termination signal
         "Read GrayScale sensor signal")
 
