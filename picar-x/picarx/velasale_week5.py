@@ -533,7 +533,7 @@ def week_5(px):
     graySensor = rr.Producer(
         sensor.adc_list,                # function that will generate data
         bGraySensor,                    # output data bus
-        0.05,                           # delay between data generation
+        0.01,                           # delay between data generation
         bTerminate,                     # bus to watch for termination signal
         "Read GrayScale sensor signal")
 
@@ -548,7 +548,7 @@ def week_5(px):
     dirController = rr.Consumer(
         controller.steer_towards_line,
         bGrayInterpreter,
-        0.05,
+        0.01,
         bTerminate,
         "Control steering angle")
 
