@@ -536,7 +536,7 @@ def week_5(px):
     interpreter = GrayInterpreter()
     controller = GrayController(px, 20)
     dController = DistanceController(px)
-    ultrasonic = Ultrasonic('D2','D3')
+    ultrasonic = Ultrasonic(Pin('D2'), Pin('D3'))
 
     """ Part 1: Initiate instances of Buses"""
     bCamera = rr.Bus(0, "Camera bus")
