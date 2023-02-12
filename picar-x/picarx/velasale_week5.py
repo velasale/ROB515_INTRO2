@@ -17,7 +17,6 @@ from picamera import PiCamera
 # --- Packages from own development
 import picarx_improved
 import rossros as rr
-
 try:
     from robot_hat import *
     from robot_hat import reset_mcu
@@ -121,6 +120,20 @@ class GrayController():
     def steer_towards_line(self, error):
         angle = self.scale_factor * error
         self.picar_object.set_dir_servo_angle(angle)
+
+
+class DistanceController():
+    """Consumer class"""
+
+    def __init__(self,
+                 picar_object):
+        self.picar_object = picar_object
+
+    def move_stop(self, distance):
+        if distance > 10:
+            self.picar_object.forward(10)
+        elif distance < 10:
+            self.picar_object.stop()
 
 
 class PicarCamera():
@@ -522,11 +535,14 @@ def week_5(px):
     sensor = GraySensing()
     interpreter = GrayInterpreter()
     controller = GrayController(px, 20)
+    dController = DistanceController(px)
+    ultrasonic = Ultrasonic()
 
     """ Part 1: Initiate instances of Buses"""
     bCamera = rr.Bus(0, "Camera bus")
     bGraySensor = rr.Bus(sensor.adc_list(), "Grayscale Sensor Bus")
     bGrayInterpreter = rr.Bus(interpreter.sharp_edge(bGraySensor.message), "Grayscale Interpreter bus")
+    bUltrasonic = rr.Bus(ultrasonic.read(10), "Ultrasonic Interpreter bus")
     bTerminate = rr.Bus(0, "Termination Bus")
 
     """ Part 2: Wrap sensor, interpreter and controller functions into RossROS objects"""
@@ -545,12 +561,26 @@ def week_5(px):
         bTerminate,                     # bus to watch for termination signal
         "Interpret Grayscale into line position")
 
+    ultrasonicSensor = rr.Producer(
+        ultrasonic.read,
+        bUltrasonic,
+        0.001,
+        bTerminate,
+        "Read and Interpret Ultrasound distance")
+
     dirController = rr.Consumer(
         controller.steer_towards_line,
         bGrayInterpreter,
         0.001,
         bTerminate,
         "Control steering angle")
+
+    distController = rr.Consumer(
+        dController.move_stop,
+        bUltrasonic,
+        0.001,
+        bTerminate,
+        "Watching the distance ahead")
 
     """ Part 3: Create RossROS Timer object """
     terminationTimer = rr.Timer(
@@ -565,6 +595,8 @@ def week_5(px):
     producer_consumer_list = [graySensor,
                               grayInterpreter,
                               dirController,
+                              ultrasonicSensor,
+                              distController
                               terminationTimer]
 
     # Execute the list of producer-consumers concurrently
