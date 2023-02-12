@@ -596,7 +596,7 @@ def week_5(px):
                               grayInterpreter,
                               dirController,
                               ultrasonicSensor,
-                              distController
+                              distController,
                               terminationTimer]
 
     # Execute the list of producer-consumers concurrently
