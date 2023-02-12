@@ -550,25 +550,30 @@ def week_4(px):
     eController.result()
 
 
-def week_5():
+def week_5(px):
     """This week we implement RossROS"""
+
+    # Instances of sensor, interpreter and controller
+    sensor = GraySensing()
+    interpreter = GrayInterpreter()
+    controller = GrayController(px, 20)
 
     """ Part 1: Initiate instances of Buses"""
     bCamera = rr.Bus(0, "Camera bus")
-    bGrayInterpreter = rr.Bus(GrayInterpreter.sharp_edge(), "Grayscale Interpreter bus")
-    bGraySensor = rr.Bus(GraySensing.adc_list(), "Grayscale Sensor Bus")
+    bGrayInterpreter = rr.Bus(interpreter.sharp_edge(), "Grayscale Interpreter bus")
+    bGraySensor = rr.Bus(sensor.adc_list(), "Grayscale Sensor Bus")
     bTerminate = rr.Bus(0, "Termination Bus")
 
     """ Part 2: Wrap sensor, interpreter and controller functions into RossROS objects"""
     graySensor = rr.Producer(
-        GraySensing.adc_list,           # function that will generate data
+        sensor.adc_list,                # function that will generate data
         bGraySensor,                    # output data bus
         0.05,                           # delay between data generation
         bTerminate,                     # bus to watch for termination signal
         "Read GrayScale sensor signal")
 
     grayInterpreter = rr.ConsumerProducer(
-        GrayInterpreter.sharp_edge,     # function that processes data
+        interpreter.sharp_edge,     # function that processes data
         bGraySensor,                    # input data bus
         bGrayInterpreter,               # output data bus
         0.05,                           # delay
@@ -576,7 +581,7 @@ def week_5():
         "Interpret Grayscale into line position")
 
     dirController = rr.Consumer(
-        GrayController.steer_towards_line,
+        controller.steer_towards_line,
         bGrayInterpreter,
         0.05,
         bTerminate,
@@ -594,13 +599,11 @@ def week_5():
     # Create list of producer-consumers to execute concurrently
     producer_consumer_list = [graySensor,
                               grayInterpreter,
-                              dirController,
+                              # dirController,
                               terminationTimer]
 
     # Execute the list of producer-consumers concurrently
     rr.runConcurrently(producer_consumer_list)
-
-
 
 
 if __name__ == "__main__":
@@ -609,6 +612,6 @@ if __name__ == "__main__":
     # week_2(px)
     # week_3(px, "photosensor")
     # week_4(px)
-    week_5()
+    week_5(px)
 
 
