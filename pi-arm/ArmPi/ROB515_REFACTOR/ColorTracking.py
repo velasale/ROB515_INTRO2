@@ -339,6 +339,7 @@ def run(img):
      
     frame_resize = cv2.resize(img_copy, size, interpolation=cv2.INTER_NEAREST)
     frame_gb = cv2.GaussianBlur(frame_resize, (11, 11), 11)
+
     # if a recognized object is detected in a certain area, the area will be detected until there is no
     if get_roi and start_pick_up:
         get_roi = False
@@ -379,6 +380,7 @@ def run(img):
             cv2.drawContours(img, [box], -1, range_rgb[detect_color], 2)
             cv2.putText(img, '(' + str(world_x) + ',' + str(world_y) + ')', (min(box[0, 0], box[2, 0]), box[2, 1] - 10),
                     cv2.FONT_HERSHEY_SIMPLEX, 0.5, range_rgb[detect_color], 1) # draw center point
+
             # Compare the last coordinates to determine whether to move
             distance = math.sqrt(pow(world_x - last_x, 2) + pow(world_y - last_y, 2))
             last_x, last_y = world_x, world_y
