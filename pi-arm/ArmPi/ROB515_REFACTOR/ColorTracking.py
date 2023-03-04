@@ -27,35 +27,38 @@ range_rgb = {
 }
 
 __target_color = ('red',)
-# Set Detection Color
+
 def setTargetColor(target_color):
+    """ Set Detection Color"""
     global __target_color
 
     #print("COLOR", target_color)
     __target_color = target_color
     return (True, ())
 
-# Find the contour with the largest area
-# parameter is list of contours to compare
+
 def getAreaMaxContour(contours):
+    """ Find the contour with the largest area
+    parameter is list of contours to compare"""
     contour_area_temp = 0
     contour_area_max = 0
     area_max_contour = None
 
-    for c in contours:  # 历遍所有轮廓
-        contour_area_temp = math.fabs(cv2.contourArea(c))  # 计算轮廓面积
+    # iterate over all contours
+    for c in contours:
+        contour_area_temp = math.fabs(cv2.contourArea(c))  # Calculate area of contour
         if contour_area_temp > contour_area_max:
             contour_area_max = contour_area_temp
-            if contour_area_temp > 300:  # 只有在面积大于300时，最大面积的轮廓才是有效的，以过滤干扰
+            if contour_area_temp > 300:  # Only when the area > 300, the contour of the largest area is valid to filter interference
                 area_max_contour = c
 
-    return area_max_contour, contour_area_max  # 返回最大的轮廓
+    return area_max_contour, contour_area_max  # returns largest contour
 
 # the angle at which the gripper closes when griping
 servo1 = 500
 
-# Initial Position
 def initMove():
+    """ Initial Position"""
     Board.setBusServoPulse(1, servo1 - 50, 300)
     Board.setBusServoPulse(2, 500, 500)
     AK.setPitchRangeMoving((0, 10, 10), -30, -30, -90, 1500)
@@ -360,25 +363,28 @@ def run(img):
                 contours = cv2.findContours(closed, cv2.RETR_EXTERNAL, cv2.CHAIN_APPROX_NONE)[-2]
                 # Find the largest contour
                 areaMaxContour, area_max = getAreaMaxContour(contours)
-        if area_max > 2500:  # 有找到最大面积
+        if area_max > 2500:  # Have found the largest area
             rect = cv2.minAreaRect(areaMaxContour)
             box = np.int0(cv2.boxPoints(rect))
 
-            roi = getROI(box) #获取roi区域
+            roi = getROI(box) # Get ROI area
             get_roi = True
 
-            img_centerx, img_centery = getCenter(rect, roi, size, square_length)  # 获取木块中心坐标
-            world_x, world_y = convertCoordinate(img_centerx, img_centery, size) #转换为现实世界坐标
+            # Get the coordinates of the center of the block
+            img_centerx, img_centery = getCenter(rect, roi, size, square_length)
+            # Convert to real world coordinates
+            world_x, world_y = convertCoordinate(img_centerx, img_centery, size)
             
             
             cv2.drawContours(img, [box], -1, range_rgb[detect_color], 2)
             cv2.putText(img, '(' + str(world_x) + ',' + str(world_y) + ')', (min(box[0, 0], box[2, 0]), box[2, 1] - 10),
-                    cv2.FONT_HERSHEY_SIMPLEX, 0.5, range_rgb[detect_color], 1) #绘制中心点
-            distance = math.sqrt(pow(world_x - last_x, 2) + pow(world_y - last_y, 2)) #对比上次坐标来判断是否移动
+                    cv2.FONT_HERSHEY_SIMPLEX, 0.5, range_rgb[detect_color], 1) # draw center point
+            # Compare the last coordinates to determine whether to move
+            distance = math.sqrt(pow(world_x - last_x, 2) + pow(world_y - last_y, 2))
             last_x, last_y = world_x, world_y
             track = True
             #print(count,distance)
-            # 累计判断
+            # Cumulative judgement
             if action_finish:
                 if distance < 0.3:
                     center_list.extend((world_x, world_y))
