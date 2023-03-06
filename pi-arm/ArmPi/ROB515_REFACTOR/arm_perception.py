@@ -24,6 +24,10 @@ class ArmPerception():
         self.target_color = target_color
         self.frame = frame
 
+        self.detect_color =
+
+
+
         self.range_rgb = {
             'red': (0, 0, 255),
             'blue': (255, 0, 0),
@@ -31,6 +35,11 @@ class ArmPerception():
             'black': (0, 0, 0),
             'white': (255, 255, 255)
         }
+
+
+    def reset(self):
+        ...
+
 
     def getAreaMaxContour(self, contours):
         """ Find the contour with largest area """

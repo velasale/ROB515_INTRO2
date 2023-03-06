@@ -83,10 +83,10 @@ class ArmIK:
         return movetime
 
     def setPitchRange(self, coordinate_data, alpha1, alpha2, da = 1):
-        #给定坐标coordinate_data和俯仰角的范围alpha1，alpha2, 自动在范围内寻找到的合适的解
-        #如果无解返回False,否则返回对应舵机角度,俯仰角
-        #坐标单位cm， 以元组形式传入，例如(0, 5, 10)
-        #da为俯仰角遍历时每次增加的角度
+        """Given the range of coordinate_data and pitch angle alpha1, alpha2, automatically find a suitable solution within the range
+        If there is no solution, return False, otherwise return the corresponding servo angle, pitch angle
+        Coordinate unit cm, passed in as a tuple, for example (0, 5, 10)
+        da is the angle increased each time the pitch angle traverses
         x, y, z = coordinate_data
         if alpha1 >= alpha2:
             da = -da
