@@ -305,7 +305,7 @@ def run(img):
         get_roi = False
         frame_gb = getMaskROI(frame_gb, roi, size)    
     
-    frame_lab = cv2.cvtColor(frame_gb, cv2.COLOR_BGR2LAB)  # 将图像转换到LAB空间
+    frame_lab = cv2.cvtColor(frame_gb, cv2.COLOR_BGR2LAB)  # 将图像转换到LAB空间`
 
     color_area_max = None
     max_area = 0
