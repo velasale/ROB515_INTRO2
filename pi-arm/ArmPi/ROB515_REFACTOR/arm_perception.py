@@ -116,6 +116,7 @@ class ArmController():
     the respective color bin"""
 
     def __init__(self):
+        ...
 
 
 class ArmTask():
@@ -146,7 +147,6 @@ class ArmTask():
             'white': (255, 255, 255)
         }
         self.size = (640, 480)
-
 
 
         # Actuation Variables
