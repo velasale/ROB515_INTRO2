@@ -79,6 +79,7 @@ class ArmInterpreter():
             for i in color_range:  #color range comes from LABconfig.py
                 if i in self.task.target_color:
                     detect_color = i
+                    print(detect_color)
 
                     # Perform bitwise operations on original image and mask
                     frame_mask = cv2.inRange(frame_lab, color_range[detect_color][0], color_range[detect_color][1])
