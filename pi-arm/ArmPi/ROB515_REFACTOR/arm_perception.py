@@ -43,8 +43,8 @@ class ArmSensing():
     def cross_hair(self):
         """Applies CrossHair to image """
         img_h, img_w = self.img.shape[:2]
-        cv2.line(img, (0, int(img_h / 2)), (img_w, int(img_h / 2)), (0, 0, 200), 1)
-        cv2.line(img, (int(img_w / 2), 0), (int(img_w / 2), img_h), (0, 0, 200), 1)
+        cv2.line(self.img, (0, int(img_h / 2)), (img_w, int(img_h / 2)), (0, 0, 200), 1)
+        cv2.line(self.img, (int(img_w / 2), 0), (int(img_w / 2), img_h), (0, 0, 200), 1)
 
     def filter(self):
         """Applies filter"""
@@ -52,9 +52,9 @@ class ArmSensing():
         frame_gb = cv2.GaussianBlur(frame_resize, (11, 11), 11)
 
         # TODO (line 346) of ColorTracking.py
-        if self.get_roi and self.start_pick_up:
-            self.get_roi = False
-            frame_gb = getMaskROI(frame_gb, roi, size)
+        if self.task.get_roi and self.task.start_pick_up:
+            self.task.get_roi = False
+            frame_gb = getMaskROI(frame_gb, self.task.roi, self.task.size)
 
         frame_lab = cv2.cvtColor(frame_gb, cv2.COLOR_BGR2LAB)  # convert image to lab space
 
@@ -96,13 +96,13 @@ class ArmInterpreter():
                 self.box = np.int0(cv2.boxPoints(rect))
 
                 # TODO
-                self.roi = getROI(self.box)
-                self.get_roi = True
+                self.task.roi = getROI(self.box)
+                self.task.get_roi = True
 
                 # Get the coordinates of the center of the block
-                img_centerx, img_centery = getCenter(self.rect, self.roi, self.task.size, square_length)
+                img_centerx, img_centery = getCenter(self.rect, self.task.roi, self.task.size, square_length)
                 # Convert to real world coordinates
-                world_x, world_y = convertCoordinate(img_centerx, img_centery, size)
+                world_x, world_y = convertCoordinate(img_centerx, img_centery, self.task.size)
 
                 # Draw Contours
                 cv2.drawContours(img, [box], -1, range_rgb[detect_color], 2)

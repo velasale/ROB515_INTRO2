@@ -13,7 +13,7 @@ logging.basicConfig(format=logging_format, level=logging.INFO,
 
 class Bus:
     """
-    Class for passing broadcast messages between processes.
+    Class for passing broadcast messages between processesA.
     """
 
     def __init__(self,
