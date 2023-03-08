@@ -35,7 +35,7 @@ class ArmSensing():
     def mask_image(self):
         self.img = self.my_camera.frame
 
-        if img is not None:
+        if self.img is not None:
             self.cross_hair()
             frame_lab = self.filter()
             return frame_lab
