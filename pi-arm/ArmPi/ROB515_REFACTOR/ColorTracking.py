@@ -228,7 +228,9 @@ def move():
                     # Stop and exit flag detection
                     if not __isRunning:
                         continue
+
                     Board.setBusServoPulse(1, servo1 - 280, 500)  # Paws open
+
                     # Calculate the angle the gripper needs to rotate
                     servo2_angle = getAngle(world_X, world_Y, rotation_angle)
                     Board.setBusServoPulse(2, servo2_angle, 500)

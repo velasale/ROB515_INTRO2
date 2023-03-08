@@ -83,10 +83,10 @@ class ArmIK:
         return movetime
 
     def setPitchRange(self, coordinate_data, alpha1, alpha2, da = 1):
-        """Given the range of coordinate_data and pitch angle alpha1, alpha2, automatically find a suitable solution within the range
-        If there is no solution, return False, otherwise return the corresponding servo angle, pitch angle
-        Coordinate unit cm, passed in as a tuple, for example (0, 5, 10)
-        da is the angle increased each time the pitch angle traverses"""
+        """Given the range of coordinate_data and pitch angle alpha1, alpha2, automatically find a suitable solution
+        within the range. If there is no solution, return False, otherwise return the corresponding servo angle,
+        pitch angle. Coordinate unit cm, passed in as a tuple, for example (0, 5, 10) da is the angle increased each
+        time the pitch angle traverses"""
 
         x, y, z = coordinate_data
         if alpha1 >= alpha2:
@@ -105,9 +105,9 @@ class ArmIK:
         """ Given the coordinate coordinate_data and pitch angle alpha, as well as the range alpha1 and alpha2 of the
         pitch angle range, automatically find the solution closest to the given pitch angle and go to the target position
         If there is no solution, return False, otherwise return the servo angle, pitch angle, running time
-        Coordinate unit cm, passed in as a tuple, for example (0, 5, 10) alpha is the given pitch angle alpha1 and
-        alpha2 are the value range of the pitch angle movetime is the turning time of the steering gear, in ms, if no
-        time is given, it will be calculated automatically"""
+        @ Coordinate: unit cm, passed in as a tuple, for example (0, 5, 10).
+        @ alpha: given pitch angle alpha1 and alpha2 are the value range of the pitch angle
+        @ movetime: turning time of the steering gear, in ms, if no time is given, it will be calculated automatically"""
         x, y, z = coordinate_data
         result1 = self.setPitchRange((x, y, z), alpha, alpha1)
         result2 = self.setPitchRange((x, y, z), alpha, alpha2)

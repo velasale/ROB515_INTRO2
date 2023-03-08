@@ -113,9 +113,11 @@ def getCenter(rect, roi, size, square_length):
 
     return  x, y
 
-# Get the angle of rotation
-# Parameters: the coordinates of the end of the robot arm, the rotation angle of the wooden block
+
 def getAngle(x, y, angle):
+    """ Get the angle of rotation
+    @ x, y: the coordinates of the end of the robot arm,
+    @ angle: the rotation angle of the wooden block"""
     theta6 = round(math.degrees(math.atan2(abs(x), abs(y))), 1)
     angle = abs(angle)
     
