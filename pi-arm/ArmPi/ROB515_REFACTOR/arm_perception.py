@@ -77,7 +77,7 @@ class ArmInterpreter():
         self.areaMaxContour = 0
         if not self.task.start_pick_up:
             for i in color_range:  #color range comes from LABconfig.py
-                if i in self.task.__target_color:
+                if i in self.task.target_color:
                     detect_color = i
 
                     # Perform bitwise operations on original image and mask
@@ -135,7 +135,7 @@ class ArmTask():
 
         # General Variables
         self.__isRunning = False
-        self.__target_color = ('red')
+        self.target_color = ('red')
         self._stop = False
 
         # Perception Parameters
@@ -172,7 +172,7 @@ def main():
     # --- PART 1 ---
     # Instances of Sensor, interpreter and controller
     sensor = ArmSensing(task)
-    interpreter = ArmInterpreter(task )
+    interpreter = ArmInterpreter(task)
 
     # Instances of Buses
     bSensor = rr.Bus(sensor.mask_image(), "Camera Sensor Bus")
