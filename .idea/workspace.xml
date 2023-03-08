@@ -4,8 +4,10 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="ce17af2d-055a-4cc7-a5a5-9612d636b721" name="Changes" comment="copy of colortracking.py, and translated">
+    <list default="true" id="ce17af2d-055a-4cc7-a5a5-9612d636b721" name="Changes" comment="Perception Refactoring">
+      <change afterPath="$PROJECT_DIR$/pi-arm/ArmPi/ROB515_REFACTOR/rossros.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pi-arm/ArmPi/ROB515_REFACTOR/arm_perception.py" beforeDir="false" afterPath="$PROJECT_DIR$/pi-arm/ArmPi/ROB515_REFACTOR/arm_perception.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -30,14 +32,14 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;last_opened_file_path&quot;: &quot;/home/alejo/PycharmProjects/RobotSystems/pi-arm/ArmPi/Functions/ColorTracking.py&quot;,
-    &quot;two.files.diff.last.used.file&quot;: &quot;/home/alejo/PycharmProjects/RobotSystems/pi-arm/ArmPi/Functions/ColorTracking.py&quot;
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "RunOnceActivity.OpenProjectViewOnStart": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "last_opened_file_path": "/home/alejo/PycharmProjects/RobotSystems/pi-arm/ArmPi/ROB515_REFACTOR",
+    "two.files.diff.last.used.file": "/home/alejo/PycharmProjects/RobotSystems/pi-arm/ArmPi/Functions/ColorTracking.py"
   }
-}</component>
+}]]></component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
       <recent name="$PROJECT_DIR$/pi-arm/ArmPi/ROB515_REFACTOR" />
@@ -119,12 +121,56 @@
       <option name="project" value="LOCAL" />
       <updated>1678071664230</updated>
     </task>
-    <option name="localTasksCounter" value="10" />
+    <task id="LOCAL-00010" summary="copy of colortracking.py, and translated">
+      <created>1678143314040</created>
+      <option name="number" value="00010" />
+      <option name="presentableId" value="LOCAL-00010" />
+      <option name="project" value="LOCAL" />
+      <updated>1678143314040</updated>
+    </task>
+    <task id="LOCAL-00011" summary="Translation from chinese to english">
+      <created>1678220532795</created>
+      <option name="number" value="00011" />
+      <option name="presentableId" value="LOCAL-00011" />
+      <option name="project" value="LOCAL" />
+      <updated>1678220532796</updated>
+    </task>
+    <task id="LOCAL-00012" summary="Translation from chinese to english">
+      <created>1678221163075</created>
+      <option name="number" value="00012" />
+      <option name="presentableId" value="LOCAL-00012" />
+      <option name="project" value="LOCAL" />
+      <updated>1678221163075</updated>
+    </task>
+    <task id="LOCAL-00013" summary="Translation from chinese to english">
+      <created>1678234272463</created>
+      <option name="number" value="00013" />
+      <option name="presentableId" value="LOCAL-00013" />
+      <option name="project" value="LOCAL" />
+      <updated>1678234272463</updated>
+    </task>
+    <task id="LOCAL-00014" summary="Perception Refactoring">
+      <created>1678234289756</created>
+      <option name="number" value="00014" />
+      <option name="presentableId" value="LOCAL-00014" />
+      <option name="project" value="LOCAL" />
+      <updated>1678234289756</updated>
+    </task>
+    <task id="LOCAL-00015" summary="Perception Refactoring">
+      <created>1678237463854</created>
+      <option name="number" value="00015" />
+      <option name="presentableId" value="LOCAL-00015" />
+      <option name="project" value="LOCAL" />
+      <updated>1678237463854</updated>
+    </task>
+    <option name="localTasksCounter" value="16" />
     <servers />
   </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="Created pi-car and pi-arm subfolders" />
     <MESSAGE value="copy of colortracking.py, and translated" />
-    <option name="LAST_COMMIT_MESSAGE" value="copy of colortracking.py, and translated" />
+    <MESSAGE value="Translation from chinese to english" />
+    <MESSAGE value="Perception Refactoring" />
+    <option name="LAST_COMMIT_MESSAGE" value="Perception Refactoring" />
   </component>
 </project>

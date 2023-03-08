@@ -61,7 +61,7 @@ class ArmSensing():
         return frame_lab
 
 
-class ArmInterpretation():
+class ArmInterpreter():
     """ This class and its methods return the x,y location of the object"""
 
     def __init__(self, task):
@@ -71,7 +71,7 @@ class ArmInterpretation():
         self.rect = None
 
 
-    def function(self):
+    def function(self, frame_lab):
 
         self.area_max = 0
         self.areaMaxContour = 0
@@ -167,33 +167,52 @@ def main():
     """Perception Assignment 1: Set up a simple program that uses this class to identify the location of a block in the pickup
     area and labels it on the video display from the camera."""
 
-    # Instances of Sensor, interpreter and controller
+    task = ArmTask()
 
+    # --- PART 1 ---
+    # Instances of Sensor, interpreter and controller
+    sensor = ArmSensing(task)
+    interpreter = ArmInterpreter(task )
 
     # Instances of Buses
+    bSensor = rr.Bus(sensor.mask_image(), "Camera Sensor Bus")
+    bInterpreter = rr.Bus(interpreter.function(bSensor.message), "Interpreter Sensor Bus")
+    b.Terminate = rr.Bus(0, "Termination Bus")
 
 
+    # --- PART 2 ---
     # Wrap Sensor, Interpreter and Controller function into RossROS objects
+    wrappedSensor = rr.Producer(
+        sensor.mask_image(),    # function that generates data
+        bSensor,                # output data bus
+        0.01,                  # delay between data generation
+        bTerminate,             # bus to watch for termination signal
+        "Read Camera Sensor Signal")
 
+    wrappedInterpreter = rr.ConsumerProducer(
+        interpreter.function,
+        bSensor,
+        bInterpreter,
+        0.01,
+        bTerminate,
+        "Interpret Masked Image")
 
+    # --- PART 3 ---
     # Create RossROS Timer Object
+    terminationTimer = rr.Timer(
+        bTerminate,
+        20,
+        0.01,
+        bTerminate,
+        "Termination Timer")
 
-
+    # --- PART 4 ---
     # Concurrent Execution
+    producer_consumer_list = [wrappedSensor,
+                              wrappedInterpreter]
 
-
-    # Start Camera
-    camera = Camera.Camera()
-    camera.camera.open()
-
-    # Loop
-    while True:
-        # Picture of what the camera is currently looking
-        img = camera.frame
-        if img is not None:
-            frame = img.copy()
-            perception = ArmPerception(frame, tar)
-
+    # Execute the list of produces-consumers concurrently
+    rr.runConcurrently(producer_consumer_list)
 
 
 if __name__ == '__main__':
