@@ -66,8 +66,8 @@ class ArmSensing():
 
     def sense_function(self):
         print('Camera Sensing...')
-        # image = self.my_camera.frame
-        image = np.ones((640,480,3))
+        image = self.my_camera.frame
+        # image = np.ones((640,480,3))
         print(image)
         vision = [image,image]
 
@@ -246,7 +246,7 @@ def main():
     # my_camera = Camera.Camera()
     # my_camera.camera_close()
     # my_camera.camera_open()
-    time.sleep(1)
+    time.sleep(2)
     print('Camera Open')
 
     my_camera = None
