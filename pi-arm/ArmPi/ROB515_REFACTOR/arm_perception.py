@@ -199,16 +199,19 @@ def main():
     # sensor = ArmSensing(task)
     # interpreter = ArmInterpreter(task)
 
+    print('Part1')
     sensor = SENSOR()
     interpreter = INTERPRETER()
 
     # Instances of Buses
+    print('Instances of buses')
     bSensor = rr.Bus(sensor.function(), "Camera Sensor Bus")
     bInterpreter = rr.Bus(interpreter.function(bSensor.message), "Interpreter Sensor Bus")
     bTerminate = rr.Bus(0, "Termination Bus")
 
 
     # --- PART 2 ---
+    print('Wrapping functions')
     # Wrap Sensor, Interpreter and Controller function into RossROS objects
     wrappedSensor = rr.Producer(
         sensor.function(),    # function that generates data
@@ -240,6 +243,7 @@ def main():
                               wrappedInterpreter]
 
     # Execute the list of produces-consumers concurrently
+    print('running concurrent')
     rr.runConcurrently(producer_consumer_list)
 
 
