@@ -38,6 +38,7 @@ class ArmSensing():
         if self.img is not None:
             self.cross_hair()
             frame_lab = self.filter()
+            cv2.imshow('Frame', frame_lab)
             return frame_lab
 
     def cross_hair(self):
@@ -113,7 +114,8 @@ class ArmInterpreter():
 
 
     def function(self, frame_lab):
-        cv2.imshow('Frame', frame_lab)
+        ...
+        # cv2.imshow('Frame', frame_lab)
 
 class ArmController():
     """Given the x,y location of an object, the controller takes the object into
