@@ -63,6 +63,8 @@ class ArmSensing():
     def function(self):
         self.img = self.my_camera.frame
 
+        print("did this")
+
         if self.img is not None:
             self.cross_hair()
             frame_lab = self.filter()
