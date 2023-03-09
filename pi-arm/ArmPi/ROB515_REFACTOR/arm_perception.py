@@ -266,28 +266,30 @@ def main():
     # --- PART 2 ---
     print('Wrapping functions')
     # Wrap Sensor, Interpreter and Controller function into RossROS objectsz
-    wrappedSensor = rr.ConsumerProducer(
-        sensor.sense_function,    # function that generates data
-        sensor_input_bus,
-        bSensor,                # output data bus
-        1,                  # delay between data generation
-        bTerminate,             # bus to watch for termination signal
-        "Read Camera Sensor Signal")
 
-    wrappedInterpreter = rr.ConsumerProducer(
+    wSensor = rr.Producer(
+        sensor.sense_function,
+        bSensor,
+        0.01,
+        bTerminate,
+        "Read Camera Sensor")
+
+    wInterpreter = rr.ConsumerProducer(
         interpreter.function,
         bSensor,
         bInterpreter,
-        4,
+        1,
         bTerminate,
-        "Interpret Masked Image")
+        "Interpret Camera")
 
-    wrappedController = rr.Consumer(
+
+    wController = rr.Consumer(
         controller.function,
-        bSensor,
+        bInterpreter,
         2,
         bTerminate,
-        "Controller")
+        "Controlling Arm")
+
 
     # --- PART 3 ---
     # Create RossROS Timer Object
@@ -300,10 +302,9 @@ def main():
 
     # --- PART 4 ---
     # Concurrent Execution
-    producer_consumer_list = [wrappedInterpreter,
-                              wrappedSensor,
-                              # wrappedInterpreter,
-                              wrappedController]
+    producer_consumer_list = [wSensor,
+                              wInterpreter,
+                              wController]
 
     # Execute the list of produces-consumers concurrently
     print('running concurrent\n\n')
