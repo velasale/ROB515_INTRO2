@@ -30,8 +30,8 @@ class SENSOR():
         self.name = 'papa'
 
     def sense_function(self):
-        print('sensing')
         number = random.randint(0,9)
+        print(number)
         return number
 
 class INTERPRETER():
