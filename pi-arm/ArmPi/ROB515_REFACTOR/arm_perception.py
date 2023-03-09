@@ -150,7 +150,7 @@ class ArmInterpreter():
         return whatever
 
 
-    def getAreaMaxContour(self.contours):
+    def getAreaMaxContour(self,contours):
         """ Find the contour with the largest area
         parameter is list of contours to compare"""
         contour_area_temp = 0
