@@ -63,10 +63,11 @@ class ArmSensing():
 
     def function(self):
         image = self.my_camera.frame
-        self.img = image.copy()
-        print("image:", self.img)
 
-        if self.img is not None:
+        if image is not None:
+            self.img = image.copy()
+            print("image:", self.img)
+
             self.cross_hair()
             # cv2.imshow('Frame', self.img)
 
@@ -237,6 +238,7 @@ def main():
 
     task = ArmTask()
     my_camera = Camera.Camera()
+    my_camera.camera_close()
     my_camera.camera_open()
     time.sleep(1)
     print('Camera Open')
