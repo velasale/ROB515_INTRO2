@@ -55,13 +55,12 @@ class ArmSensing():
     """ This class and its methods return the image sensed by the camera
     and its respective filterings"""
 
-    def __init__(self, task):
+    def __init__(self, task, my_camera):
         self.task = task
-        self.my_camera = Camera.Camera()
-        self.my_camera.camera_open()
+        self.my_camera = my_camera
         self.img = self.my_camera.frame
 
-    def mask_image(self):
+    def function(self):
         self.img = self.my_camera.frame
 
         if self.img is not None:
@@ -143,8 +142,10 @@ class ArmInterpreter():
 
 
     def function(self, frame_lab):
-        ...
-        # cv2.imshow('Frame', frame_lab)
+        cv2.imshow('Frame', frame_lab)
+
+        whatever = 5
+        return whatever
 
 class ArmController():
     """Given the x,y location of an object, the controller takes the object into
@@ -202,14 +203,17 @@ def main():
     """Perception Assignment 1: Set up a simple program that uses this class to identify the location of a block in the pickup
     area and labels it on the video display from the camera."""
 
-    # task = ArmTask()
+    task = ArmTask()
+    my_camera = Camera.Camera()
+    my_camera.camera_open()
 
     # --- PART 1 ---
     # Instances of Sensor, interpreter and controller
-    # sensor = ArmSensing(task)
-    # interpreter = ArmInterpreter(task)
+    sensor = ArmSensing(task, my_camera)
+    interpreter = ArmInterpreter(task)
 
     print('Part1')
+
     sensor = SENSOR()
     interpreter = INTERPRETER()
     controller = ACTUATOR()
