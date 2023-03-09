@@ -33,13 +33,16 @@ class ArmSensing():
         self.img = self.my_camera.frame
 
     def mask_image(self):
-        self.img = self.my_camera.frame
+        print("trial")
+        return 1
 
-        if self.img is not None:
-            self.cross_hair()
-            frame_lab = self.filter()
-            cv2.imshow('Frame', frame_lab)
-            return frame_lab
+        # self.img = self.my_camera.frame
+        #
+        # if self.img is not None:
+        #     self.cross_hair()
+        #     frame_lab = self.filter()
+        #     cv2.imshow('Frame', frame_lab)
+        #     return frame_lab
 
     def cross_hair(self):
         """Applies CrossHair to image """
