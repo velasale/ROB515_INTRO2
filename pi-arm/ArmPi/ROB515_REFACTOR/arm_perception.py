@@ -235,12 +235,12 @@ def main():
     """Perception Assignment 1: Set up a simple program that uses this class to identify the location of a block in the pickup
     area and labels it on the video display from the camera."""
 
-    cv2.destroyAllWindows()
+    # cv2.destroyAllWindows()
 
     task = ArmTask()
-    my_camera = Camera.Camera()
-    my_camera.camera_close()
-    my_camera.camera_open()
+    # my_camera = Camera.Camera()
+    # my_camera.camera_close()
+    # my_camera.camera_open()
     time.sleep(1)
     print('Camera Open')
 
