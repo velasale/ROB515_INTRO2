@@ -207,7 +207,7 @@ def main():
     # Create RossROS Timer Object
     terminationTimer = rr.Timer(
         bTerminate,
-        20,
+        5,
         0.01,
         bTerminate,
         "Termination Timer")
