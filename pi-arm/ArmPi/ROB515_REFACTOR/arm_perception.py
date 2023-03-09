@@ -67,9 +67,11 @@ class ArmSensing():
         if self.img is not None:
             self.cross_hair()
             frame_lab = self.filter()
-            cv2.imshow('Frame', frame_lab)
+            # cv2.imshow('Frame', frame_lab)
             print("did this")
-            return frame_lab
+
+            vision = [frame_lab, self.img]
+            return vision
 
     def cross_hair(self):
         """Applies CrossHair to image """
@@ -102,8 +104,10 @@ class ArmInterpreter():
         self.rect = None
 
 
-    def function_b(self, frame_lab):
+    def function(self, vision):
 
+        frame_lab = vision[0]
+        img = vision[1]
         self.area_max = 0
         self.areaMaxContour = 0
         if not self.task.start_pick_up:
@@ -144,7 +148,7 @@ class ArmInterpreter():
 
 
     def function(self, frame_lab):
-        # cv2.imshow('Frame', frame_lab)
+        cv2.imshow('Frame', frame_lab)
 
         whatever = 5
         return whatever
