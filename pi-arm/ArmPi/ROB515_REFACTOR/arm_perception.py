@@ -32,7 +32,6 @@ class SENSOR():
         number = 40
         return number
 
-
 class INTERPRETER():
 
     def __init__(self):
@@ -59,10 +58,12 @@ class ArmSensing():
         print("did this")
         self.task = task
         self.my_camera = my_camera
-        self.img = self.my_camera.frame
+        # self.img = self.my_camera.frame
 
     def function(self):
         self.img = self.my_camera.frame
+
+        cv2.imshow('Frame', self.img)
 
         if self.img is not None:
             self.cross_hair()
@@ -146,7 +147,7 @@ class ArmInterpreter():
                             (min(self.box[0, 0], self.box[2, 0]), self.box[2, 1] - 10),
                             cv2.FONT_HERSHEY_SIMPLEX, 0.5, self.task.range_rgb[detect_color], 1)  # draw center point
 
-        cv2.imshow('Frame', img)
+        # cv2.imshow('Frame', img)
         whatever = 5
         return whatever
 
