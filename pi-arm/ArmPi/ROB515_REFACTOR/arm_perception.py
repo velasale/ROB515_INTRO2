@@ -57,9 +57,7 @@ class ArmSensing():
     def __init__(self, task, my_camera):
         print("did this")
         self.task = task
-
         self.my_camera = my_camera
-        # self.img = self.my_camera.frame
 
     def function(self):
         image = self.my_camera.frame
@@ -268,7 +266,7 @@ def main():
     wrappedSensor = rr.Producer(
         sensor.function(),    # function that generates data
         bSensor,                # output data bus
-        0.1,                  # delay between data generation
+        1,                  # delay between data generation
         bTerminate,             # bus to watch for termination signal
         "Read Camera Sensor Signal")
 
@@ -276,7 +274,7 @@ def main():
         interpreter.function,
         bSensor,
         bInterpreter,
-        0.1,
+        2,
         bTerminate,
         "Interpret Masked Image")
 
