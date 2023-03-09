@@ -55,11 +55,11 @@ class ArmSensing():
     and its respective filterings"""
 
     def __init__(self, task, my_camera):
-        print("did this")
         self.task = task
         self.my_camera = my_camera
 
     def function(self):
+        print('Camera Sensing...')
         image = self.my_camera.frame
 
         if image is not None:
@@ -108,6 +108,7 @@ class ArmInterpreter():
 
 
     def function(self, vision):
+        print('Camera Interpreting')
 
         frame_lab = vision[0]
         img = vision[1]
@@ -117,7 +118,6 @@ class ArmInterpreter():
             for i in color_range:  #color range comes from LABconfig.py
                 if i in self.task.target_color:
                     detect_color = i
-                    print(detect_color)
 
                     # Perform bitwise operations on original image and mask
                     frame_mask = cv2.inRange(frame_lab, color_range[detect_color][0], color_range[detect_color][1])
