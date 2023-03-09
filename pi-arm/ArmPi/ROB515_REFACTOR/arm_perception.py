@@ -58,7 +58,7 @@ class ArmSensing():
         self.task = task
         self.my_camera = my_camera
 
-    def function(self):
+    def sense_function(self):
         print('Camera Sensing...')
         image = self.my_camera.frame
 
@@ -108,7 +108,7 @@ class ArmInterpreter():
 
 
     def function(self, vision):
-        # print('Camera Interpreting')
+        print('Camera Interpreting...')
 
         frame_lab = vision[0]
         img = vision[1]
@@ -255,7 +255,7 @@ def main():
 
     # Instances of Buses
     print('Instances of buses')
-    bSensor = rr.Bus(sensor.function(), "Camera Sensor Bus")
+    bSensor = rr.Bus(sensor.sense_function(), "Camera Sensor Bus")
     bInterpreter = rr.Bus(interpreter.function(bSensor.message), "Interpreter Sensor Bus")
     bTerminate = rr.Bus(0, "Termination Bus")
 
@@ -264,7 +264,7 @@ def main():
     print('Wrapping functions')
     # Wrap Sensor, Interpreter and Controller function into RossROS objects
     wrappedSensor = rr.Producer(
-        sensor.function(),    # function that generates data
+        sensor.sense_function(),    # function that generates data
         bSensor,                # output data bus
         1,                  # delay between data generation
         bTerminate,             # bus to watch for termination signal
@@ -301,7 +301,7 @@ def main():
                               wrappedController]
 
     # Execute the list of produces-consumers concurrently
-    print('running concurrent')
+    print('running concurrent\n\n')
     rr.runConcurrently(producer_consumer_list)
 
 
