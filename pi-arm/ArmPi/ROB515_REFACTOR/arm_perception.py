@@ -254,8 +254,9 @@ def main():
 
     print('Part1')
 
-    sensor = SENSOR()
-    interpreter = INTERPRETER()
+    # sensor = SENSOR()
+    # interpreter = INTERPRETER()
+
     controller = ACTUATOR()
 
     # Instances of Buses
