@@ -146,8 +146,10 @@ class ArmInterpreter():
                             (min(box[0, 0], box[2, 0]), box[2, 1] - 10),
                             cv2.FONT_HERSHEY_SIMPLEX, 0.5, range_rgb[detect_color], 1)  # draw center point
 
+        whatever = 5
+        return whatever
 
-    def function(self, frame_lab):
+    def functionb(self, frame_lab):
         cv2.imshow('Frame', frame_lab)
 
         whatever = 5
