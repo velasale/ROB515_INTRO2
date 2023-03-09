@@ -241,9 +241,9 @@ def main():
     cv2.destroyAllWindows()
 
     task = ArmTask()
-    # my_camera = Camera.Camera()
-    # my_camera.camera_close()
-    # my_camera.camera_open()
+    my_camera = Camera.Camera()
+    my_camera.camera_close()
+    my_camera.camera_open()
     time.sleep(1)
     print('Camera Open')
 
