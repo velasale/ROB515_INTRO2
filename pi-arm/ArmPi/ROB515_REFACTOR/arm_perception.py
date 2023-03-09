@@ -56,6 +56,7 @@ class ArmSensing():
     and its respective filterings"""
 
     def __init__(self, task, my_camera):
+        print("did this")
         self.task = task
         self.my_camera = my_camera
         self.img = self.my_camera.frame
@@ -63,7 +64,7 @@ class ArmSensing():
     def function(self):
         self.img = self.my_camera.frame
 
-        print("did this")
+
 
         if self.img is not None:
             self.cross_hair()
@@ -209,6 +210,8 @@ def main():
     task = ArmTask()
     my_camera = Camera.Camera()
     my_camera.camera_open()
+
+    print('Part0')
 
     # --- PART 1 ---
     # Instances of Sensor, interpreter and controller
