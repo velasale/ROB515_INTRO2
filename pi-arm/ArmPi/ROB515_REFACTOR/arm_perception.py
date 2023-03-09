@@ -31,6 +31,7 @@ class SENSOR():
 
     def sense_function(self):
         number = random.randint(0,9)
+        print('sensing')
         print(number)
         return number
 
