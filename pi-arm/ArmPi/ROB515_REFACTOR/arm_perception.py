@@ -15,6 +15,7 @@ from CameraCalibration.CalibrationConfig import *
 import rossros as rr
 import concurrent.futures
 
+import random
 
 
 if sys.version_info.major == 2:
@@ -30,7 +31,7 @@ class SENSOR():
 
     def sense_function(self):
         print('sensing')
-        number = 40
+        number = random.randint(0,9)
         return number
 
 class INTERPRETER():
