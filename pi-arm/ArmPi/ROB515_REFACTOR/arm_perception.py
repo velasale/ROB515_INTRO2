@@ -239,21 +239,21 @@ def main():
     # cv2.destroyAllWindows()
 
     task = ArmTask()
-    # my_camera = Camera.Camera()
-    # my_camera.camera_close()
-    # my_camera.camera_open()
+    my_camera = Camera.Camera()
+    my_camera.camera_close()
+    my_camera.camera_open()
     time.sleep(1)
     print('Camera Open')
 
     # --- PART 1 ---
     # Instances of Sensor, interpreter and controller
-    # sensor = ArmSensing(task, my_camera)
-    # interpreter = ArmInterpreter(task)
+    sensor = ArmSensing(task, my_camera)
+    interpreter = ArmInterpreter(task)
 
     print('Part1')
 
-    sensor = SENSOR()
-    interpreter = INTERPRETER()
+    # sensor = SENSOR()
+    # interpreter = INTERPRETER()
     controller = ACTUATOR()
 
     # Instances of Buses
@@ -270,7 +270,7 @@ def main():
     wSensor = rr.Producer(
         sensor.sense_function,
         bSensor,
-        0.01,
+        0.1,
         bTerminate,
         "Read Camera Sensor")
 
@@ -278,7 +278,7 @@ def main():
         interpreter.function,
         bSensor,
         bInterpreter,
-        0.01,
+        1,
         bTerminate,
         "Interpret Camera")
 
