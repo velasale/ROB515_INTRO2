@@ -32,8 +32,7 @@ class SENSOR:
 
     def sense_function(self):
         number = random.randint(0,9)
-        print('sensing')
-        print(number)
+        print('sensing:', number)
         return number
 
 class INTERPRETER:
@@ -240,21 +239,21 @@ def main():
     # cv2.destroyAllWindows()
 
     task = ArmTask()
-    my_camera = Camera.Camera()
-    my_camera.camera_close()
-    my_camera.camera_open()
+    # my_camera = Camera.Camera()
+    # my_camera.camera_close()
+    # my_camera.camera_open()
     time.sleep(1)
     print('Camera Open')
 
     # --- PART 1 ---
     # Instances of Sensor, interpreter and controller
-    sensor = ArmSensing(task, my_camera)
-    interpreter = ArmInterpreter(task)
+    # sensor = ArmSensing(task, my_camera)
+    # interpreter = ArmInterpreter(task)
 
     print('Part1')
 
-    # sensor = SENSOR()
-    # interpreter = INTERPRETER()
+    sensor = SENSOR()
+    interpreter = INTERPRETER()
     controller = ACTUATOR()
 
     # Instances of Buses
