@@ -108,7 +108,7 @@ class ArmInterpreter():
 
 
     def function(self, vision):
-        print('Camera Interpreting')
+        # print('Camera Interpreting')
 
         frame_lab = vision[0]
         img = vision[1]
@@ -274,7 +274,7 @@ def main():
         interpreter.function,
         bSensor,
         bInterpreter,
-        2,
+        4,
         bTerminate,
         "Interpret Masked Image")
 
