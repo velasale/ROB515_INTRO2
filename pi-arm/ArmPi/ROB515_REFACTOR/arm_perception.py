@@ -22,6 +22,25 @@ if sys.version_info.major == 2:
     sys.exit(0)
 
 
+
+class SENSOR():
+
+    def __init__(self):
+        self.name = 'papa'
+
+    def function(self):
+        return 'a'
+
+
+class INTERPRETER():
+
+    def __init__(self):
+        self.name = 'popp'
+
+    def function(self, string):
+        return string + 'ba'
+
+
 class ArmSensing():
     """ This class and its methods return the image sensed by the camera
     and its respective filterings"""
@@ -33,16 +52,13 @@ class ArmSensing():
         self.img = self.my_camera.frame
 
     def mask_image(self):
-        print("trial")
-        return 1
+        self.img = self.my_camera.frame
 
-        # self.img = self.my_camera.frame
-        #
-        # if self.img is not None:
-        #     self.cross_hair()
-        #     frame_lab = self.filter()
-        #     cv2.imshow('Frame', frame_lab)
-        #     return frame_lab
+        if self.img is not None:
+            self.cross_hair()
+            frame_lab = self.filter()
+            cv2.imshow('Frame', frame_lab)
+            return frame_lab
 
     def cross_hair(self):
         """Applies CrossHair to image """
@@ -180,11 +196,14 @@ def main():
 
     # --- PART 1 ---
     # Instances of Sensor, interpreter and controller
-    sensor = ArmSensing(task)
-    interpreter = ArmInterpreter(task)
+    # sensor = ArmSensing(task)
+    # interpreter = ArmInterpreter(task)
+
+    sensor = SENSOR()
+    interpreter = INTERPRETER()
 
     # Instances of Buses
-    bSensor = rr.Bus(sensor.mask_image(), "Camera Sensor Bus")
+    bSensor = rr.Bus(sensor.function(), "Camera Sensor Bus")
     bInterpreter = rr.Bus(interpreter.function(bSensor.message), "Interpreter Sensor Bus")
     bTerminate = rr.Bus(0, "Termination Bus")
 
@@ -192,7 +211,7 @@ def main():
     # --- PART 2 ---
     # Wrap Sensor, Interpreter and Controller function into RossROS objects
     wrappedSensor = rr.Producer(
-        sensor.mask_image(),    # function that generates data
+        sensor.function(),    # function that generates data
         bSensor,                # output data bus
         0.01,                  # delay between data generation
         bTerminate,             # bus to watch for termination signal
