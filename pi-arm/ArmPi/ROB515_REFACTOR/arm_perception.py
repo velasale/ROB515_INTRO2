@@ -64,12 +64,10 @@ class ArmSensing():
     def function(self):
         self.img = self.my_camera.frame
 
-
-
         if self.img is not None:
             self.cross_hair()
             frame_lab = self.filter()
-            # cv2.imshow('Frame', frame_lab)
+            cv2.imshow('Frame', frame_lab)
             print("did this")
             return frame_lab
 
@@ -210,9 +208,8 @@ def main():
     task = ArmTask()
     my_camera = Camera.Camera()
     my_camera.camera_open()
-    time.sleep(2)
-
-    print('Part0')
+    time.sleep(1)
+    print('Camera Open')
 
     # --- PART 1 ---
     # Instances of Sensor, interpreter and controller
