@@ -141,9 +141,9 @@ class ArmInterpreter():
                 world_x, world_y = convertCoordinate(img_centerx, img_centery, self.task.size)
 
                 # Draw Contours
-                cv2.drawContours(img, [box], -1, range_rgb[detect_color], 2)
+                cv2.drawContours(img, [self.box], -1, range_rgb[detect_color], 2)
                 cv2.putText(img, '(' + str(world_x) + ',' + str(world_y) + ')',
-                            (min(box[0, 0], box[2, 0]), box[2, 1] - 10),
+                            (min(self.box[0, 0], self.box[2, 0]), self.box[2, 1] - 10),
                             cv2.FONT_HERSHEY_SIMPLEX, 0.5, range_rgb[detect_color], 1)  # draw center point
 
         whatever = 5
