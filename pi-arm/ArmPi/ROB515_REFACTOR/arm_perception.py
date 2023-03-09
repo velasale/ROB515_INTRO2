@@ -231,7 +231,7 @@ def main():
     wrappedSensor = rr.Producer(
         sensor.function(),    # function that generates data
         bSensor,                # output data bus
-        0.01,                  # delay between data generation
+        0.1,                  # delay between data generation
         bTerminate,             # bus to watch for termination signal
         "Read Camera Sensor Signal")
 
@@ -239,7 +239,7 @@ def main():
         interpreter.function,
         bSensor,
         bInterpreter,
-        0.01,
+        0.1,
         bTerminate,
         "Interpret Masked Image")
 
