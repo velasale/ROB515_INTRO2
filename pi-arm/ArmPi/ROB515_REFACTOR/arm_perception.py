@@ -70,18 +70,18 @@ class ArmSensing():
         # image = np.ones((640,480,3))
         vision = [image,image]
 
-        # if image is not None:
-        #     self.img = image.copy()
-        #     # print("image:", self.img)
-        #     # cv2.imshow('Frame', self.img)
-        #
-        #     self.cross_hair()
-        #     cv2.imshow('Frame', self.img)
-        #
-        #     frame_lab = self.filter()
-        #     # cv2.imshow('Frame', frame_lab)
-        #
-        #     vision = [frame_lab, self.img]
+        if image is not None:
+            self.img = image.copy()
+            # print("image:", self.img)
+            cv2.imshow('Frame', self.img)
+
+            self.cross_hair()
+            # cv2.imshow('Frame', self.img)
+
+            frame_lab = self.filter()
+            # cv2.imshow('Frame', frame_lab)
+
+            vision = [frame_lab, self.img]
         return vision
 
     def cross_hair(self):
