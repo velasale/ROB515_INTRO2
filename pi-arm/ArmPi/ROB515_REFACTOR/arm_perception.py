@@ -67,6 +67,7 @@ class ArmSensing():
             self.cross_hair()
             frame_lab = self.filter()
             # cv2.imshow('Frame', frame_lab)
+            print("did this")
             return frame_lab
 
     def cross_hair(self):
