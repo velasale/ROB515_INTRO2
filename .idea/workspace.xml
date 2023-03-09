@@ -56,34 +56,6 @@
       <option name="presentableId" value="Default" />
       <updated>1677792190542</updated>
     </task>
-    <task id="LOCAL-00048" summary="Perception Refactoring">
-      <created>1678323705738</created>
-      <option name="number" value="00048" />
-      <option name="presentableId" value="LOCAL-00048" />
-      <option name="project" value="LOCAL" />
-      <updated>1678323705738</updated>
-    </task>
-    <task id="LOCAL-00049" summary="Perception Refactoring">
-      <created>1678323857090</created>
-      <option name="number" value="00049" />
-      <option name="presentableId" value="LOCAL-00049" />
-      <option name="project" value="LOCAL" />
-      <updated>1678323857090</updated>
-    </task>
-    <task id="LOCAL-00050" summary="Perception Refactoring">
-      <created>1678323884597</created>
-      <option name="number" value="00050" />
-      <option name="presentableId" value="LOCAL-00050" />
-      <option name="project" value="LOCAL" />
-      <updated>1678323884598</updated>
-    </task>
-    <task id="LOCAL-00051" summary="Perception Refactoring">
-      <created>1678323965219</created>
-      <option name="number" value="00051" />
-      <option name="presentableId" value="LOCAL-00051" />
-      <option name="project" value="LOCAL" />
-      <updated>1678323965219</updated>
-    </task>
     <task id="LOCAL-00052" summary="Perception Refactoring">
       <created>1678324021949</created>
       <option name="number" value="00052" />
@@ -399,7 +371,35 @@
       <option name="project" value="LOCAL" />
       <updated>1678405378819</updated>
     </task>
-    <option name="localTasksCounter" value="97" />
+    <task id="LOCAL-00097" summary="Perception Refactoring">
+      <created>1678405440533</created>
+      <option name="number" value="00097" />
+      <option name="presentableId" value="LOCAL-00097" />
+      <option name="project" value="LOCAL" />
+      <updated>1678405440533</updated>
+    </task>
+    <task id="LOCAL-00098" summary="Perception Refactoring">
+      <created>1678405506505</created>
+      <option name="number" value="00098" />
+      <option name="presentableId" value="LOCAL-00098" />
+      <option name="project" value="LOCAL" />
+      <updated>1678405506505</updated>
+    </task>
+    <task id="LOCAL-00099" summary="Perception Refactoring">
+      <created>1678405632726</created>
+      <option name="number" value="00099" />
+      <option name="presentableId" value="LOCAL-00099" />
+      <option name="project" value="LOCAL" />
+      <updated>1678405632726</updated>
+    </task>
+    <task id="LOCAL-00100" summary="Perception Refactoring">
+      <created>1678405696049</created>
+      <option name="number" value="00100" />
+      <option name="presentableId" value="LOCAL-00100" />
+      <option name="project" value="LOCAL" />
+      <updated>1678405696049</updated>
+    </task>
+    <option name="localTasksCounter" value="101" />
     <servers />
   </component>
   <component name="VcsManagerConfiguration">
