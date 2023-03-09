@@ -5,7 +5,6 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="ce17af2d-055a-4cc7-a5a5-9612d636b721" name="Changes" comment="Perception Refactoring">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/pi-arm/ArmPi/ROB515_REFACTOR/arm_perception.py" beforeDir="false" afterPath="$PROJECT_DIR$/pi-arm/ArmPi/ROB515_REFACTOR/arm_perception.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -56,34 +55,6 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1677792190542</updated>
-    </task>
-    <task id="LOCAL-00044" summary="Perception Refactoring">
-      <created>1678322999541</created>
-      <option name="number" value="00044" />
-      <option name="presentableId" value="LOCAL-00044" />
-      <option name="project" value="LOCAL" />
-      <updated>1678322999541</updated>
-    </task>
-    <task id="LOCAL-00045" summary="Perception Refactoring">
-      <created>1678323044761</created>
-      <option name="number" value="00045" />
-      <option name="presentableId" value="LOCAL-00045" />
-      <option name="project" value="LOCAL" />
-      <updated>1678323044761</updated>
-    </task>
-    <task id="LOCAL-00046" summary="Perception Refactoring">
-      <created>1678323216316</created>
-      <option name="number" value="00046" />
-      <option name="presentableId" value="LOCAL-00046" />
-      <option name="project" value="LOCAL" />
-      <updated>1678323216316</updated>
-    </task>
-    <task id="LOCAL-00047" summary="Perception Refactoring">
-      <created>1678323557011</created>
-      <option name="number" value="00047" />
-      <option name="presentableId" value="LOCAL-00047" />
-      <option name="project" value="LOCAL" />
-      <updated>1678323557011</updated>
     </task>
     <task id="LOCAL-00048" summary="Perception Refactoring">
       <created>1678323705738</created>
@@ -400,7 +371,35 @@
       <option name="project" value="LOCAL" />
       <updated>1678404742181</updated>
     </task>
-    <option name="localTasksCounter" value="93" />
+    <task id="LOCAL-00093" summary="Perception Refactoring">
+      <created>1678404803429</created>
+      <option name="number" value="00093" />
+      <option name="presentableId" value="LOCAL-00093" />
+      <option name="project" value="LOCAL" />
+      <updated>1678404803429</updated>
+    </task>
+    <task id="LOCAL-00094" summary="Perception Refactoring">
+      <created>1678404905713</created>
+      <option name="number" value="00094" />
+      <option name="presentableId" value="LOCAL-00094" />
+      <option name="project" value="LOCAL" />
+      <updated>1678404905713</updated>
+    </task>
+    <task id="LOCAL-00095" summary="Perception Refactoring">
+      <created>1678404937114</created>
+      <option name="number" value="00095" />
+      <option name="presentableId" value="LOCAL-00095" />
+      <option name="project" value="LOCAL" />
+      <updated>1678404937114</updated>
+    </task>
+    <task id="LOCAL-00096" summary="Perception Refactoring">
+      <created>1678405378819</created>
+      <option name="number" value="00096" />
+      <option name="presentableId" value="LOCAL-00096" />
+      <option name="project" value="LOCAL" />
+      <updated>1678405378819</updated>
+    </task>
+    <option name="localTasksCounter" value="97" />
     <servers />
   </component>
   <component name="VcsManagerConfiguration">
