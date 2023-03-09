@@ -270,7 +270,7 @@ def main():
         sensor.sense_function,    # function that generates data
         sensor_input_bus,
         bSensor,                # output data bus
-        0.1,                  # delay between data generation
+        1,                  # delay between data generation
         bTerminate,             # bus to watch for termination signal
         "Read Camera Sensor Signal")
 
@@ -294,7 +294,7 @@ def main():
     terminationTimer = rr.Timer(
         bTerminate,
         5,
-        1,
+        0.1,
         bTerminate,
         "Termination Timer")
 
