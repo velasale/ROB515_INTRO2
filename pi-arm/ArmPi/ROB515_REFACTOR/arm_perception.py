@@ -66,7 +66,7 @@ class ArmSensing():
     def sense_function(self):
         print('Camera Sensing...')
         image = self.my_camera.frame
-        print(image)
+        # print(image)
         vision = [0,0]
 
         if image is not None:
