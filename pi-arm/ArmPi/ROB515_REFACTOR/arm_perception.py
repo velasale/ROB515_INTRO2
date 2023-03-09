@@ -67,6 +67,7 @@ class ArmSensing():
         print('Camera Sensing...')
         image = self.my_camera.frame
         print(image)
+        vision = [0,0]
 
         if image is not None:
             self.img = image.copy()
@@ -80,7 +81,7 @@ class ArmSensing():
             # cv2.imshow('Frame', frame_lab)
 
             vision = [frame_lab, self.img]
-            return vision
+        return vision
 
     def cross_hair(self):
         """Applies CrossHair to image """
