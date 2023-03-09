@@ -4,6 +4,7 @@ import sys
 sys.path.append('/home/pi/ArmPi/')
 import cv2
 import time
+import numpy as np
 import Camera
 import threading
 from LABConfig import *
@@ -61,13 +62,14 @@ class ArmSensing():
 
     def __init__(self, task, my_camera):
         self.task = task
-        self.my_camera = my_camera
+        # self.my_camera = my_camera
 
     def sense_function(self):
         print('Camera Sensing...')
         # image = self.my_camera.frame
-        # print(image)
-        vision = [0,0]
+        image = np.ones((640,480))
+        print(image)
+        vision = [image,image]
 
         # if image is not None:
         #     self.img = image.copy()
@@ -241,11 +243,13 @@ def main():
     cv2.destroyAllWindows()
 
     task = ArmTask()
-    my_camera = Camera.Camera()
-    my_camera.camera_close()
-    my_camera.camera_open()
+    # my_camera = Camera.Camera()
+    # my_camera.camera_close()
+    # my_camera.camera_open()
     time.sleep(1)
     print('Camera Open')
+
+    my_camera = None
 
     # --- PART 1 ---
     # Instances of Sensor, interpreter and controller
