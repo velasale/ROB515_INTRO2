@@ -248,7 +248,7 @@ def main():
     time.sleep(2)
     print('Camera Open')
 
-    my_camera = None
+    # my_camera = None
 
     # --- PART 1 ---
     # Instances of Sensor, interpreter and controller
