@@ -249,7 +249,7 @@ def main():
 
     # --- PART 1 ---
     # Instances of Sensor, interpreter and controller
-    sensor = ArmSensing(task, my_camera)
+    # sensor = ArmSensing(task, my_camera)
     interpreter = ArmInterpreter(task)
 
     print('Part1')
