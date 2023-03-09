@@ -68,7 +68,6 @@ class ArmSensing():
         print('Camera Sensing...')
         image = self.my_camera.frame
         # image = np.ones((640,480,3))
-        print(image)
         vision = [image,image]
 
         # if image is not None:
@@ -276,7 +275,7 @@ def main():
     wSensor = rr.Producer(
         sensor.sense_function,
         bSensor,
-        1,
+        0.1,
         bTerminate,
         "Read Camera Sensor")
 
@@ -284,7 +283,7 @@ def main():
         interpreter.function,
         bSensor,
         bInterpreter,
-        3,
+        0.1,
         bTerminate,
         "Interpret Camera")
 
