@@ -29,7 +29,8 @@ class SENSOR():
         self.name = 'papa'
 
     def function(self):
-        return 'a'
+        number = 40
+        return number
 
 
 class INTERPRETER():
@@ -37,8 +38,17 @@ class INTERPRETER():
     def __init__(self):
         self.name = 'popp'
 
-    def function(self, string):
-        return string + 'ba'
+    def function(self, par):
+        mapping = par * 4
+        return mapping
+
+class ACTUATOR():
+
+    def __init__(self):
+        self.name = 'pipa'
+
+    def function (self, para):
+        print(para)
 
 
 class ArmSensing():
@@ -202,6 +212,7 @@ def main():
     print('Part1')
     sensor = SENSOR()
     interpreter = INTERPRETER()
+    controller = ACTUATOR()
 
     # Instances of Buses
     print('Instances of buses')
@@ -228,6 +239,13 @@ def main():
         bTerminate,
         "Interpret Masked Image")
 
+    wrappedController = rr.Consumer(
+        controller.function,
+        bInterpreter,
+        0.1,
+        bTerminate,
+        "Controller")
+
     # --- PART 3 ---
     # Create RossROS Timer Object
     terminationTimer = rr.Timer(
@@ -240,7 +258,8 @@ def main():
     # --- PART 4 ---
     # Concurrent Execution
     producer_consumer_list = [wrappedSensor,
-                              wrappedInterpreter]
+                              wrappedInterpreter,
+                              wrappedController]
 
     # Execute the list of produces-consumers concurrently
     print('running concurrent')
