@@ -283,7 +283,7 @@ def main():
         interpreter.function,
         bSensor,
         bInterpreter,
-        1,
+        3,
         bTerminate,
         "Interpret Camera")
 
