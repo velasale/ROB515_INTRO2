@@ -62,7 +62,7 @@ class ArmSensing():
 
     def __init__(self, task, my_camera):
         self.task = task
-        # self.my_camera = my_camera
+        self.my_camera = my_camera
 
     def sense_function(self):
         print('Camera Sensing...')
