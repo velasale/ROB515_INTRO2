@@ -68,19 +68,19 @@ class ArmSensing():
         image = self.my_camera.frame
         # print(image)
         vision = [0,0]
-
-        if image is not None:
-            self.img = image.copy()
-            # print("image:", self.img)
-            # cv2.imshow('Frame', self.img)
-
-            self.cross_hair()
-            cv2.imshow('Frame', self.img)
-
-            frame_lab = self.filter()
-            # cv2.imshow('Frame', frame_lab)
-
-            vision = [frame_lab, self.img]
+        #
+        # if image is not None:
+        #     self.img = image.copy()
+        #     # print("image:", self.img)
+        #     # cv2.imshow('Frame', self.img)
+        #
+        #     self.cross_hair()
+        #     cv2.imshow('Frame', self.img)
+        #
+        #     frame_lab = self.filter()
+        #     # cv2.imshow('Frame', frame_lab)
+        #
+        #     vision = [frame_lab, self.img]
         return vision
 
     def cross_hair(self):
@@ -241,9 +241,9 @@ def main():
     cv2.destroyAllWindows()
 
     task = ArmTask()
-    my_camera = Camera.Camera()
-    my_camera.camera_close()
-    my_camera.camera_open()
+    # my_camera = Camera.Camera()
+    # my_camera.camera_close()
+    # my_camera.camera_open()
     time.sleep(1)
     print('Camera Open')
 
@@ -254,8 +254,8 @@ def main():
 
     print('Part1')
 
-    # sensor = SENSOR()
-    # interpreter = INTERPRETER()
+    sensor = SENSOR()
+    interpreter = INTERPRETER()
 
     controller = ACTUATOR()
 
