@@ -125,11 +125,11 @@ class ArmInterpreter():
                     # Find the outline
                     contours = cv2.findContours(closed, cv2.RETR_EXTERNAL, cv2.CHAIN_APPROX_NONE)[-2]
                     # Find the largest contour
-                    self.reaMaxContour, self.area_max = self.getAreaMaxContour(contours)
+                    self.areaMaxContour, self.area_max = self.getAreaMaxContour(contours)
 
             if self.area_max > 2500:
-                self.rect = cv2.minAreaRect(areaMaxContour)
-                self.box = np.int0(cv2.boxPoints(rect))
+                self.rect = cv2.minAreaRect(self.areaMaxContour)
+                self.box = np.int0(cv2.boxPoints(self.rect))
 
                 # TODO
                 self.task.roi = getROI(self.box)
