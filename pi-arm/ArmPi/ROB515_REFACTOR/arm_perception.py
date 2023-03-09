@@ -242,7 +242,7 @@ def main():
     wrappedController = rr.Consumer(
         controller.function,
         bInterpreter,
-        0.1,
+        2,
         bTerminate,
         "Controller")
 
