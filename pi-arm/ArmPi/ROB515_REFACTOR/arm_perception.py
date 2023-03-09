@@ -267,7 +267,7 @@ def main():
     print('Wrapping functions')
     # Wrap Sensor, Interpreter and Controller function into RossROS objects
     wrappedSensor = rr.ConsumerProducer(
-        sensor.sense_function(),    # function that generates data
+        sensor.sense_function,    # function that generates data
         sensor_input_bus,
         bSensor,                # output data bus
         0.1,                  # delay between data generation
