@@ -24,7 +24,7 @@ if sys.version_info.major == 2:
 
 
 
-class SENSOR():
+class SENSOR:
 
     def __init__(self):
         ...
@@ -35,7 +35,7 @@ class SENSOR():
         print(number)
         return number
 
-class INTERPRETER():
+class INTERPRETER:
 
     def __init__(self):
         ...
@@ -45,7 +45,7 @@ class INTERPRETER():
         mapping = par * 4
         return mapping
 
-class ACTUATOR():
+class ACTUATOR:
 
     def __init__(self):
         ...
@@ -300,7 +300,8 @@ def main():
 
     # --- PART 4 ---
     # Concurrent Execution
-    producer_consumer_list = [wrappedSensor,
+    producer_consumer_list = [wrappedInterpreter,
+                              wrappedSensor,
                               # wrappedInterpreter,
                               wrappedController]
 
