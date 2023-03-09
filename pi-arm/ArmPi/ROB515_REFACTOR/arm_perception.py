@@ -57,20 +57,20 @@ class ArmSensing():
     def __init__(self, task, my_camera):
         print("did this")
         self.task = task
+
         self.my_camera = my_camera
         # self.img = self.my_camera.frame
 
     def function(self):
         self.img = self.my_camera.frame
+        print("image:", self.img)
 
         if self.img is not None:
             self.cross_hair()
-
-            cv2.imshow('Frame', self.img)
+            # cv2.imshow('Frame', self.img)
 
             frame_lab = self.filter()
             # cv2.imshow('Frame', frame_lab)
-            print("did this")
 
             vision = [frame_lab, self.img]
             return vision
