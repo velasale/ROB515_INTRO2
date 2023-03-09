@@ -27,7 +27,7 @@ if sys.version_info.major == 2:
 class SENSOR():
 
     def __init__(self):
-        self.name = 'papa'
+        ...
 
     def sense_function(self):
         number = random.randint(0,9)
@@ -37,7 +37,7 @@ class SENSOR():
 class INTERPRETER():
 
     def __init__(self):
-        self.name = 'popp'
+        ...
 
     def function(self, par):
         print('interpreting')
@@ -47,7 +47,7 @@ class INTERPRETER():
 class ACTUATOR():
 
     def __init__(self):
-        self.name = 'pipa'
+        ...
 
     def function (self, para):
         print(para)
@@ -98,7 +98,6 @@ class ArmSensing():
         frame_lab = cv2.cvtColor(frame_gb, cv2.COLOR_BGR2LAB)  # convert image to lab space
 
         return frame_lab
-
 
 class ArmInterpreter():
     """ This class and its methods return the x,y location of the object"""
@@ -186,7 +185,6 @@ class ArmController():
 
     def __init__(self):
         ...
-
 
 class ArmTask():
 
