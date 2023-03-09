@@ -210,7 +210,9 @@ def main():
     task = ArmTask()
     my_camera = Camera.Camera()
     my_camera.camera_open()
-    print('Camera Open')
+    time.sleep(2)
+
+    print('Part0')
 
     # --- PART 1 ---
     # Instances of Sensor, interpreter and controller
