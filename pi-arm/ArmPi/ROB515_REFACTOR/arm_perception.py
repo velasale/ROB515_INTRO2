@@ -192,7 +192,7 @@ def main():
     """Perception Assignment 1: Set up a simple program that uses this class to identify the location of a block in the pickup
     area and labels it on the video display from the camera."""
 
-    task = ArmTask()
+    # task = ArmTask()
 
     # --- PART 1 ---
     # Instances of Sensor, interpreter and controller
