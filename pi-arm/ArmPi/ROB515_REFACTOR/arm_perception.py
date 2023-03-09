@@ -246,8 +246,8 @@ def main():
 
     # --- PART 1 ---
     # Instances of Sensor, interpreter and controller
-    sensor = ArmSensing(task, my_camera)
-    interpreter = ArmInterpreter(task)
+    # sensor = ArmSensing(task, my_camera)
+    # interpreter = ArmInterpreter(task)
 
     print('Part1')
 
@@ -268,7 +268,7 @@ def main():
     wrappedSensor = rr.Producer(
         sensor.sense_function(),    # function that generates data
         bSensor,                # output data bus
-        1,                  # delay between data generation
+        0.1,                  # delay between data generation
         bTerminate,             # bus to watch for termination signal
         "Read Camera Sensor Signal")
 
