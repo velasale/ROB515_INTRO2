@@ -284,7 +284,7 @@ def main():
 
     wrappedController = rr.Consumer(
         controller.function,
-        bInterpreter,
+        bSensor,
         2,
         bTerminate,
         "Controller")
@@ -301,7 +301,7 @@ def main():
     # --- PART 4 ---
     # Concurrent Execution
     producer_consumer_list = [wrappedSensor,
-                              wrappedInterpreter,
+                              # wrappedInterpreter,
                               wrappedController]
 
     # Execute the list of produces-consumers concurrently
