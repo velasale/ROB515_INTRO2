@@ -62,7 +62,8 @@ class ArmSensing():
         # self.img = self.my_camera.frame
 
     def function(self):
-        self.img = self.my_camera.frame
+        image = self.my_camera.frame
+        self.img = image.copy()
         print("image:", self.img)
 
         if self.img is not None:
