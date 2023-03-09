@@ -295,7 +295,7 @@ def main():
     terminationTimer = rr.Timer(
         bTerminate,
         5,
-        0.01,
+        1,
         bTerminate,
         "Termination Timer")
 
