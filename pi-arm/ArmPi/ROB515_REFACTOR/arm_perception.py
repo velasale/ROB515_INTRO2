@@ -183,7 +183,7 @@ def main():
     # Instances of Buses
     bSensor = rr.Bus(sensor.mask_image(), "Camera Sensor Bus")
     bInterpreter = rr.Bus(interpreter.function(bSensor.message), "Interpreter Sensor Bus")
-    b.Terminate = rr.Bus(0, "Termination Bus")
+    bTerminate = rr.Bus(0, "Termination Bus")
 
 
     # --- PART 2 ---
