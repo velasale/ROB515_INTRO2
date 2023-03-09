@@ -125,7 +125,7 @@ class ArmInterpreter():
                     # Find the outline
                     contours = cv2.findContours(closed, cv2.RETR_EXTERNAL, cv2.CHAIN_APPROX_NONE)[-2]
                     # Find the largest contour
-                    self.reaMaxContour, self.area_max = getAreaMaxContour(contours)
+                    self.reaMaxContour, self.area_max = self.getAreaMaxContour(contours)
 
             if self.area_max > 2500:
                 self.rect = cv2.minAreaRect(areaMaxContour)
@@ -148,6 +148,24 @@ class ArmInterpreter():
 
         whatever = 5
         return whatever
+
+
+    def getAreaMaxContour(self.contours):
+        """ Find the contour with the largest area
+        parameter is list of contours to compare"""
+        contour_area_temp = 0
+        contour_area_max = 0
+        area_max_contour = None
+
+        # iterate over all contours
+        for c in contours:
+            contour_area_temp = math.fabs(cv2.contourArea(c))  # Calculate area of contour
+            if contour_area_temp > contour_area_max:
+                contour_area_max = contour_area_temp
+                if contour_area_temp > 300:  # Only when the area > 300, the contour of the largest area is valid to filter interference
+                    area_max_contour = c
+
+        return area_max_contour, contour_area_max  # returns largest contour
 
     def functionb(self, frame_lab):
         cv2.imshow('Frame', frame_lab)
