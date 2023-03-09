@@ -28,7 +28,8 @@ class SENSOR():
     def __init__(self):
         self.name = 'papa'
 
-    def function(self):
+    def sense_function(self):
+        print('sensing')
         number = 40
         return number
 
@@ -38,6 +39,7 @@ class INTERPRETER():
         self.name = 'popp'
 
     def function(self, par):
+        print('interpreting')
         mapping = par * 4
         return mapping
 
@@ -249,8 +251,8 @@ def main():
 
     print('Part1')
 
-    # sensor = SENSOR()
-    # interpreter = INTERPRETER()
+    sensor = SENSOR()
+    interpreter = INTERPRETER()
     controller = ACTUATOR()
 
     # Instances of Buses
