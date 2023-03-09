@@ -66,11 +66,11 @@ class ArmSensing():
 
         if image is not None:
             self.img = image.copy()
-            print("image:", self.img)
-            cv2.imshow('Frame', self.img)
+            # print("image:", self.img)
+            # cv2.imshow('Frame', self.img)
 
             self.cross_hair()
-            # cv2.imshow('Frame', self.img)
+            cv2.imshow('Frame', self.img)
 
             frame_lab = self.filter()
             # cv2.imshow('Frame', frame_lab)
