@@ -24,6 +24,7 @@ if sys.version_info.major == 2:
 
 
 
+### --- SIMPLE CLASSES TO CHECK CONCURRENT --- ###
 class SENSOR:
 
     def __init__(self):
@@ -52,6 +53,7 @@ class ACTUATOR:
 
     def function (self, para):
         print(para)
+
 
 
 class ArmSensing():
@@ -238,26 +240,25 @@ def main():
     # cv2.destroyAllWindows()
 
     task = ArmTask()
-    # my_camera = Camera.Camera()
-    # my_camera.camera_close()
-    # my_camera.camera_open()
+    my_camera = Camera.Camera()
+    my_camera.camera_close()
+    my_camera.camera_open()
     time.sleep(1)
     print('Camera Open')
 
     # --- PART 1 ---
     # Instances of Sensor, interpreter and controller
-    # sensor = ArmSensing(task, my_camera)
-    # interpreter = ArmInterpreter(task)
+    sensor = ArmSensing(task, my_camera)
+    interpreter = ArmInterpreter(task)
 
     print('Part1')
 
-    sensor = SENSOR()
-    interpreter = INTERPRETER()
+    # sensor = SENSOR()
+    # interpreter = INTERPRETER()
     controller = ACTUATOR()
 
     # Instances of Buses
     print('Instances of buses')
-    sensor_input_bus = rr.Bus(0, "Default producer input bus")
     bSensor = rr.Bus(sensor.sense_function(), "Camera Sensor Bus")
     bInterpreter = rr.Bus(interpreter.function(bSensor.message), "Interpreter Sensor Bus")
     bTerminate = rr.Bus(0, "Termination Bus")
@@ -278,7 +279,7 @@ def main():
         interpreter.function,
         bSensor,
         bInterpreter,
-        1,
+        0.01,
         bTerminate,
         "Interpret Camera")
 
