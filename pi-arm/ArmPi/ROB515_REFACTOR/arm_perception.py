@@ -270,7 +270,7 @@ def main():
     wSensor = rr.Producer(
         sensor.sense_function,
         bSensor,
-        0.1,
+        1,
         bTerminate,
         "Read Camera Sensor")
 
@@ -278,7 +278,7 @@ def main():
         interpreter.function,
         bSensor,
         bInterpreter,
-        1,
+        3,
         bTerminate,
         "Interpret Camera")
 
@@ -286,7 +286,7 @@ def main():
     wController = rr.Consumer(
         controller.function,
         bInterpreter,
-        2,
+        6,
         bTerminate,
         "Controlling Arm")
 
