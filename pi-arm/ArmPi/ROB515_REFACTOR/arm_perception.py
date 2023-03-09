@@ -208,10 +208,10 @@ def main():
     area and labels it on the video display from the camera."""
 
     task = ArmTask()
-    print('Parta')
     my_camera = Camera.Camera()
-    print('Partb')
+    print('Parta')
     my_camera.camera_open()
+    time.sleep(2)
 
     print('Part0')
 
