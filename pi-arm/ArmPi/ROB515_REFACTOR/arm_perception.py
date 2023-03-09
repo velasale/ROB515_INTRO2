@@ -41,7 +41,7 @@ class INTERPRETER:
         ...
 
     def function(self, par):
-        print('interpreting')
+        print('FOR GODs SAKE interpreting')
         mapping = par * 4
         return mapping
 
