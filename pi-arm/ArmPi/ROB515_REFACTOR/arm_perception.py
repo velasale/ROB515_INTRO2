@@ -257,6 +257,7 @@ def main():
 
     # Instances of Buses
     print('Instances of buses')
+    sensor_input_bus = rr.Bus(0, "Default producer input bus")
     bSensor = rr.Bus(sensor.sense_function(), "Camera Sensor Bus")
     bInterpreter = rr.Bus(interpreter.function(bSensor.message), "Interpreter Sensor Bus")
     bTerminate = rr.Bus(0, "Termination Bus")
@@ -265,8 +266,9 @@ def main():
     # --- PART 2 ---
     print('Wrapping functions')
     # Wrap Sensor, Interpreter and Controller function into RossROS objects
-    wrappedSensor = rr.Producer(
+    wrappedSensor = rr.ConsumerProducer(
         sensor.sense_function(),    # function that generates data
+        sensor_input_bus,
         bSensor,                # output data bus
         0.1,                  # delay between data generation
         bTerminate,             # bus to watch for termination signal
