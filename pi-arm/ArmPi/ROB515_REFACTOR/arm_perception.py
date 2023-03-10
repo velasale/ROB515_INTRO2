@@ -76,8 +76,8 @@ class ArmSensing():
             # cv2.destroyAllWindows()
 
             self.cross_hair()
-            cv2.imshow('Frame', self.img)
-            key = cv2.waitKey(1)
+            # cv2.imshow('Frame', self.img)
+            # key = cv2.waitKey(1)
             # time.sleep(1)
 
             frame_lab = self.filter()
@@ -319,6 +319,15 @@ def main():
     # Execute the list of produces-consumers concurrently
     print('running concurrent\n\n')
     rr.runConcurrently(producer_consumer_list)
+
+    while True:
+        cv2.imshow('Frame', bSensor.message[0])
+        key = cv2.waitKey(1000)
+        if key == 27:
+            break
+    my_camera.camera_close()
+    cv2.destroyAllWindows()
+
 
 
 if __name__ == '__main__':
