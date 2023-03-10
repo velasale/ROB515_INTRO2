@@ -72,14 +72,13 @@ class ArmSensing():
 
         if image is not None:
             self.img = image.copy()
-            # print("image:", self.img)
-            cv2.imshow('Frame', self.img)
-            key = cv2.waitKey(1000)
-            time.sleep(1)
+
             # cv2.destroyAllWindows()
 
             self.cross_hair()
-            # cv2.imshow('Frame', self.img)
+            cv2.imshow('Frame', self.img)
+            key = cv2.waitKey(1)
+            # time.sleep(1)
 
             frame_lab = self.filter()
             # cv2.imshow('Frame', frame_lab)
@@ -281,7 +280,7 @@ def main():
     wSensor = rr.Producer(
         sensor.sense_function,
         bSensor,
-        5,
+        1,
         bTerminate,
         "Read Camera Sensor")
 
