@@ -25,37 +25,6 @@ if sys.version_info.major == 2:
 
 
 
-### --- SIMPLE CLASSES TO CHECK CONCURRENT --- ###
-class SENSOR:
-
-    def __init__(self):
-        ...
-
-    def sense_function(self):
-        number = random.randint(0,9)
-        print('sensing:', number)
-        return number
-
-class INTERPRETER:
-
-    def __init__(self):
-        ...
-
-    def function(self, par):
-        print('FOR GODs SAKE interpreting')
-        mapping = par * 4
-        return mapping
-
-class ACTUATOR:
-
-    def __init__(self):
-        ...
-
-    def function (self, para):
-        print(para)
-
-
-
 class ArmSensing():
     """ This class and its methods return the image sensed by the camera
     and its respective filterings"""
@@ -63,19 +32,18 @@ class ArmSensing():
     def __init__(self, task, my_camera):
         self.task = task
         self.my_camera = my_camera
+        self.img = None
 
     def sense_function(self):
         print('Thread: Camera Sensing...')
         image = self.my_camera.frame
         # image = np.ones((640,480,3))
-        vision = [image, image]
+        vision = image.copy()
 
         if image is not None:
             self.img = image.copy()
             self.cross_hair()
-            frame_lab = self.filter()
-
-            vision = [frame_lab, self.img]
+            vision = self.img
 
         return vision
 
@@ -85,18 +53,7 @@ class ArmSensing():
         cv2.line(self.img, (0, int(img_h / 2)), (img_w, int(img_h / 2)), (0, 0, 200), 1)
         cv2.line(self.img, (int(img_w / 2), 0), (int(img_w / 2), img_h), (0, 0, 200), 1)
 
-    def filter(self):
-        """Applies filter"""
-        frame_resize = cv2.resize(self.img, self.task.size, interpolation=cv2.INTER_NEAREST)
-        frame_gb = cv2.GaussianBlur(frame_resize, (11, 11), 11)
 
-        if self.task.get_roi and self.task.start_pick_up:
-            self.task.get_roi = False
-            frame_gb = getMaskROI(frame_gb, self.task.roi, self.task.size)
-
-        frame_lab = cv2.cvtColor(frame_gb, cv2.COLOR_BGR2LAB)  # convert image to lab space
-
-        return frame_lab
 
 class ArmInterpreter():
     """ This class and its methods return the x,y location of the object"""
@@ -106,13 +63,15 @@ class ArmInterpreter():
         self.area_max = 0
         self.areaMaxContour = 0
         self.rect = None
+        self.img = None
 
 
     def function(self, vision):
         print('Thread: Camera Interpreting...')
+        self.img = vision
 
-        frame_lab = vision[0]
-        img = vision[1]
+        frame_lab = self.filter()
+
         self.area_max = 0
         self.areaMaxContour = 0
         if not self.task.start_pick_up:
@@ -135,6 +94,7 @@ class ArmInterpreter():
                 self.rect = cv2.minAreaRect(self.areaMaxContour)
                 self.box = np.int0(cv2.boxPoints(self.rect))
 
+                # TODO...
                 self.task.roi = getROI(self.box)
                 self.task.get_roi = True
 
@@ -144,13 +104,27 @@ class ArmInterpreter():
                 world_x, world_y = convertCoordinate(img_centerx, img_centery, self.task.size)
 
                 # Draw Contours
-                cv2.drawContours(img, [self.box], -1, self.task.range_rgb[detect_color], 2)
-                cv2.putText(img, '(' + str(world_x) + ',' + str(world_y) + ')',
+                cv2.drawContours(self.img, [self.box], -1, self.task.range_rgb[detect_color], 2)
+                cv2.putText(self.img, '(' + str(world_x) + ',' + str(world_y) + ')',
                             (min(self.box[0, 0], self.box[2, 0]), self.box[2, 1] - 10),
                             cv2.FONT_HERSHEY_SIMPLEX, 0.5, self.task.range_rgb[detect_color], 1)  # draw center point
 
         whatever = 5
         return whatever
+
+
+    def filter(self):
+        """Applies filter and Draws a rectangle"""
+        frame_resize = cv2.resize(self.img, self.task.size, interpolation=cv2.INTER_NEAREST)
+        frame_gb = cv2.GaussianBlur(frame_resize, (11, 11), 11)
+
+        if self.task.get_roi and self.task.start_pick_up:
+            self.task.get_roi = False
+            frame_gb = getMaskROI(frame_gb, self.task.roi, self.task.size)
+
+        frame_lab = cv2.cvtColor(frame_gb, cv2.COLOR_BGR2LAB)  # convert image to lab space
+
+        return frame_lab
 
 
     def getAreaMaxContour(self,contours):
@@ -169,7 +143,6 @@ class ArmInterpreter():
                     area_max_contour = c
 
         return area_max_contour, contour_area_max  # returns largest contour
-
 
 
 class ArmController():
