@@ -298,7 +298,7 @@ def main():
     wDisplay = rr.Consumer(
         display.function,
         bSensor,
-        0.03,
+        0.01,
         bTerminate,
         "Display Image")
 
