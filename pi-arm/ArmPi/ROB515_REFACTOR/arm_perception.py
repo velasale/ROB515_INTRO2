@@ -195,8 +195,8 @@ class ImageVisualizer():
     def function(self, image):
         cv2.imshow('Frame', Frame)
         key = cv2.waitKey(1)
-        if key == 27:
-            break
+        # if key == 27:
+        #     break
 
 
 class ArmTask():
