@@ -38,20 +38,24 @@ class ArmSensing():
         print('Thread: Camera Sensing...')
         image = self.my_camera.frame
         # image = np.ones((640,480,3))
-        vision = image.copy()
+        vision = [image.copy(), image.copy()]
 
         if image is not None:
             self.img = image.copy()
-            self.cross_hair()
-            vision = self.img
+            frame_gb = self.cross_hair()
+            vision = [frame_gb, self.img]
 
         return vision
-
     def cross_hair(self):
         """Applies CrossHair to image """
         img_h, img_w = self.img.shape[:2]
         cv2.line(self.img, (0, int(img_h / 2)), (img_w, int(img_h / 2)), (0, 0, 200), 1)
         cv2.line(self.img, (int(img_w / 2), 0), (int(img_w / 2), img_h), (0, 0, 200), 1)
+
+        frame_resize = cv2.resize(self.img, self.task.size, interpolation=cv2.INTER_NEAREST)
+        frame_gb = cv2.GaussianBlur(frame_resize, (11, 11), 11)
+
+        return frame_gb
 
 
 
@@ -68,9 +72,11 @@ class ArmInterpreter():
 
     def function(self, vision):
         print('Thread: Camera Interpreting...')
-        self.img = vision
 
-        frame_lab = self.filter()
+        frame_gb = vision[0]
+        self.img = vision[1]
+
+        frame_lab = self.filter(frame_gb)
 
         self.area_max = 0
         self.areaMaxContour = 0
@@ -94,7 +100,6 @@ class ArmInterpreter():
                 self.rect = cv2.minAreaRect(self.areaMaxContour)
                 self.box = np.int0(cv2.boxPoints(self.rect))
 
-                # TODO...
                 self.task.roi = getROI(self.box)
                 self.task.get_roi = True
 
@@ -113,10 +118,8 @@ class ArmInterpreter():
         return whatever
 
 
-    def filter(self):
+    def filter(self, frame_gb):
         """Applies filter and Draws a rectangle"""
-        frame_resize = cv2.resize(self.img, self.task.size, interpolation=cv2.INTER_NEAREST)
-        frame_gb = cv2.GaussianBlur(frame_resize, (11, 11), 11)
 
         if self.task.get_roi and self.task.start_pick_up:
             self.task.get_roi = False
