@@ -75,9 +75,7 @@ class ArmSensing():
             self.cross_hair()
             frame_lab = self.filter()
 
-            ch_ima = self.img.copy()
-
-            vision = [frame_lab, self.img, ch_ima ]
+            vision = [frame_lab, self.img]
 
         return vision
 
@@ -189,7 +187,7 @@ class ImageVisualizer():
 
     def function(self, image):
         print("Thread: Displaying image")
-        cv2.imshow('Frame', image[2])
+        cv2.imshow('Frame', image[1])
         cv2.waitKey(1)
         # cv2.destroyAllWindows()
 
