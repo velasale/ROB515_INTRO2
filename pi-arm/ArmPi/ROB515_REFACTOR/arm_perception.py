@@ -167,8 +167,8 @@ class ImageVisualizer():
 
     def function(self, image):
         print("Thread: Displaying image")
-        cv2.imshow('Frame', image[1])
-        cv2.waitKey(0)
+        cv2.imshow('Frame', image[0])
+        cv2.waitKey(1)
 
 
 class ArmTask():
