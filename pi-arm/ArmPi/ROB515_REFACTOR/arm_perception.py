@@ -120,25 +120,25 @@ class ArmInterpreter():
                 track = True
                 # print(count,distance)
                 # Cumulative judgement
-                if action_finish:
+                if self.action_finish:
                     if distance < 0.3:
-                        center_list.extend((world_x, world_y))
-                        count += 1
-                        if start_count_t1:
-                            start_count_t1 = False
+                        self.center_list.extend((world_x, world_y))
+                        self.count += 1
+                        if self.start_count_t1:
+                            self.start_count_t1 = False
                             t1 = time.time()
                         if time.time() - t1 > 1.5:
-                            rotation_angle = rect[2]
-                            start_count_t1 = True
-                            world_X, world_Y = np.mean(np.array(center_list).reshape(count, 2), axis=0)
-                            count = 0
+                            self.rotation_angle = self.rect[2]
+                            self.start_count_t1 = True
+                            world_X, world_Y = np.mean(np.array(self.center_list).reshape(count, 2), axis=0)
+                            self.count = 0
                             center_list = []
                             start_pick_up = True
                     else:
                         t1 = time.time()
-                        start_count_t1 = True
-                        count = 0
-                        center_list = []
+                        self.start_count_t1 = True
+                        self.count = 0
+                        self.center_list = []
 
         vision = [self.img.copy(), 5]
         return vision
