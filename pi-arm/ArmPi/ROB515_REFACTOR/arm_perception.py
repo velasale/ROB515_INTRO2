@@ -75,10 +75,10 @@ class ArmSensing():
 
 
             self.cross_hair()
-            cv2.imshow('image', self.img)
-
-            cv2.waitKey(10)
-            cv2.destroyAllWindows()
+            # cv2.imshow('image', self.img)
+            #
+            # cv2.waitKey(10)
+            # cv2.destroyAllWindows()
             # key = cv2.waitKey(1)
             # time.sleep(1)
 
@@ -283,7 +283,7 @@ def main():
     wSensor = rr.Producer(
         sensor.sense_function,
         bSensor,
-        1,
+        0.03,
         bTerminate,
         "Read Camera Sensor")
 
@@ -291,7 +291,7 @@ def main():
         interpreter.function,
         bSensor,
         bInterpreter,
-        3,
+        0.03,
         bTerminate,
         "Interpret Camera")
 
@@ -299,7 +299,7 @@ def main():
     wController = rr.Consumer(
         controller.function,
         bInterpreter,
-        6,
+        1,
         bTerminate,
         "Controlling Arm")
 
