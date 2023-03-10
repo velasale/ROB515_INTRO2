@@ -75,6 +75,7 @@ class ArmSensing():
             # print("image:", self.img)
             cv2.imshow('Frame', self.img)
             key = cv2.waitKey(1000)
+            time.sleep(1)
             # cv2.destroyAllWindows()
 
             self.cross_hair()
@@ -280,7 +281,7 @@ def main():
     wSensor = rr.Producer(
         sensor.sense_function,
         bSensor,
-        2,
+        5,
         bTerminate,
         "Read Camera Sensor")
 
