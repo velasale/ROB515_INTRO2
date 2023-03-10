@@ -74,6 +74,8 @@ class ArmSensing():
             self.img = image.copy()
             # print("image:", self.img)
             cv2.imshow('Frame', self.img)
+            key = cv2.waitKey(10)
+            cv2.destroyAllWindows()
 
             self.cross_hair()
             # cv2.imshow('Frame', self.img)
@@ -82,6 +84,9 @@ class ArmSensing():
             # cv2.imshow('Frame', frame_lab)
 
             vision = [frame_lab, self.img]
+
+
+
         return vision
 
     def cross_hair(self):
