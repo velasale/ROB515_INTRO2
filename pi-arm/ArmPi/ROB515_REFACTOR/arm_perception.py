@@ -190,7 +190,7 @@ class ImageVisualizer():
     def function(self, image):
         print("Displaying image")
         cv2.imshow('Frame', image[2])
-        cv2.waitKey(1)
+        cv2.waitKey(10)
         cv2.destroyAllWindows()
 
 
