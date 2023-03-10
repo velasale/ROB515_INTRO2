@@ -106,39 +106,39 @@ class ArmInterpreter():
                 # Get the coordinates of the center of the block
                 img_centerx, img_centery = getCenter(self.rect, self.task.roi, self.task.size, square_length)
                 # Convert to real world coordinates
-                world_x, world_y = convertCoordinate(img_centerx, img_centery, self.task.size)
+                self.task.world_x, self.task.world_y = convertCoordinate(img_centerx, img_centery, self.task.size)
 
                 # Draw Contours
                 cv2.drawContours(self.img, [self.box], -1, self.task.range_rgb[detect_color], 2)
-                cv2.putText(self.img, '(' + str(world_x) + ',' + str(world_y) + ')',
+                cv2.putText(self.img, '(' + str(self.task.world_x) + ',' + str(self.task.world_y) + ')',
                             (min(self.box[0, 0], self.box[2, 0]), self.box[2, 1] - 10),
                             cv2.FONT_HERSHEY_SIMPLEX, 0.5, self.task.range_rgb[detect_color], 1)  # draw center point
 
                 # Compare the last coordinates to determine whether to move
                 distance = math.sqrt(pow(world_x - self.task.last_x, 2) + pow(world_y - self.task.last_y, 2))
-                self.task.last_x, self.task.last_y = world_x, world_y
-                track = True
+                self.task.last_x, self.task.last_y = self.task.world_x, self.task.world_y
+                self.task.track = True
                 # print(count,distance)
                 # Cumulative judgement
-                if self.action_finish:
+                if self.task.action_finish:
                     if distance < 0.3:
-                        self.center_list.extend((world_x, world_y))
-                        self.count += 1
-                        if self.start_count_t1:
-                            self.start_count_t1 = False
+                        self.task.center_list.extend((self.task.world_x, self.task.world_y))
+                        self.task.count += 1
+                        if self.task.start_count_t1:
+                            self.task.start_count_t1 = False
                             t1 = time.time()
                         if time.time() - t1 > 1.5:
-                            self.rotation_angle = self.rect[2]
-                            self.start_count_t1 = True
-                            world_X, world_Y = np.mean(np.array(self.center_list).reshape(count, 2), axis=0)
-                            self.count = 0
-                            center_list = []
-                            start_pick_up = True
+                            self.task.rotation_angle = self.rect[2]
+                            self.task.start_count_t1 = True
+                            self.task.world_X, self.task.world_Y = np.mean(np.array(self.task.center_list).reshape(self.task.count, 2), axis=0)
+                            self.task.count = 0
+                            self.task.center_list = []
+                            self.task.start_pick_up = True
                     else:
                         t1 = time.time()
-                        self.start_count_t1 = True
-                        self.count = 0
-                        self.center_list = []
+                        self.task.start_count_t1 = True
+                        self.task.count = 0
+                        self.task.center_list = []
 
         vision = [self.img.copy(), 5]
         return vision
