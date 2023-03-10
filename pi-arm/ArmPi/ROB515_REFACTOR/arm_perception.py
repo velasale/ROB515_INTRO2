@@ -68,14 +68,14 @@ class ArmSensing():
         print('Camera Sensing...')
         image = self.my_camera.frame
         # image = np.ones((640,480,3))
-        vision = [image,image]
+        vision = [image, image]
 
         if image is not None:
             self.img = image.copy()
             self.cross_hair()
             frame_lab = self.filter()
+
             vision = [frame_lab, self.img]
-            cv2.imshow('Frame', frame_lab)
 
         return vision
 
@@ -151,7 +151,6 @@ class ArmInterpreter():
                             (min(self.box[0, 0], self.box[2, 0]), self.box[2, 1] - 10),
                             cv2.FONT_HERSHEY_SIMPLEX, 0.5, self.task.range_rgb[detect_color], 1)  # draw center point
 
-        # cv2.imshow('Frame', img)
         whatever = 5
         return whatever
 
@@ -173,11 +172,7 @@ class ArmInterpreter():
 
         return area_max_contour, contour_area_max  # returns largest contour
 
-    def functionb(self, frame_lab):
-        cv2.imshow('Frame', frame_lab)
 
-        whatever = 5
-        return whatever
 
 class ArmController():
     """Given the x,y location of an object, the controller takes the object into
@@ -193,10 +188,9 @@ class ImageVisualizer():
         ...
 
     def function(self, image):
-        cv2.imshow('Frame', Frame)
+        print("Displaying image")
+        cv2.imshow('Frame', image[0])
         key = cv2.waitKey(1)
-        # if key == 27:
-        #     break
 
 
 class ArmTask():
@@ -269,6 +263,7 @@ def main():
     # interpreter = INTERPRETER()
 
     controller = ACTUATOR()
+    display = ImageVisualizer()
 
     # Instances of Buses
     print('Instances of buses')
@@ -305,6 +300,14 @@ def main():
         "Controlling Arm")
 
 
+    wDisplay = rr.Consumer(
+        display.function,
+        bSensor,
+        0.1,
+        bTerminate,
+        "Display Image")
+
+
     # --- PART 3 ---
     # Create RossROS Timer Object
     terminationTimer = rr.Timer(
@@ -318,21 +321,12 @@ def main():
     # Concurrent Execution
     producer_consumer_list = [wSensor,
                               wInterpreter,
+                              wDisplay,
                               wController]
 
     # Execute the list of produces-consumers concurrently
     print('running concurrent\n\n')
     rr.runConcurrently(producer_consumer_list)
-
-    while True:
-        print('something')
-        cv2.imshow('Frame', bSensor.message[0])
-        key = cv2.waitKey(1000)
-        if key == 27:
-            break
-    my_camera.camera_close()
-    cv2.destroyAllWindows()
-
 
 
 if __name__ == '__main__':
