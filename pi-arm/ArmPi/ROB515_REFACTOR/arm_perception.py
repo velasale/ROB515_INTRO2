@@ -73,9 +73,9 @@ class ArmSensing():
         if image is not None:
             self.img = image.copy()
             # print("image:", self.img)
-            cv2.imshow('Frame', self.img)
-            key = cv2.waitKey(10)
-            cv2.destroyAllWindows()
+            # cv2.imshow('Frame', self.img)
+            # key = cv2.waitKey(10)
+            # cv2.destroyAllWindows()
 
             self.cross_hair()
             # cv2.imshow('Frame', self.img)
