@@ -73,9 +73,10 @@ class ArmSensing():
         if image is not None:
             self.img = image.copy()
             self.cross_hair()
+            ch_ima = self.img.copy()
             frame_lab = self.filter()
 
-            vision = [frame_lab, self.img]
+            vision = [frame_lab, self.img, ch_ima ]
 
         return vision
 
@@ -189,7 +190,7 @@ class ImageVisualizer():
 
     def function(self, image):
         print("Displaying image")
-        cv2.imshow('Frame', image[1])
+        cv2.imshow('Frame', image[2])
         cv2.waitKey(0)
         cv2.destroyAllWindows()
 
@@ -288,14 +289,12 @@ def main():
         bTerminate,
         "Interpret Camera")
 
-
     wController = rr.Consumer(
         controller.function,
         bInterpreter,
         1,
         bTerminate,
         "Controlling Arm")
-
 
     wDisplay = rr.Consumer(
         display.function,
