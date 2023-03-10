@@ -191,6 +191,7 @@ class ImageVisualizer():
         print("Displaying image")
         cv2.imshow('Frame', image[0])
         key = cv2.waitKey(1)
+        cv2.destroyAllWindows()
 
 
 class ArmTask():
