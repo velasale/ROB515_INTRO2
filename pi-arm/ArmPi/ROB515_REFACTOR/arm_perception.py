@@ -168,8 +168,7 @@ class ImageVisualizer():
     def function(self, image):
         print("Thread: Displaying image")
         cv2.imshow('Frame', image[1])
-        cv2.waitKey(1)
-        # cv2.destroyAllWindows()
+        cv2.waitKey(0)
 
 
 class ArmTask():
@@ -262,7 +261,7 @@ def main():
     wController = rr.Consumer(
         controller.function,
         bInterpreter,
-        1,
+        0.01,
         bTerminate,
         "Controlling Arm")
 
