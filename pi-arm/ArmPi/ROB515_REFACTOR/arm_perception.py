@@ -77,7 +77,7 @@ class ArmSensing():
             self.cross_hair()
             cv2.imshow('image', self.img)
 
-            cv2.waitKey(0)
+            cv2.waitKey(10)
             cv2.destroyAllWindows()
             # key = cv2.waitKey(1)
             # time.sleep(1)
