@@ -152,6 +152,10 @@ class ArmController():
     def __init__(self):
         ...
 
+    def function(self, msg):
+        print("Thread: Arm Controller:", msg * 5)
+
+
 
 class ImageVisualizer():
 
@@ -218,19 +222,12 @@ def main():
     my_camera = Camera.Camera()
     my_camera.camera_open()
     time.sleep(1)
-    print('Camera Open')
 
     # --- PART 1 ---
     # Instances of Sensor, interpreter and controller
     sensor = ArmSensing(task, my_camera)
     interpreter = ArmInterpreter(task)
-
-    print('Part1')
-
-    # sensor = SENSOR()
-    # interpreter = INTERPRETER()
-
-    controller = ACTUATOR()
+    controller = ArmController()
     display = ImageVisualizer()
 
     # Instances of Buses
