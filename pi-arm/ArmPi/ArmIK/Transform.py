@@ -43,9 +43,10 @@ def world2pixel(l, size):
 
     return l_
 
-# Get the roi area of the detected object
-# Pass in the values of the four vertices returned by cv2.boxPoints(rect), and return the extreme points
+
 def getROI(box):
+    """ Get the roi area of the detected object. Pass in the values of the four vertices returned
+    by cv2.boxPoints(rect), and return the extreme points"""
     x_min = min(box[0, 0], box[1, 0], box[2, 0], box[3, 0])
     x_max = max(box[0, 0], box[1, 0], box[2, 0], box[3, 0])
     y_min = min(box[0, 1], box[1, 1], box[2, 1], box[3, 1])

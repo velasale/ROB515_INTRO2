@@ -73,7 +73,6 @@ class ArmSensing():
         if image is not None:
             self.img = image.copy()
             self.cross_hair()
-            ch_ima = self.img.copy()
             frame_lab = self.filter()
 
             vision = [frame_lab, self.img, ch_ima ]
@@ -91,7 +90,6 @@ class ArmSensing():
         frame_resize = cv2.resize(self.img, self.task.size, interpolation=cv2.INTER_NEAREST)
         frame_gb = cv2.GaussianBlur(frame_resize, (11, 11), 11)
 
-        # TODO (line 346) of ColorTracking.py
         if self.task.get_roi and self.task.start_pick_up:
             self.task.get_roi = False
             frame_gb = getMaskROI(frame_gb, self.task.roi, self.task.size)
@@ -247,7 +245,7 @@ def main():
 
     my_camera = Camera.Camera()
     my_camera.camera_open()
-    time.sleep(2)
+    time.sleep(0.5)
     print('Camera Open')
 
     # --- PART 1 ---
