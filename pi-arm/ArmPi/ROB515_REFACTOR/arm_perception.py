@@ -76,7 +76,7 @@ class ArmSensing():
             # cv2.destroyAllWindows()
 
             self.cross_hair()
-            # cv2.imshow('Frame', self.img)
+            cv2.imshow('image', self.img)
             # key = cv2.waitKey(1)
             # time.sleep(1)
 
@@ -245,6 +245,7 @@ def main():
     area and labels it on the video display from the camera."""
 
     cv2.destroyAllWindows()
+    cv2.namedWindow('image')
 
     task = ArmTask()
     my_camera = Camera.Camera()
