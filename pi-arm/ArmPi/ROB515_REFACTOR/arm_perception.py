@@ -65,7 +65,7 @@ class ArmSensing():
         self.my_camera = my_camera
 
     def sense_function(self):
-        print('Camera Sensing...')
+        print('Thread: Camera Sensing...')
         image = self.my_camera.frame
         # image = np.ones((640,480,3))
         vision = [image, image]
@@ -111,7 +111,7 @@ class ArmInterpreter():
 
 
     def function(self, vision):
-        print('Camera Interpreting...')
+        print('Thread: Camera Interpreting...')
 
         frame_lab = vision[0]
         img = vision[1]
@@ -188,7 +188,7 @@ class ImageVisualizer():
         ...
 
     def function(self, image):
-        print("Displaying image")
+        print("Thread: Displaying image")
         cv2.imshow('Frame', image[2])
         cv2.waitKey(1)
         # cv2.destroyAllWindows()
