@@ -72,22 +72,10 @@ class ArmSensing():
 
         if image is not None:
             self.img = image.copy()
-
-
             self.cross_hair()
-            # cv2.imshow('image', self.img)
-            #
-            # cv2.waitKey(10)
-            # cv2.destroyAllWindows()
-            # key = cv2.waitKey(1)
-            # time.sleep(1)
-
             frame_lab = self.filter()
-            # cv2.imshow('Frame', frame_lab)
-
             vision = [frame_lab, self.img]
-
-
+            cv2.imshow('Frame', frame_lab)
 
         return vision
 
@@ -197,6 +185,19 @@ class ArmController():
 
     def __init__(self):
         ...
+
+
+class ImageVisualizer():
+
+    def __init__(self):
+        ...
+
+    def function(self, image):
+        cv2.imshow('Frame', Frame)
+        key = cv2.waitKey(1)
+        if key == 27:
+            break
+
 
 class ArmTask():
 
