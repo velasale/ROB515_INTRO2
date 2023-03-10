@@ -321,6 +321,7 @@ def main():
     rr.runConcurrently(producer_consumer_list)
 
     while True:
+        print('something')
         cv2.imshow('Frame', bSensor.message[0])
         key = cv2.waitKey(1000)
         if key == 27:
