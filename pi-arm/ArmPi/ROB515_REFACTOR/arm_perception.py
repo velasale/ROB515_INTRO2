@@ -114,8 +114,34 @@ class ArmInterpreter():
                             (min(self.box[0, 0], self.box[2, 0]), self.box[2, 1] - 10),
                             cv2.FONT_HERSHEY_SIMPLEX, 0.5, self.task.range_rgb[detect_color], 1)  # draw center point
 
-        whatever = 5
-        return whatever
+                # Compare the last coordinates to determine whether to move
+                distance = math.sqrt(pow(world_x - last_x, 2) + pow(world_y - last_y, 2))
+                last_x, last_y = world_x, world_y
+                track = True
+                # print(count,distance)
+                # Cumulative judgement
+                if action_finish:
+                    if distance < 0.3:
+                        center_list.extend((world_x, world_y))
+                        count += 1
+                        if start_count_t1:
+                            start_count_t1 = False
+                            t1 = time.time()
+                        if time.time() - t1 > 1.5:
+                            rotation_angle = rect[2]
+                            start_count_t1 = True
+                            world_X, world_Y = np.mean(np.array(center_list).reshape(count, 2), axis=0)
+                            count = 0
+                            center_list = []
+                            start_pick_up = True
+                    else:
+                        t1 = time.time()
+                        start_count_t1 = True
+                        count = 0
+                        center_list = []
+
+        vision = [self.img.copy(), 5]
+        return vision
 
 
     def filter(self, frame_gb):
@@ -156,7 +182,7 @@ class ArmController():
         ...
 
     def function(self, msg):
-        print("Thread: Arm Controller:", msg * 5)
+        print("Thread: Arm Controller:", msg[1] * 5)
 
 
 
@@ -267,7 +293,7 @@ def main():
 
     wDisplay = rr.Consumer(
         display.function,
-        bSensor,
+        bInterpreter,
         0.005,
         bTerminate,
         "Display Image")
