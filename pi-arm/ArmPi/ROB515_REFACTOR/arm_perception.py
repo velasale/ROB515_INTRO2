@@ -75,6 +75,8 @@ class ArmSensing():
             self.cross_hair()
             frame_lab = self.filter()
 
+            ch_ima = self.img.copy()
+
             vision = [frame_lab, self.img, ch_ima ]
 
         return vision
