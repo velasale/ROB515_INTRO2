@@ -242,16 +242,12 @@ def main():
     """Perception Assignment 1: Set up a simple program that uses this class to identify the location of a block in the pickup
     area and labels it on the video display from the camera."""
 
-    cv2.destroyAllWindows()
-    cv2.namedWindow('image')
-
     task = ArmTask()
+
     my_camera = Camera.Camera()
     my_camera.camera_open()
     time.sleep(2)
     print('Camera Open')
-
-    # my_camera = None
 
     # --- PART 1 ---
     # Instances of Sensor, interpreter and controller
@@ -304,7 +300,7 @@ def main():
     wDisplay = rr.Consumer(
         display.function,
         bSensor,
-        0.1,
+        2,
         bTerminate,
         "Display Image")
 
