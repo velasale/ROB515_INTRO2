@@ -245,7 +245,7 @@ def main():
 
     my_camera = Camera.Camera()
     my_camera.camera_open()
-    time.sleep(0.5)
+    time.sleep(1)
     print('Camera Open')
 
     # --- PART 1 ---
