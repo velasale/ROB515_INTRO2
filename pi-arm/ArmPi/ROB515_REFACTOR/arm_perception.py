@@ -190,8 +190,8 @@ class ImageVisualizer():
     def function(self, image):
         print("Displaying image")
         cv2.imshow('Frame', image[2])
-        cv2.waitKey(30)
-        cv2.destroyAllWindows()
+        cv2.waitKey(1)
+        # cv2.destroyAllWindows()
 
 
 class ArmTask():
