@@ -137,7 +137,6 @@ class ArmInterpreter():
                 self.rect = cv2.minAreaRect(self.areaMaxContour)
                 self.box = np.int0(cv2.boxPoints(self.rect))
 
-                # TODO
                 self.task.roi = getROI(self.box)
                 self.task.get_roi = True
 
@@ -190,7 +189,7 @@ class ImageVisualizer():
 
     def function(self, image):
         print("Displaying image")
-        cv2.imshow('Frame', image[2])
+        cv2.imshow('Frame', image[0])
         cv2.waitKey(0)
         cv2.destroyAllWindows()
 
