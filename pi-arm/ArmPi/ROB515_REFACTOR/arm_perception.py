@@ -32,7 +32,6 @@ class ArmSensing():
     def __init__(self, task, my_camera):
         self.task = task
         self.my_camera = my_camera
-        self.img = None
 
     def sense_function(self):
         print('Thread: Camera Sensing...')
@@ -41,18 +40,17 @@ class ArmSensing():
         vision = [image.copy(), image.copy()]
 
         if image is not None:
-            self.img = image.copy()
-            frame_gb = self.cross_hair()
-            vision = [frame_gb, self.img]
+            self.task.img = image.copy()
+            self.task.frame_gb = self.cross_hair()
 
-        return vision
+        return self.task
     def cross_hair(self):
         """Applies CrossHair to image """
-        img_h, img_w = self.img.shape[:2]
-        cv2.line(self.img, (0, int(img_h / 2)), (img_w, int(img_h / 2)), (0, 0, 200), 1)
-        cv2.line(self.img, (int(img_w / 2), 0), (int(img_w / 2), img_h), (0, 0, 200), 1)
+        img_h, img_w = self.task.img.shape[:2]
+        cv2.line(self.task.img, (0, int(img_h / 2)), (img_w, int(img_h / 2)), (0, 0, 200), 1)
+        cv2.line(self.task.img, (int(img_w / 2), 0), (int(img_w / 2), img_h), (0, 0, 200), 1)
 
-        frame_resize = cv2.resize(self.img, self.task.size, interpolation=cv2.INTER_NEAREST)
+        frame_resize = cv2.resize(self.task.img, self.task.size, interpolation=cv2.INTER_NEAREST)
         frame_gb = cv2.GaussianBlur(frame_resize, (11, 11), 11)
 
         return frame_gb
@@ -67,16 +65,15 @@ class ArmInterpreter():
         self.area_max = 0
         self.areaMaxContour = 0
         self.rect = None
-        self.img = None
+        self.box = None
 
 
-    def function(self, vision):
+    def function(self, msg):
         print('Thread: Camera Interpreting...')
 
-        frame_gb = vision[0]
-        self.img = vision[1]
+        self.task = msg
 
-        frame_lab = self.filter(frame_gb)
+        frame_lab = self.filter(self.task.frame_gb)
 
         self.area_max = 0
         self.areaMaxContour = 0
@@ -109,8 +106,8 @@ class ArmInterpreter():
                 self.task.world_x, self.task.world_y = convertCoordinate(img_centerx, img_centery, self.task.size)
 
                 # Draw Contours
-                cv2.drawContours(self.img, [self.box], -1, self.task.range_rgb[detect_color], 2)
-                cv2.putText(self.img, '(' + str(self.task.world_x) + ',' + str(self.task.world_y) + ')',
+                cv2.drawContours(self.task.img, [self.box], -1, self.task.range_rgb[detect_color], 2)
+                cv2.putText(self.task.img, '(' + str(self.task.world_x) + ',' + str(self.task.world_y) + ')',
                             (min(self.box[0, 0], self.box[2, 0]), self.box[2, 1] - 10),
                             cv2.FONT_HERSHEY_SIMPLEX, 0.5, self.task.range_rgb[detect_color], 1)  # draw center point
 
@@ -141,8 +138,7 @@ class ArmInterpreter():
                 #         self.task.count = 0
                 #         self.task.center_list = []
 
-        vision = [self.img.copy(), 6]
-        return vision
+        return self.task
 
 
     def filter(self, frame_gb):
@@ -175,7 +171,7 @@ class ArmInterpreter():
         return area_max_contour, contour_area_max  # returns largest contour
 
 
-class ArmController(ArmTask):
+class ArmController():
     """Given the x,y location of an object, the controller takes the object into
     the respective color bin"""
 
@@ -189,8 +185,10 @@ class ArmController(ArmTask):
             'blue': (-15 + 0.5, 0 - 0.5, 1.5),
         }
 
-
     def function(self, msg):
+        print("Thread: Arm Controller:", msg.count * 5)
+
+    def function_in_progress(self, msg):
         self.task = msg
 
         # When an object is first detected
@@ -209,9 +207,9 @@ class ArmController(ArmTask):
             time.sleep(result[2]/1000)
             self.task.start_pic_up = False
             self.task.first_move = False
-            self.task.action_
+            self.task.action_finish = True
 
-        print("Thread: Arm Controller:", msg[1] * 5)
+
 
     def set_rgb(self,color):
         """Set the rgb light color of the expansion board to match the color to be tracked"""
@@ -234,16 +232,14 @@ class ArmController(ArmTask):
 
 
 
-
-
 class ImageVisualizer():
 
     def __init__(self):
         ...
 
-    def function(self, image):
+    def function(self, msg):
         print("Thread: Displaying image")
-        cv2.imshow('Frame', image[0])
+        cv2.imshow('Frame', msg.img)
         cv2.waitKey(1)
 
 
@@ -262,6 +258,8 @@ class ArmTask():
         self.start_count_t1 = True
         self.t1 = 0
         self.center_list = []
+        self.img = None
+        self.frame_gb = None
 
         # General Variables
         self.__isRunning = False
