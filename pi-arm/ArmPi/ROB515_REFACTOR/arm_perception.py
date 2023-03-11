@@ -27,7 +27,7 @@ if sys.version_info.major == 2:
 
 class ArmSensing():
     """ This class and its methods return the image sensed by the camera
-    and its respective filterings"""
+    resized and with a crosshair"""
 
     def __init__(self, task, my_camera):
         self.task = task
@@ -118,25 +118,25 @@ class ArmInterpreter():
 
                 # print(count,distance)
                 # Cumulative judgement
-                # if self.task.action_finish:
-                #     if distance < 0.3:
-                #         self.task.center_list.extend((self.task.world_x, self.task.world_y))
-                #         self.task.count += 1
-                #         if self.task.start_count_t1:
-                #             self.task.start_count_t1 = False
-                #             self.task.t1 = time.time()
-                #         if time.time() - self.task.t1 > 1.5:
-                #             self.task.rotation_angle = self.rect[2]
-                #             self.task.start_count_t1 = True
-                #             self.task.world_X, self.task.world_Y = np.mean(np.array(self.task.center_list).reshape(self.task.count, 2), axis=0)
-                #             self.task.count = 0
-                #             self.task.center_list = []
-                #             self.task.start_pick_up = True
-                #     else:
-                #         self.task.t1 = time.time()
-                #         self.task.start_count_t1 = True
-                #         self.task.count = 0
-                #         self.task.center_list = []
+                if self.task.action_finish:
+                    if distance < 0.3:
+                        self.task.center_list.extend((self.task.world_x, self.task.world_y))
+                        self.task.count += 1
+                        if self.task.start_count_t1:
+                            self.task.start_count_t1 = False
+                            self.task.t1 = time.time()
+                        if time.time() - self.task.t1 > 1.5:
+                            self.task.rotation_angle = self.rect[2]
+                            self.task.start_count_t1 = True
+                            self.task.world_X, self.task.world_Y = np.mean(np.array(self.task.center_list).reshape(self.task.count, 2), axis=0)
+                            self.task.count = 0
+                            self.task.center_list = []
+                            self.task.start_pick_up = True
+                    else:
+                        self.task.t1 = time.time()
+                        self.task.start_count_t1 = True
+                        self.task.count = 0
+                        self.task.center_list = []
 
         return self.task
 
@@ -201,13 +201,28 @@ class ArmController():
             if result == False:
                 self.task.unreachable = True
             else:
-                unreachable = False
+                self.task.unreachable = False
 
             # The third time of the return is time
             time.sleep(result[2]/1000)
-            self.task.start_pic_up = False
+            self.task.start_pick_up = False
             self.task.first_move = False
             self.task.action_finish = True
+
+        # Object not detected for the first time
+        elif not self.task.first_move and not self.task.unreachable:
+            self.set_rgb(self.task.detect_color)
+
+            # If tracking phase
+            if self.task.track:
+                # Stop and exit flag detection
+                AK.setPitchRangeMoving((self.task.world_x, self.task.world_y - 2, 5), -90, -90, 0, 20)
+                time.sleep(0.02)
+                self.task.track = False
+
+            # If object hasnt moved for a while
+            if self.task.start_pick_up
+
 
 
 
