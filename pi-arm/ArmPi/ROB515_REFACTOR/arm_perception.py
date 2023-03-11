@@ -185,10 +185,10 @@ class ArmController():
             'blue': (-15 + 0.5, 0 - 0.5, 1.5),
         }
 
-    def function(self, msg):
+    def function_b(self, msg):
         print("Thread: Arm Controller:", msg.count * 5)
 
-    def function_in_progress(self, msg):
+    def function(self, msg):
         self.task = msg
 
         # When an object is first detected
