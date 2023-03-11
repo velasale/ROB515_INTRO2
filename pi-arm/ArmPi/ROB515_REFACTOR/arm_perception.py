@@ -121,25 +121,25 @@ class ArmInterpreter():
 
                 # print(count,distance)
                 # Cumulative judgement
-                if self.task.action_finish:
-                    if distance < 0.3:
-                        self.task.center_list.extend((self.task.world_x, self.task.world_y))
-                        self.task.count += 1
-                        if self.task.start_count_t1:
-                            self.task.start_count_t1 = False
-                            self.task.t1 = time.time()
-                        if time.time() - self.task.t1 > 1.5:
-                            self.task.rotation_angle = self.rect[2]
-                            self.task.start_count_t1 = True
-                            self.task.world_X, self.task.world_Y = np.mean(np.array(self.task.center_list).reshape(self.task.count, 2), axis=0)
-                            self.task.count = 0
-                            self.task.center_list = []
-                            self.task.start_pick_up = True
-                    else:
-                        self.task.t1 = time.time()
-                        self.task.start_count_t1 = True
-                        self.task.count = 0
-                        self.task.center_list = []
+                # if self.task.action_finish:
+                #     if distance < 0.3:
+                #         self.task.center_list.extend((self.task.world_x, self.task.world_y))
+                #         self.task.count += 1
+                #         if self.task.start_count_t1:
+                #             self.task.start_count_t1 = False
+                #             self.task.t1 = time.time()
+                #         if time.time() - self.task.t1 > 1.5:
+                #             self.task.rotation_angle = self.rect[2]
+                #             self.task.start_count_t1 = True
+                #             self.task.world_X, self.task.world_Y = np.mean(np.array(self.task.center_list).reshape(self.task.count, 2), axis=0)
+                #             self.task.count = 0
+                #             self.task.center_list = []
+                #             self.task.start_pick_up = True
+                #     else:
+                #         self.task.t1 = time.time()
+                #         self.task.start_count_t1 = True
+                #         self.task.count = 0
+                #         self.task.center_list = []
 
         vision = [self.img.copy(), 6]
         return vision
@@ -182,6 +182,14 @@ class ArmController():
     def __init__(self, task):
         self.task = task
 
+        # Placement coordinates of wooden blocks of different colors (x,y,z)
+        self.coordinate = {
+            'red': (-15 + 0.5, 12 - 0.5, 1.5),
+            'green': (-15 + 0.5, 6 - 0.5, 1.5),
+            'blue': (-15 + 0.5, 0 - 0.5, 1.5),
+        }
+
+
     def function(self, msg):
         print("Thread: Arm Controller:", msg[1] * 5)
 
@@ -205,6 +213,7 @@ class ArmTask():
         self.track = False
         self.roi = ()
         self.get_roi = False
+        self.unreachable = False
         self.first_move = True
         self.detect_color = 'None'
         self.action_finish = True
