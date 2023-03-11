@@ -221,7 +221,7 @@ class ArmController():
                 self.task.track = False
 
             # If object hasnt moved for a while
-            if self.task.start_pick_up
+            # if self.task.start_pick_up
 
 
 
