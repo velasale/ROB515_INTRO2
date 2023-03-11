@@ -221,7 +221,11 @@ class ArmController():
                 self.task.track = False
 
             # If object hasnt moved for a while
-            # if self.task.start_pick_up
+            if self.task.start_pick_up:
+                self.task.action_finish = False
+
+                Board.setBusServoPulse(1, servo1 - 280, 500) # Paws Open
+
 
 
 
