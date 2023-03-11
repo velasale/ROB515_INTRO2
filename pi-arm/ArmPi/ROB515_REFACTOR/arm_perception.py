@@ -119,7 +119,7 @@ class ArmInterpreter():
                 # print(count,distance)
                 # Cumulative judgement
                 if self.task.action_finish:
-                    if distance < 0.01:     # originally 0.3
+                    if distance < 0.2:     # originally 0.3
                         self.task.center_list.extend((self.task.world_x, self.task.world_y))
                         self.task.count += 1
                         if self.task.start_count_t1:
