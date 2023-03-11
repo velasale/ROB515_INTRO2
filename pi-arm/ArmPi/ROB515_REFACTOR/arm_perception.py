@@ -357,7 +357,7 @@ def main():
     wController = rr.Consumer(
         controller.function,
         bInterpreter,
-        1,
+        5,
         bTerminate,
         "Controlling Arm")
 
