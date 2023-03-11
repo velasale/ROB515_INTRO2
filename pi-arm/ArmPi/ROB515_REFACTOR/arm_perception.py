@@ -175,7 +175,7 @@ class ArmInterpreter():
         return area_max_contour, contour_area_max  # returns largest contour
 
 
-class ArmController():
+class ArmController(ArmTask):
     """Given the x,y location of an object, the controller takes the object into
     the respective color bin"""
 
@@ -191,7 +191,48 @@ class ArmController():
 
 
     def function(self, msg):
+        self.task = msg
+
+        # When an object is first detected
+        if self.task.first_move and self.task.start_pick_up:
+            self.task.action_finish = False
+            self.set_rgb(self.task.detect_color)
+
+            # Do not fill the running time parameter, adaptive running time
+            result = AK.setPitchRangeMoving((self.task.world_X, self.task.world_Y - 2, 5), -90, -90, 0)
+            if result == False:
+                self.task.unreachable = True
+            else:
+                unreachable = False
+
+            # The third time of the return is time
+            time.sleep(result[2]/1000)
+            self.task.start_pic_up = False
+            self.task.first_move = False
+            self.task.action_
+
         print("Thread: Arm Controller:", msg[1] * 5)
+
+    def set_rgb(self,color):
+        """Set the rgb light color of the expansion board to match the color to be tracked"""
+        if color == "red":
+            Board.RGB.setPixelColor(0, Board.PixelColor(255, 0, 0))
+            Board.RGB.setPixelColor(1, Board.PixelColor(255, 0, 0))
+            Board.RGB.show()
+        elif color == "green":
+            Board.RGB.setPixelColor(0, Board.PixelColor(0, 255, 0))
+            Board.RGB.setPixelColor(1, Board.PixelColor(0, 255, 0))
+            Board.RGB.show()
+        elif color == "blue":
+            Board.RGB.setPixelColor(0, Board.PixelColor(0, 0, 255))
+            Board.RGB.setPixelColor(1, Board.PixelColor(0, 0, 255))
+            Board.RGB.show()
+        else:
+            Board.RGB.setPixelColor(0, Board.PixelColor(0, 0, 0))
+            Board.RGB.setPixelColor(1, Board.PixelColor(0, 0, 0))
+            Board.RGB.show()
+
+
 
 
 
