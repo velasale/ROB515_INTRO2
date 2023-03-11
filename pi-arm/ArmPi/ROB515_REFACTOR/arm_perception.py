@@ -118,6 +118,7 @@ class ArmInterpreter():
                 distance = math.sqrt(pow(self.task.world_x - self.task.last_x, 2) + pow(self.task.world_y - self.task.last_y, 2))
                 self.task.last_x, self.task.last_y = self.task.world_x, self.task.world_y
                 self.task.track = True
+
                 # print(count,distance)
                 # Cumulative judgement
                 if self.task.action_finish:
@@ -273,7 +274,7 @@ def main():
     wSensor = rr.Producer(
         sensor.sense_function,
         bSensor,
-        0.005,
+        0.01,
         bTerminate,
         "Read Camera Sensor")
 
@@ -281,7 +282,7 @@ def main():
         interpreter.function,
         bSensor,
         bInterpreter,
-        0.005,
+        0.01,
         bTerminate,
         "Interpret Camera")
 
@@ -295,7 +296,7 @@ def main():
     wDisplay = rr.Consumer(
         display.function,
         bInterpreter,
-        0.005,
+        0.01,
         bTerminate,
         "Display Image")
 
