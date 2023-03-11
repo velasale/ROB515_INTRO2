@@ -210,28 +210,34 @@ class ArmController():
             self.task.first_move = False
             self.task.action_finish = True
 
-        # Object not detected for the first time
-        elif not self.task.first_move and not self.task.unreachable:
-            self.set_rgb(self.task.detect_color)
+        # # Object not detected for the first time
+        # elif not self.task.first_move and not self.task.unreachable:
+        #     self.set_rgb(self.task.detect_color)
+        #
+        #     # If tracking phase
+        #     if self.task.track:
+        #         # Stop and exit flag detection
+        #         AK.setPitchRangeMoving((self.task.world_x, self.task.world_y - 2, 5), -90, -90, 0, 20)
+        #         time.sleep(0.02)
+        #         self.task.track = False
+        #
+        #     # If object hasnt moved for a while
+        #     if self.task.start_pick_up:
+        #         self.task.action_finish = False
+        #
+        #         # step 1: Open paws
+        #         Board.setBusServoPulse(1, servo1 - 280, 500)
+        #
+        #         # step 2: Rotate paws
+        #         servo2_angle = getAngle(world_X, world_Y, rotation_angle)
+        #         Board.setBusServoPulse(2, servo2_angle, 500)
+        #         time.sleep(0.8)
+        #
+        #         # Step 3: Lower Altitude
+        #         AK.setPitchRangeMoving((world_X, world_Y, 2), -90, -90, 0, 1000)  # lower the altitude
+        #         time.sleep(2)
 
-            # If tracking phase
-            if self.task.track:
-                # Stop and exit flag detection
-                AK.setPitchRangeMoving((self.task.world_x, self.task.world_y - 2, 5), -90, -90, 0, 20)
-                time.sleep(0.02)
-                self.task.track = False
 
-            # If object hasnt moved for a while
-            if self.task.start_pick_up:
-                self.task.action_finish = False
-
-                # step 1: Open paws
-                Board.setBusServoPulse(1, servo1 - 280, 500)
-
-                # step 2: Rotate paws
-                servo2_angle = getAngle(world_X, world_Y, rotation_angle)
-                Board.setBusServoPulse(2, servo2_angle, 500)
-                time.sleep(0.8)
 
 
     def set_rgb(self,color):
