@@ -117,26 +117,26 @@ class ArmInterpreter():
                 self.task.track = True
 
                 # print(count,distance)
-                # # Cumulative judgement
-                # if self.task.action_finish:
-                #     if distance < 0.3:
-                #         self.task.center_list.extend((self.task.world_x, self.task.world_y))
-                #         self.task.count += 1
-                #         if self.task.start_count_t1:
-                #             self.task.start_count_t1 = False
-                #             self.task.t1 = time.time()
-                #         if time.time() - self.task.t1 > 1.5:
-                #             self.task.rotation_angle = self.rect[2]
-                #             self.task.start_count_t1 = True
-                #             self.task.world_X, self.task.world_Y = np.mean(np.array(self.task.center_list).reshape(self.task.count, 2), axis=0)
-                #             self.task.count = 0
-                #             self.task.center_list = []
-                #             self.task.start_pick_up = True
-                #     else:
-                #         self.task.t1 = time.time()
-                #         self.task.start_count_t1 = True
-                #         self.task.count = 0
-                #         self.task.center_list = []
+                # Cumulative judgement
+                if self.task.action_finish:
+                    if distance < 0.01:     # originally 0.3
+                        self.task.center_list.extend((self.task.world_x, self.task.world_y))
+                        self.task.count += 1
+                        if self.task.start_count_t1:
+                            self.task.start_count_t1 = False
+                            self.task.t1 = time.time()
+                        if time.time() - self.task.t1 > 1.5:
+                            self.task.rotation_angle = self.rect[2]
+                            self.task.start_count_t1 = True
+                            self.task.world_X, self.task.world_Y = np.mean(np.array(self.task.center_list).reshape(self.task.count, 2), axis=0)
+                            self.task.count = 0
+                            self.task.center_list = []
+                            self.task.start_pick_up = True
+                    else:
+                        self.task.t1 = time.time()
+                        self.task.start_count_t1 = True
+                        self.task.count = 0
+                        self.task.center_list = []
 
         return self.task
 
