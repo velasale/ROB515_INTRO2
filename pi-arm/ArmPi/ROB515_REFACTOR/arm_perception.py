@@ -234,9 +234,6 @@ class ArmController():
                 time.sleep(0.8)
 
 
-
-
-
     def set_rgb(self,color):
         """Set the rgb light color of the expansion board to match the color to be tracked"""
         if color == "red":
@@ -363,7 +360,7 @@ def main():
     wController = rr.Consumer(
         controller.function,
         bInterpreter,
-        5,
+        10,
         bTerminate,
         "Controlling Arm")
 
