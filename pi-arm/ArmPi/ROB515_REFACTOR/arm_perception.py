@@ -140,7 +140,7 @@ class ArmInterpreter():
                         self.task.count = 0
                         self.task.center_list = []
 
-        vision = [self.img.copy(), 5]
+        vision = [self.img.copy(), 6]
         return vision
 
 
