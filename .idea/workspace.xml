@@ -57,13 +57,6 @@
       <option name="presentableId" value="Default" />
       <updated>1677792190542</updated>
     </task>
-    <task id="LOCAL-00117" summary="Perception Refactoring">
-      <created>1678408712346</created>
-      <option name="number" value="00117" />
-      <option name="presentableId" value="LOCAL-00117" />
-      <option name="project" value="LOCAL" />
-      <updated>1678408712346</updated>
-    </task>
     <task id="LOCAL-00118" summary="Perception Refactoring">
       <created>1678409149515</created>
       <option name="number" value="00118" />
@@ -400,7 +393,14 @@
       <option name="project" value="LOCAL" />
       <updated>1678566881135</updated>
     </task>
-    <option name="localTasksCounter" value="166" />
+    <task id="LOCAL-00166" summary="Perception Refactoring">
+      <created>1678567182945</created>
+      <option name="number" value="00166" />
+      <option name="presentableId" value="LOCAL-00166" />
+      <option name="project" value="LOCAL" />
+      <updated>1678567182945</updated>
+    </task>
+    <option name="localTasksCounter" value="167" />
     <servers />
   </component>
   <component name="VcsManagerConfiguration">
