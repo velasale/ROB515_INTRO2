@@ -189,6 +189,7 @@ class ArmController():
         print("Thread: Arm Controller:", msg.count * 5)
 
     def function(self, msg):
+        print("\nThread: Arm Controller:")
         self.task = msg
 
         # When an object is first detected
