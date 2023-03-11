@@ -225,7 +225,13 @@ class ArmController():
             if self.task.start_pick_up:
                 self.task.action_finish = False
 
-                Board.setBusServoPulse(1, servo1 - 280, 500) # Paws Open
+                # step 1: Open paws
+                Board.setBusServoPulse(1, servo1 - 280, 500)
+
+                # step 2: Rotate paws
+                servo2_angle = getAngle(world_X, world_Y, rotation_angle)
+                Board.setBusServoPulse(2, servo2_angle, 500)
+                time.sleep(0.8)
 
 
 
