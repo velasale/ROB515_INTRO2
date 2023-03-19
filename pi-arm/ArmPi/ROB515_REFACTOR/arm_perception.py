@@ -390,7 +390,6 @@ def main():
     wController = rr.Producer(
         controller.function,
         bInterpreter,
-        bController,
         1,
         bTerminate,
         "Controlling Arm")
