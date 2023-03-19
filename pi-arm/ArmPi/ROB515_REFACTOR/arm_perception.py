@@ -92,7 +92,7 @@ class ArmInterpreter():
 
                 # Decide to move if object is steady within a distance and after a period of time
                 distance_threshold = 0.3
-                time_threshold = 1.5
+                time_threshold = 4
                 self.decideToMove(distance_threshold, time_threshold)
 
         return self.task
