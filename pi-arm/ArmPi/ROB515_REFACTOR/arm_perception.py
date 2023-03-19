@@ -326,6 +326,7 @@ def main():
 
     task = ArmTask()
 
+    # Initiate Camera Object
     my_camera = Camera.Camera()
     my_camera.camera_open()
     time.sleep(1)
@@ -391,8 +392,9 @@ def main():
     # Concurrent Execution
     producer_consumer_list = [wSensor,
                               wInterpreter,
-                              wDisplay,
-                              wController]
+                              wController,
+                              wDisplay
+                              ]
 
     # Execute the list of produces-consumers concurrently
     print('running concurrent\n\n')
