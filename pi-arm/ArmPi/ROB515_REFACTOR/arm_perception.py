@@ -34,7 +34,9 @@ class ArmSensing():
         self.task = task
         self.my_camera = my_camera
 
-    def function(self):
+    def function(self, msg):
+        self.task = msg
+
         print('Thread: Camera Sensing...')
         image = self.my_camera.frame
         # image = np.ones((640, 480, 3))
@@ -361,9 +363,9 @@ def main():
 
     # Instances of Buses
     print('Instances of buses')
-    bSensor = rr.Bus(sensor.function(), "Camera Sensor Bus")
+    bSensor = rr.Bus(sensor.function(bController.message), "Camera Sensor Bus")
     bInterpreter = rr.Bus(interpreter.function(bSensor.message), "Interpreter Sensor Bus")
-    # bController = rr.Bus(controller.function(bInterpreter.message), "Controller Sensor Bus")
+    bController = rr.Bus(controller.function(bInterpreter.message), "Controller Sensor Bus")
     bTerminate = rr.Bus(0, "Termination Bus")
 
 
@@ -371,8 +373,9 @@ def main():
     print('Wrapping functions')
     # Wrap Sensor, Interpreter and Controller function into RossROS objectsz
 
-    wSensor = rr.Producer(
+    wSensor = rr.ConsumerProducer(
         sensor.function,
+        bController,
         bSensor,
         0.01,
         bTerminate,
@@ -386,9 +389,10 @@ def main():
         bTerminate,
         "Interpret Camera")
 
-    wController = rr.Consumer(
+    wController = rr.ConsumerProducer(
         controller.function,
         bInterpreter,
+        bController,
         1,
         bTerminate,
         "Controlling Arm")
