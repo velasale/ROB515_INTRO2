@@ -85,7 +85,7 @@ class ArmInterpreter():
 
             if self.area_max > 2500:
 
-                # Place rectangle and label around contour
+                # Place label and rectangle around contour
                 self.labelContour()
 
                 self.task.track = True
@@ -212,21 +212,8 @@ class ArmController():
 
         # When an object is first detected
         if self.task.first_move and self.task.start_pick_up:
-            self.task.action_finish = False
-            self.set_rgb(self.task.detect_color)
-
-            # Do not fill the running time parameter, adaptive running time
-            result = AK.setPitchRangeMoving((self.task.world_X, self.task.world_Y - 2, 5), -90, -90, 0)
-            if result == False:
-                self.task.unreachable = True
-            else:
-                self.task.unreachable = False
-
-            # The third time of the return is time
-            time.sleep(result[2]/1000)
-            self.task.start_pick_up = False
-            self.task.first_move = False
-            self.task.action_finish = True
+            # Make initial move to bring arm close to object
+            self.initialMove()
 
         # # Object not detected for the first time
         # elif not self.task.first_move and not self.task.unreachable:
@@ -256,6 +243,23 @@ class ArmController():
         #         time.sleep(2)
 
 
+    def initialMove(self):
+
+        self.task.action_finish = False
+        self.set_rgb(self.task.detect_color)
+
+        # Do not fill the running time parameter, adaptive running time
+        result = AK.setPitchRangeMoving((self.task.world_X, self.task.world_Y - 2, 5), -90, -90, 0)
+        if result == False:
+            self.task.unreachable = True
+        else:
+            self.task.unreachable = False
+
+        # The third time of the return is time
+        time.sleep(result[2] / 1000)
+        self.task.start_pick_up = False
+        self.task.first_move = False
+        self.task.action_finish = True
 
 
     def set_rgb(self,color):
@@ -276,7 +280,6 @@ class ArmController():
             Board.RGB.setPixelColor(0, Board.PixelColor(0, 0, 0))
             Board.RGB.setPixelColor(1, Board.PixelColor(0, 0, 0))
             Board.RGB.show()
-
 
 
 class ImageVisualizer():
