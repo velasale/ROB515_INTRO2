@@ -413,7 +413,7 @@ def main():
     # Concurrent Execution
     producer_consumer_list = [wSensor,
                               wInterpreter,
-                              # wController,
+                              wController,
                               wDisplay
                               ]
 
