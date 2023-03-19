@@ -387,7 +387,7 @@ def main():
         bTerminate,
         "Interpret Camera")
 
-    wController = rr.ConsumerProducer(
+    wController = rr.Producer(
         controller.function,
         bInterpreter,
         bController,
