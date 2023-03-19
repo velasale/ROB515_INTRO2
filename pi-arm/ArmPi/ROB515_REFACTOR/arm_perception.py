@@ -101,7 +101,7 @@ class ArmInterpreter():
                 cv2.drawContours(self.task.img, [self.box], -1, self.task.range_rgb[self.detect_color], 2)
                 cv2.putText(self.task.img, '(' + str(self.task.world_x) + ',' + str(self.task.world_y) + ')',
                             (min(self.box[0, 0], self.box[2, 0]), self.box[2, 1] - 10),
-                            cv2.FONT_HERSHEY_SIMPLEX, 0.5, self.task.range_rgb[detect_color], 1)  # draw center point
+                            cv2.FONT_HERSHEY_SIMPLEX, 0.5, self.task.range_rgb[self.detect_color], 1)  # draw center point
 
                 # Compare the last coordinates to determine whether to move
                 distance = math.sqrt(pow(self.task.world_x - self.task.last_x, 2) + pow(self.task.world_y - self.task.last_y, 2))
