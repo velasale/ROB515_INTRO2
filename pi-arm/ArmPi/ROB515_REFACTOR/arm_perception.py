@@ -112,9 +112,9 @@ class ArmInterpreter():
                             cv2.FONT_HERSHEY_SIMPLEX, 0.5, self.task.range_rgb[detect_color], 1)  # draw center point
 
                 # Compare the last coordinates to determine whether to move
-                # distance = math.sqrt(pow(self.task.world_x - self.task.last_x, 2) + pow(self.task.world_y - self.task.last_y, 2))
-                # self.task.last_x, self.task.last_y = self.task.world_x, self.task.world_y
-                # self.task.track = True
+                distance = math.sqrt(pow(self.task.world_x - self.task.last_x, 2) + pow(self.task.world_y - self.task.last_y, 2))
+                self.task.last_x, self.task.last_y = self.task.world_x, self.task.world_y
+                self.task.track = True
 
                 # print(count,distance)
                 # Cumulative judgement
