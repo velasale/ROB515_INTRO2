@@ -83,25 +83,10 @@ class ArmInterpreter():
             # Sweep all colors
             self.findContour(frame_lab)
 
-
-
             if self.area_max > 2500:
-                self.rect = cv2.minAreaRect(self.areaMaxContour)
-                self.box = np.int0(cv2.boxPoints(self.rect))
 
-                self.task.roi = getROI(self.box)
-                self.task.get_roi = True
-
-                # Get the coordinates of the center of the block
-                img_centerx, img_centery = getCenter(self.rect, self.task.roi, self.task.size, square_length)
-                # Convert to real world coordinates
-                self.task.world_x, self.task.world_y = convertCoordinate(img_centerx, img_centery, self.task.size)
-
-                # Draw Contours
-                cv2.drawContours(self.task.img, [self.box], -1, self.task.range_rgb[self.detect_color], 2)
-                cv2.putText(self.task.img, '(' + str(self.task.world_x) + ',' + str(self.task.world_y) + ')',
-                            (min(self.box[0, 0], self.box[2, 0]), self.box[2, 1] - 10),
-                            cv2.FONT_HERSHEY_SIMPLEX, 0.5, self.task.range_rgb[self.detect_color], 1)  # draw center point
+                # Place rectangle and label around countour
+                self.labelContour()
 
                 # Compare the last coordinates to determine whether to move
                 distance = math.sqrt(pow(self.task.world_x - self.task.last_x, 2) + pow(self.task.world_y - self.task.last_y, 2))
@@ -179,6 +164,26 @@ class ArmInterpreter():
                 contours = cv2.findContours(closed, cv2.RETR_EXTERNAL, cv2.CHAIN_APPROX_NONE)[-2]
                 # Find the largest contour
                 self.areaMaxContour, self.area_max = self.getAreaMaxContour(contours)
+
+
+    def labelContour(self):
+
+        self.rect = cv2.minAreaRect(self.areaMaxContour)
+        self.box = np.int0(cv2.boxPoints(self.rect))
+
+        self.task.roi = getROI(self.box)
+        self.task.get_roi = True
+
+        # Get the coordinates of the center of the block
+        img_centerx, img_centery = getCenter(self.rect, self.task.roi, self.task.size, square_length)
+        # Convert to real world coordinates
+        self.task.world_x, self.task.world_y = convertCoordinate(img_centerx, img_centery, self.task.size)
+
+        # Draw Contours
+        cv2.drawContours(self.task.img, [self.box], -1, self.task.range_rgb[self.detect_color], 2)
+        cv2.putText(self.task.img, '(' + str(self.task.world_x) + ',' + str(self.task.world_y) + ')',
+                    (min(self.box[0, 0], self.box[2, 0]), self.box[2, 1] - 10),
+                    cv2.FONT_HERSHEY_SIMPLEX, 0.5, self.task.range_rgb[self.detect_color], 1)  # draw center point
 
 
 class ArmController():
