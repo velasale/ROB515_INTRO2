@@ -38,7 +38,7 @@ class ArmSensing():
         print('Thread: Camera Sensing...')
         image = self.my_camera.frame
         image = np.ones((640, 480, 3))
-
+        self.task.frame_gb = image.copy()
 
         if image is not None:
             self.task.img = image.copy()
