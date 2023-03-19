@@ -78,20 +78,11 @@ class ArmInterpreter():
         self.area_max = 0
         self.areaMaxContour = 0
         if not self.task.start_pick_up:
-            for i in color_range:  #color range comes from LABconfig.py
-                if i in self.task.target_color:
-                    detect_color = i
 
-                    # Perform bitwise operations on original image and mask
-                    frame_mask = cv2.inRange(frame_lab, color_range[detect_color][0], color_range[detect_color][1])
-                    # Open Operation
-                    opened = cv2.morphologyEx(frame_mask, cv2.MORPH_OPEN, np.ones((6, 6), np.uint8))
-                    # Close Operation
-                    closed = cv2.morphologyEx(opened, cv2.MORPH_CLOSE, np.ones((6, 6), np.uint8))
-                    # Find the outline
-                    contours = cv2.findContours(closed, cv2.RETR_EXTERNAL, cv2.CHAIN_APPROX_NONE)[-2]
-                    # Find the largest contour
-                    self.areaMaxContour, self.area_max = self.getAreaMaxContour(contours)
+            # Sweep all colors
+            self.findContour(frame_lab)
+
+
 
             if self.area_max > 2500:
                 self.rect = cv2.minAreaRect(self.areaMaxContour)
@@ -169,6 +160,24 @@ class ArmInterpreter():
                     area_max_contour = c
 
         return area_max_contour, contour_area_max  # returns largest contour
+
+
+    def findContour(self, frame_lab):
+
+        for i in color_range:  # color range comes from LABconfig.py
+            if i in self.task.target_color:
+                detect_color = i
+
+                # Perform bitwise operations on original image and mask
+                frame_mask = cv2.inRange(frame_lab, color_range[detect_color][0], color_range[detect_color][1])
+                # Open Operation
+                opened = cv2.morphologyEx(frame_mask, cv2.MORPH_OPEN, np.ones((6, 6), np.uint8))
+                # Close Operation
+                closed = cv2.morphologyEx(opened, cv2.MORPH_CLOSE, np.ones((6, 6), np.uint8))
+                # Find the outline
+                contours = cv2.findContours(closed, cv2.RETR_EXTERNAL, cv2.CHAIN_APPROX_NONE)[-2]
+                # Find the largest contour
+                self.areaMaxContour, self.area_max = self.getAreaMaxContour(contours)
 
 
 class ArmController():
