@@ -362,8 +362,8 @@ def main():
     # Instances of Buses
     print('Instances of buses')
     bSensor = rr.Bus(sensor.function(), "Camera Sensor Bus")
-    bInterpreter = rr.Bus(interpreter.function(), "Interpreter Sensor Bus")
-    bController = rr.Bus(controller.function(), "Controller Sensor Bus")
+    bInterpreter = rr.Bus(interpreter.function(bSensor), "Interpreter Sensor Bus")
+    bController = rr.Bus(controller.function(bInterpreter), "Controller Sensor Bus")
     bTerminate = rr.Bus(0, "Termination Bus")
 
 
@@ -414,7 +414,7 @@ def main():
     # Concurrent Execution
     producer_consumer_list = [wSensor,
                               wInterpreter,
-                              # wController,
+                              wController,
                               wDisplay
                               ]
 
