@@ -203,8 +203,6 @@ class ArmController():
             'blue': (-15 + 0.5, 0 - 0.5, 1.5),
         }
 
-    def function_b(self, msg):
-        print("Thread: Arm Controller:", msg.count * 5)
 
     def function(self, msg):
         print("\nThread: Arm Controller:", self.task.first_move)
@@ -243,6 +241,7 @@ class ArmController():
                     AK.setPitchRangeMoving((self.task.world_X, self.task.world_Y, 2), -90, -90, 0, 1000)  # lower the altitude
                     time.sleep(2)
 
+        return self.task
 
     def initialMove(self):
 
@@ -363,7 +362,8 @@ def main():
     # Instances of Buses
     print('Instances of buses')
     bSensor = rr.Bus(sensor.function(), "Camera Sensor Bus")
-    bInterpreter = rr.Bus(interpreter.function(bSensor.message), "Interpreter Sensor Bus")
+    bInterpreter = rr.Bus(interpreter.function(), "Interpreter Sensor Bus")
+    bController = rr.Bus(controller.function(), "Controller Sensor Bus")
     bTerminate = rr.Bus(0, "Termination Bus")
 
 
@@ -386,7 +386,7 @@ def main():
         bTerminate,
         "Interpret Camera")
 
-    wController = rr.Consumer(
+    wController = rr.ConsumerProducer(
         controller.function,
         bInterpreter,
         5,
@@ -414,7 +414,7 @@ def main():
     # Concurrent Execution
     producer_consumer_list = [wSensor,
                               wInterpreter,
-                              wController,
+                              # wController,
                               wDisplay
                               ]
 
