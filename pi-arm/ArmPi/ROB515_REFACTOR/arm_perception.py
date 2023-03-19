@@ -58,7 +58,8 @@ class ArmSensing():
 
 
 class ArmInterpreter():
-    """ This class and its methods return the x,y location of the object"""
+    """ This class and its methods return the x,y location of the object,
+    and also decide"""
 
     def __init__(self, task):
         self.task = task
@@ -90,7 +91,9 @@ class ArmInterpreter():
                 self.task.track = True
 
                 # Decide to move if object is steady within a distance and after a period of time
-                self.decideToMove(0.3, 1.5)
+                distance_threshold = 0.3
+                time_threshold = 1.5
+                self.decideToMove(distance_threshold, time_threshold)
 
         return self.task
 
