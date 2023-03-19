@@ -37,7 +37,8 @@ class ArmSensing():
     def function(self):
         print('Thread: Camera Sensing...')
         image = self.my_camera.frame
-        # image = np.ones((640,480,3))
+        image = np.ones((640, 480, 3))
+
 
         if image is not None:
             self.task.img = image.copy()
@@ -108,7 +109,7 @@ class ArmInterpreter():
 
         return frame_lab
 
-    def getAreaMaxContour(self,contours):
+    def getAreaMaxContour(self, contours):
         """ Find the contour with the largest area
         parameter is list of contours to compare"""
         contour_area_temp = 0
@@ -350,7 +351,7 @@ def main():
     # Initiate Camera Object
     my_camera = Camera.Camera()
     my_camera.camera_open()
-    time.sleep(1)
+    time.sleep(2)
 
     # --- PART 1 ---
     # Instances of Sensor, interpreter and controller
