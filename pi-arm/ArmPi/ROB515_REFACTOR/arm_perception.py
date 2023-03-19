@@ -25,6 +25,7 @@ if sys.version_info.major == 2:
 
 AK = ArmIK()
 
+
 class ArmSensing():
     """ This class and its methods return the image sensed by the camera
     resized and with a crosshair"""
@@ -37,13 +38,13 @@ class ArmSensing():
         print('Thread: Camera Sensing...')
         image = self.my_camera.frame
         # image = np.ones((640,480,3))
-        vision = [image.copy(), image.copy()]
 
         if image is not None:
             self.task.img = image.copy()
             self.task.frame_gb = self.cross_hair()
 
         return self.task
+
     def cross_hair(self):
         """Applies CrossHair to image """
         img_h, img_w = self.task.img.shape[:2]
@@ -54,7 +55,6 @@ class ArmSensing():
         frame_gb = cv2.GaussianBlur(frame_resize, (11, 11), 11)
 
         return frame_gb
-
 
 
 class ArmInterpreter():
@@ -68,7 +68,6 @@ class ArmInterpreter():
         self.box = None
         self.detect_color = None
 
-
     def function(self, msg):
         print('Thread: Camera Interpreting...')
 
@@ -80,43 +79,20 @@ class ArmInterpreter():
         self.areaMaxContour = 0
         if not self.task.start_pick_up:
 
-            # Sweep all colors
+            # Sweep all colors and find the largest contour
             self.findContour(frame_lab)
 
             if self.area_max > 2500:
 
-                # Place rectangle and label around countour
+                # Place rectangle and label around contour
                 self.labelContour()
 
-                # Compare the last coordinates to determine whether to move
-                distance = math.sqrt(pow(self.task.world_x - self.task.last_x, 2) + pow(self.task.world_y - self.task.last_y, 2))
-                self.task.last_x, self.task.last_y = self.task.world_x, self.task.world_y
                 self.task.track = True
 
-                # print(count,distance)
-                # Cumulative judgement
-                # if self.task.action_finish:
-                #     if distance < 0.3:     # originally 0.3
-                #         self.task.center_list.extend((self.task.world_x, self.task.world_y))
-                #         self.task.count += 1
-                #         if self.task.start_count_t1:
-                #             self.task.start_count_t1 = False
-                #             self.task.t1 = time.time()
-                #         if time.time() - self.task.t1 > 1.5:
-                #             self.task.rotation_angle = self.rect[2]
-                #             self.task.start_count_t1 = True
-                #             self.task.world_X, self.task.world_Y = np.mean(np.array(self.task.center_list).reshape(self.task.count, 2), axis=0)
-                #             self.task.count = 0
-                #             self.task.center_list = []
-                #             self.task.start_pick_up = True
-                #     else:
-                #         self.task.t1 = time.time()
-                #         self.task.start_count_t1 = True
-                #         self.task.count = 0
-                #         self.task.center_list = []
+                # Decide to move if object is steady within a distance and after a period of time
+                self.decideToMove(0.3, 1.5)
 
         return self.task
-
 
     def filter(self, frame_gb):
         """Applies filter and Draws a rectangle"""
@@ -128,7 +104,6 @@ class ArmInterpreter():
         frame_lab = cv2.cvtColor(frame_gb, cv2.COLOR_BGR2LAB)  # convert image to lab space
 
         return frame_lab
-
 
     def getAreaMaxContour(self,contours):
         """ Find the contour with the largest area
@@ -147,7 +122,6 @@ class ArmInterpreter():
 
         return area_max_contour, contour_area_max  # returns largest contour
 
-
     def findContour(self, frame_lab):
 
         for i in color_range:  # color range comes from LABconfig.py
@@ -165,6 +139,32 @@ class ArmInterpreter():
                 # Find the largest contour
                 self.areaMaxContour, self.area_max = self.getAreaMaxContour(contours)
 
+    def decideToMove(self, d_threshold, t_threshold):
+        # Compare the last coordinates to determine whether to move
+        distance = math.sqrt(
+            pow(self.task.world_x - self.task.last_x, 2) + pow(self.task.world_y - self.task.last_y, 2))
+        self.task.last_x, self.task.last_y = self.task.world_x, self.task.world_y
+
+        # Cumulative judgement
+        if self.task.action_finish:
+            if distance < d_threshold:     # originally 0.3
+                self.task.center_list.extend((self.task.world_x, self.task.world_y))
+                self.task.count += 1
+                if self.task.start_count_t1:
+                    self.task.start_count_t1 = False
+                    self.task.t1 = time.time()
+                if time.time() - self.task.t1 > t_threshold:
+                    self.task.rotation_angle = self.rect[2]
+                    self.task.start_count_t1 = True
+                    self.task.world_X, self.task.world_Y = np.mean(np.array(self.task.center_list).reshape(self.task.count, 2), axis=0)
+                    self.task.count = 0
+                    self.task.center_list = []
+                    self.task.start_pick_up = True
+            else:
+                self.task.t1 = time.time()
+                self.task.start_count_t1 = True
+                self.task.count = 0
+                self.task.center_list = []
 
     def labelContour(self):
 
