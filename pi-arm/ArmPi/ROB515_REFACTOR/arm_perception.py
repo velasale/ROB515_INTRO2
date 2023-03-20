@@ -257,8 +257,7 @@ class ArmController():
                 AK.setPitchRangeMoving((self.task.world_X, self.task.world_Y, 12), -90, -90, 0, 1000)  # arm raised
                 time.sleep(1)
 
-
-
+                print("///////////////////////////////////////////////////////////////////////")
                 # Step 6: Classify and place blocks of different colors
                 result = AK.setPitchRangeMoving((self.coordinate[self.task.detect_color][0],
                                                  self.coordinate[self.task.detect_color][1],
