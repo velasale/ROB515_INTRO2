@@ -252,6 +252,14 @@ class ArmController():
                 Board.setBusServoPulse(1, self.task.servo1, 500)
                 time.sleep(1)
 
+                # Step 5: Raise Arm
+                Board.setBusServoPulse(2, 500, 500)
+                AK.setPitchRangeMoving((self.task.world_X, self.task.world_Y, 12), -90, -90, 0, 1000)  # arm raised
+                time.sleep(1)
+
+
+
+
         return self.task
 
     def initialMove(self):
