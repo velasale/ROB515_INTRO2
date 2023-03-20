@@ -38,8 +38,7 @@ class ArmSensing():
         self.task = msg
 
         print('\nThread: Camera Sensing...')
-        print(self.task.first_move, "\n\n")
-
+        print(self.task.first_move,"\n\n")
         image = self.my_camera.frame
         # image = np.ones((640, 480, 3))
 
@@ -227,7 +226,7 @@ class ArmController():
 
                 print("----------------WEIRDO -----------------")
                 # Stop and exit flag detection
-                AK.setPitchRangeMoving((self.task.world_x, self.task.world_y + 6, 5), -90, -90, 0, 20)
+                AK.setPitchRangeMoving((self.task.world_x, self.task.world_y - 2, 5), -90, -90, 0, 20)
                 time.sleep(0.02)
                 self.task.track = False
 
