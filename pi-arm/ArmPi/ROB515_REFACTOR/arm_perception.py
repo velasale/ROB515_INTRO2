@@ -226,10 +226,6 @@ class ArmController():
 
                 print("----------------WEIRDO -----------------")
 
-                Board.setBusServoPulse(1, self.task.servo1 - 280, 500)
-                Board.setBusServoPulse(1, self.task.servo1, 500)
-
-
                 # Stop and exit flag detection
                 AK.setPitchRangeMoving((self.task.world_x, self.task.world_y - 2, 5), -90, -90, 0, 20)
                 time.sleep(0.02)
@@ -241,7 +237,7 @@ class ArmController():
 
                 print("----------------WEIRDO 2222 -----------------")
                 # step 1: Open paws
-                Board.setBusServoPulse(1, servo1 - 280, 500)
+                Board.setBusServoPulse(1, self.task.servo1 - 280, 500)
 
                 # step 2: Rotate paws
                 servo2_angle = getAngle(self.task.world_X, self.task.world_Y, self.task.rotation_angle)
@@ -253,7 +249,7 @@ class ArmController():
                 time.sleep(2)
 
                 # Step 4: Close paws
-                Board.setBusServoPulse(1, servo1, 500)
+                Board.setBusServoPulse(1, self.task.servo1, 500)
                 time.sleep(1)
 
         return self.task
