@@ -247,6 +247,10 @@ class ArmController():
                 AK.setPitchRangeMoving((self.task.world_X, self.task.world_Y, 2), -90, -90, 0, 1000)  # lower the altitude
                 time.sleep(2)
 
+                # Step 4: Close paws
+                Board.setBusServoPulse(1, servo1, 500)
+                time.sleep(1)
+
         return self.task
 
     def initialMove(self):
