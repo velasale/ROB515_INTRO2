@@ -214,7 +214,6 @@ class ArmController():
         if self.task.first_move and self.task.start_pick_up:
             # Make initial move to bring arm close to object
             self.initialMove()
-            print("------------------FIRST MOVE------------------------")
 
         # Object not detected for the first time
         elif not self.task.first_move and not self.task.unreachable:
@@ -222,8 +221,6 @@ class ArmController():
 
             # If tracking phase
             if self.task.track:
-
-                print("----------------WEIRDO -----------------")
 
                 # Stop and exit flag detection
                 AK.setPitchRangeMoving((self.task.world_x, self.task.world_y - 2, 5), -90, -90, 0, 20)
@@ -234,7 +231,6 @@ class ArmController():
             if self.task.start_pick_up:
                 self.task.action_finish = False
 
-                print("----------------WEIRDO 2222 -----------------")
                 # step 1: Open paws
                 Board.setBusServoPulse(1, self.task.servo1 - 280, 500)
 
@@ -256,48 +252,58 @@ class ArmController():
                 AK.setPitchRangeMoving((self.task.world_X, self.task.world_Y, 12), -90, -90, 0, 1000)  # arm raised
                 time.sleep(1)
 
-                print("///////////////////////////////////////////////////////////////////////")
                 # Step 6: Classify and place blocks of different colors
                 result = AK.setPitchRangeMoving((self.coordinate[self.task.detect_color][0],
                                                  self.coordinate[self.task.detect_color][1],
                                                  12),
                                                 -90, -90, 0)
-                print("////////////////////////////////Result 2 is: ", result[2])
                 time.sleep(result[2] / 1000)
 
-
-
-                # Step : Open Paws and drop object
-                Board.setBusServoPulse(1, self.task.servo1 - 280, 500)
-                time.sleep(0.8)
-
-
+                # Step 7:
                 servo2_angle = getAngle(self.coordinate[self.task.detect_color][0],
                                         self.coordinate[self.task.detect_color][1],
                                         -90)
                 Board.setBusServoPulse(2, servo2_angle, 500)
                 time.sleep(0.5)
 
-
+                # Step 8:
                 AK.setPitchRangeMoving((self.coordinate[self.task.detect_color][0],
                                         self.coordinate[self.task.detect_color][1],
                                         self.coordinate[self.task.detect_color][2] + 3),
                                        -90, -90, 0, 500)
                 time.sleep(0.5)
 
-
+                # Step 9:
                 AK.setPitchRangeMoving((self.coordinate[self.task.detect_color]),
                                        -90,
                                        -90,
                                        0, 1000)
                 time.sleep(0.8)
 
-                # Step : Open Paws and drop object
+                # Step 10: Open Paws and drop object
                 Board.setBusServoPulse(1, self.task.servo1 - 280, 500)
                 time.sleep(0.8)
 
+                # Step 11:
+                AK.setPitchRangeMoving((self.coordinate[self.task.detect_color][0],
+                                        self.coordinate[self.task.detect_color][1],
+                                        12),
+                                       -90, -90, 0, 800)
+                time.sleep(0.8)
 
+                self.initMove()
 
+                time.sleep(1.5)
+
+                self.task.detect_color = 'None'
+                self.task.first_move = True
+                self.task.get_roi = False
+                self.task.action_finish = True
+                self.start_pick_up = False
+                self.set_rgb(self.task.detect_color)
+
+            else:
+                time.sleep(0.01)
 
         return self.task
 
@@ -339,6 +345,12 @@ class ArmController():
             Board.RGB.setPixelColor(1, Board.PixelColor(0, 0, 0))
             Board.RGB.show()
 
+
+    def initMove(self):
+        """ Initial Position"""
+        Board.setBusServoPulse(1, self.task.servo1 - 50, 300)
+        Board.setBusServoPulse(2, 500, 500)
+        AK.setPitchRangeMoving((0, 10, 10), -30, -30, -90, 1500)
 
 class ImageVisualizer():
 
