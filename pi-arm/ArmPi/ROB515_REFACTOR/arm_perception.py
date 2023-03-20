@@ -57,8 +57,7 @@ class ArmSensing():
         frame_resize = cv2.resize(self.task.img, self.task.size, interpolation=cv2.INTER_NEAREST)
         frame_gb = cv2.GaussianBlur(frame_resize, (11, 11), 11)
 
-        return frame_gbmiguel
-
+        return frame_gb
 
 
 class ArmInterpreter():
@@ -207,7 +206,6 @@ class ArmController():
             'blue': (-15 + 0.5, 0 - 0.5, 1.5),
         }
 
-
     def function(self, msg):
         print("\nThread: Arm Controller:", self.task.first_move)
         self.task = msg
@@ -217,6 +215,7 @@ class ArmController():
         if self.task.first_move and self.task.start_pick_up:
             # Make initial move to bring arm close to object
             self.initialMove()
+            print("------------------FIRST MOVE------------------------")
 
         # Object not detected for the first time
         elif not self.task.first_move and not self.task.unreachable:
@@ -224,6 +223,8 @@ class ArmController():
 
             # If tracking phase
             if self.task.track:
+
+                print("----------------WEIRDO -----------------")
                 # Stop and exit flag detection
                 AK.setPitchRangeMoving((self.task.world_x, self.task.world_y - 2, 5), -90, -90, 0, 20)
                 time.sleep(0.02)
@@ -233,6 +234,7 @@ class ArmController():
             if self.task.start_pick_up:
                 self.task.action_finish = False
 
+                print("----------------WEIRDO 2222 -----------------")
                 # step 1: Open paws
                 Board.setBusServoPulse(1, servo1 - 280, 500)
 
