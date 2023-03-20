@@ -38,7 +38,7 @@ class ArmSensing():
         self.task = msg
 
         print('\nThread: Camera Sensing...')
-        print(self.task.first_move,"\n\n")
+        print("self.task.first_move: ", self.task.first_move,"\n\n")
         image = self.my_camera.frame
         # image = np.ones((640, 480, 3))
 
