@@ -226,8 +226,8 @@ class ArmController():
 
                 print("----------------WEIRDO -----------------")
 
-                Board.setBusServoPulse(1, servo1 - 280, 500)
-                Board.setBusServoPulse(1, servo1, 500)
+                Board.setBusServoPulse(1, self.task.servo1 - 280, 500)
+                Board.setBusServoPulse(1, self.task.servo1, 500)
 
 
                 # Stop and exit flag detection
@@ -348,6 +348,7 @@ class ArmTask():
         self.world_X, self.world_Y = 0, 0
         self.world_x, self.world_y = 0, 0
         self.last_x, self.last_y = 0, 0
+        self.servo1 = 500
 
 
     def reset(self):
