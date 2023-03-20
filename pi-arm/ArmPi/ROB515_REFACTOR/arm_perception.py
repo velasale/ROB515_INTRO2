@@ -266,8 +266,14 @@ class ArmController():
                 time.sleep(result[2] / 1000)
 
 
-                AK.setPitchRangeMoving((coordinate[self.task.detect_color][0], \
-                                        coordinate[self.task.detect_color][1], \
+                AK.setPitchRangeMoving((coordinate[self.task.detect_color][0],
+                                        coordinate[self.task.detect_color][1],
+                                        coordinate[self.task.detect_color][2] + 3),
+                                       -90, -90, 0, 500)
+                time.sleep(0.5)
+
+                AK.setPitchRangeMoving((coordinate[self.task.detect_color][0],
+                                        coordinate[self.task.detect_color][1],
                                         coordinate[self.task.detect_color][2] + 3),
                                        -90, -90, 0, 500)
                 time.sleep(0.5)
