@@ -352,6 +352,7 @@ class ArmController():
         Board.setBusServoPulse(2, 500, 500)
         AK.setPitchRangeMoving((0, 10, 10), -30, -30, -90, 1500)
 
+
 class ImageVisualizer():
 
     def __init__(self):
@@ -409,7 +410,6 @@ class ArmTask():
     def reset(self):
         ...
         # TODO
-
 
 
 def main():
