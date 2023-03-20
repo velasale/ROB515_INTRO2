@@ -222,13 +222,13 @@ class ArmController():
             self.set_rgb(self.task.detect_color)
 
             # If tracking phase
-            if self.task.track:
-
-                print("----------------WEIRDO -----------------")
-                # Stop and exit flag detection
-                AK.setPitchRangeMoving((self.task.world_x, self.task.world_y - 2, 5), -90, -90, 0, 20)
-                time.sleep(0.02)
-                self.task.track = False
+            # if self.task.track:
+            #
+            #     print("----------------WEIRDO -----------------")
+            #     # Stop and exit flag detection
+            #     AK.setPitchRangeMoving((self.task.world_x, self.task.world_y - 2, 5), -90, -90, 0, 20)
+            #     time.sleep(0.02)
+            #     self.task.track = False
 
             # If object hasnt moved for a while
             if self.task.start_pick_up:
