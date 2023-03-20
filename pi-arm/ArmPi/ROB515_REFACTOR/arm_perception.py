@@ -363,8 +363,8 @@ def main():
 
     # Instances of Buses
     print('Instances of buses')
-    bSensor = rr.Bus(task, "Camera Sensor Bus")
-    bInterpreter = rr.Bus(interpreter.function(task), "Interpreter Sensor Bus")
+    bSensor = rr.Bus(sensor.function(task), "Camera Sensor Bus")
+    bInterpreter = rr.Bus(interpreter.function(bSensor.message), "Interpreter Sensor Bus")
     bController = rr.Bus(controller.function(bInterpreter.message), "Controller Sensor Bus")
     bTerminate = rr.Bus(0, "Termination Bus")
 
