@@ -259,17 +259,18 @@ class ArmController():
 
 
 
-                # Step : Open Paws and drop object
-                Board.setBusServoPulse(1, self.task.servo1 - 280, 500)
-                time.sleep(0.8)
-
-
                 # Step 6: Classify and place blocks of different colors
                 result = AK.setPitchRangeMoving((self.coordinate[self.task.detect_color][0],
                                                  self.coordinate[self.task.detect_color][1],
                                                  12),
                                                 -90, -90, 0)
                 time.sleep(result[2] / 1000)
+
+
+
+                # Step : Open Paws and drop object
+                Board.setBusServoPulse(1, self.task.servo1 - 280, 500)
+                time.sleep(0.8)
 
 
                 servo2_angle = getAngle(self.coordinate[self.task.detect_color][0],
