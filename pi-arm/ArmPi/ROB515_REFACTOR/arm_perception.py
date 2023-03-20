@@ -257,8 +257,7 @@ class ArmController():
                 AK.setPitchRangeMoving((self.task.world_X, self.task.world_Y, 12), -90, -90, 0, 1000)  # arm raised
                 time.sleep(1)
 
-                # Step 6:
-                # Classify and place blocks of different colors
+                # Step 6: Classify and place blocks of different colors
                 result = AK.setPitchRangeMoving((self.coordinate[self.task.detect_color][0],
                                                  self.coordinate[self.task.detect_color][1],
                                                  12),
@@ -266,11 +265,12 @@ class ArmController():
                 time.sleep(result[2] / 1000)
 
 
-                AK.setPitchRangeMoving((self.coordinate[self.task.detect_color][0],
+                servo2_angle = getAngle(self.coordinate[self.task.detect_color][0],
                                         self.coordinate[self.task.detect_color][1],
-                                        self.coordinate[self.task.detect_color][2] + 3),
-                                       -90, -90, 0, 500)
+                                        -90)
+                Board.setBusServoPulse(2, servo2_angle, 500)
                 time.sleep(0.5)
+
 
                 AK.setPitchRangeMoving((self.coordinate[self.task.detect_color][0],
                                         self.coordinate[self.task.detect_color][1],
@@ -278,8 +278,17 @@ class ArmController():
                                        -90, -90, 0, 500)
                 time.sleep(0.5)
 
-                AK.setPitchRangeMoving((self.coordinate[self.task.detect_color]), -90, -90, 0, 1000)
+
+                AK.setPitchRangeMoving((self.coordinate[self.task.detect_color]),
+                                       -90,
+                                       -90,
+                                       0, 1000)
                 time.sleep(0.8)
+
+                # Step : Open Paws and drop object
+                Board.setBusServoPulse(1, self.task.servo1 - 200, 500)
+                time.sleep(0.8)
+
 
 
 
