@@ -403,7 +403,7 @@ def main():
         controller.function,
         bInterpreter,
         bController,
-        1.0,
+        4.0,
         bTerminate,
         "Controlling Arm")
 
