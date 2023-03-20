@@ -57,7 +57,8 @@ class ArmSensing():
         frame_resize = cv2.resize(self.task.img, self.task.size, interpolation=cv2.INTER_NEAREST)
         frame_gb = cv2.GaussianBlur(frame_resize, (11, 11), 11)
 
-        return frame_gb
+        return frame_gbmiguel
+
 
 
 class ArmInterpreter():
