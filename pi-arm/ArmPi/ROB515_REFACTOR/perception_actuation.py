@@ -206,7 +206,7 @@ class ArmController():
         }
 
     def function(self, msg):
-        print("\n*********************************Thread: Arm Controller:", self.task.first_move)
+        print("\nThread: Arm Controller:", self.task.first_move)
         self.task = msg
 
         # if self.task.__isRunning:
@@ -308,6 +308,7 @@ class ArmController():
         return self.task
 
     def initialMove(self):
+        """Performs a first approach to the localized object"""
 
         self.task.action_finish = False
         self.set_rgb(self.task.detect_color)
@@ -324,7 +325,6 @@ class ArmController():
         self.task.start_pick_up = False
         self.task.first_move = False
         self.task.action_finish = True
-
 
     def set_rgb(self,color):
         """Set the rgb light color of the expansion board to match the color to be tracked"""
@@ -344,7 +344,6 @@ class ArmController():
             Board.RGB.setPixelColor(0, Board.PixelColor(0, 0, 0))
             Board.RGB.setPixelColor(1, Board.PixelColor(0, 0, 0))
             Board.RGB.show()
-
 
     def initMove(self):
         """ Initial Position"""
@@ -413,8 +412,7 @@ class ArmTask():
 
 
 def main():
-    """Perception Assignment 1: Set up a simple program that uses this class to identify the location of a block in the pickup
-    area and labels it on the video display from the camera."""
+    """ Refactoring of Perception and Actuation Code"""
 
     task = ArmTask()
 
