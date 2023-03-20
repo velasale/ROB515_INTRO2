@@ -264,6 +264,7 @@ class ArmController():
                                                  self.coordinate[self.task.detect_color][1],
                                                  12),
                                                 -90, -90, 0)
+                print("////////////////////////////////Result 2 is: ", result[2])
                 time.sleep(result[2] / 1000)
 
 
