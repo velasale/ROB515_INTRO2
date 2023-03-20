@@ -70,7 +70,6 @@ class ArmInterpreter():
         self.areaMaxContour = 0
         self.rect = None
         self.box = None
-        self.detect_color = None
 
     def function(self, msg):
         print('Thread: Camera Interpreting...')
@@ -132,10 +131,10 @@ class ArmInterpreter():
 
         for i in color_range:  # color range comes from LABconfig.py
             if i in self.task.target_color:
-                self.detect_color = i
+                self.task.detect_color = i
 
                 # Perform bitwise operations on original image and mask
-                frame_mask = cv2.inRange(frame_lab, color_range[self.detect_color][0], color_range[self.detect_color][1])
+                frame_mask = cv2.inRange(frame_lab, color_range[self.task.detect_color][0], color_range[self.task.detect_color][1])
                 # Open Operation
                 opened = cv2.morphologyEx(frame_mask, cv2.MORPH_OPEN, np.ones((6, 6), np.uint8))
                 # Close Operation
