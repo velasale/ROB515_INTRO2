@@ -207,7 +207,7 @@ class ArmController():
         }
 
     def function(self, msg):
-        print("\nThread: Arm Controller:", self.task.first_move)
+        print("\n*********************************Thread: Arm Controller:", self.task.first_move)
         self.task = msg
 
         # if self.task.__isRunning:
