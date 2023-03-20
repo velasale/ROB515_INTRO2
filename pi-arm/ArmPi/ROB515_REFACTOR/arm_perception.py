@@ -225,6 +225,11 @@ class ArmController():
             if self.task.track:
 
                 print("----------------WEIRDO -----------------")
+
+                Board.setBusServoPulse(1, servo1 - 280, 500)
+                Board.setBusServoPulse(1, servo1, 500)
+
+
                 # Stop and exit flag detection
                 AK.setPitchRangeMoving((self.task.world_x, self.task.world_y - 2, 5), -90, -90, 0, 20)
                 time.sleep(0.02)
