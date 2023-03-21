@@ -232,8 +232,7 @@ class ArmController():
                 self.task.action_finish = False
 
                 pick_coords = [self.task.world_X,
-                               self.task.world_Y,
-                               self.task.world_Z]
+                               self.task.world_Y]
                 place_coords = [self.coordinate[self.task.detect_color][0],
                                 self.coordinate[self.task.detect_color][1],
                                 self.coordinate[self.task.detect_color][2]]
@@ -339,7 +338,7 @@ class ArmController():
         # Final approach
         # Step 9:
         AK.setPitchRangeMoving(place_coords, -90, -90, 0, 1000)
-        time.sleep(0.8)
+        tiFinal Project scriptsme.sleep(0.8)
 
         # Open Paws and drop object
         Board.setBusServoPulse(1, self.task.servo1 - 280, 500)
