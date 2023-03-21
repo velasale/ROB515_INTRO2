@@ -291,7 +291,7 @@ class ArmController():
                                        -90, -90, 0, 800)
                 time.sleep(0.8)
 
-                self.initMove()
+                self.initialPose()
 
                 time.sleep(1.5)
 
@@ -345,11 +345,16 @@ class ArmController():
             Board.RGB.setPixelColor(1, Board.PixelColor(0, 0, 0))
             Board.RGB.show()
 
-    def initMove(self):
+    def initialPose(self):
         """ Initial Position"""
         Board.setBusServoPulse(1, self.task.servo1 - 50, 300)
         Board.setBusServoPulse(2, 500, 500)
         AK.setPitchRangeMoving((0, 10, 10), -30, -30, -90, 1500)
+
+
+    def pickAndPlace(self, pick_coords, place_coords):
+        ...
+
 
 
 class ImageVisualizer():
