@@ -231,66 +231,7 @@ class ArmController():
             if self.task.start_pick_up:
                 self.task.action_finish = False
 
-                # step 1: Open paws
-                Board.setBusServoPulse(1, self.task.servo1 - 280, 500)
-
-                # step 2: Rotate paws
-                servo2_angle = getAngle(self.task.world_X, self.task.world_Y, self.task.rotation_angle)
-                Board.setBusServoPulse(2, servo2_angle, 500)
-                time.sleep(0.8)
-
-                # Step 3: Lower Altitude
-                AK.setPitchRangeMoving((self.task.world_X, self.task.world_Y, 2), -90, -90, 0,
-                                       1000)  # lower the altitude
-                time.sleep(2)
-
-                # Step 4: Close paws
-                Board.setBusServoPulse(1, self.task.servo1, 500)
-                time.sleep(1)
-
-                # Step 5: Raise Arm
-                Board.setBusServoPulse(2, 500, 500)
-                AK.setPitchRangeMoving((self.task.world_X, self.task.world_Y, 12), -90, -90, 0, 1000)  # arm raised
-                time.sleep(1)
-
-                # Step 6: Classify and place blocks of different colors
-                result = AK.setPitchRangeMoving((self.coordinate[self.task.detect_color][0],
-                                                 self.coordinate[self.task.detect_color][1],
-                                                 12),
-                                                -90, -90, 0)
-                time.sleep(result[2] / 1000)
-
-                # Step 7:
-                servo2_angle = getAngle(self.coordinate[self.task.detect_color][0],
-                                        self.coordinate[self.task.detect_color][1],
-                                        -90)
-                Board.setBusServoPulse(2, servo2_angle, 500)
-                time.sleep(0.5)
-
-                # Step 8:
-                AK.setPitchRangeMoving((self.coordinate[self.task.detect_color][0],
-                                        self.coordinate[self.task.detect_color][1],
-                                        self.coordinate[self.task.detect_color][2] + 3),
-                                       -90, -90, 0, 500)
-                time.sleep(0.5)
-
-                # Step 9:
-                AK.setPitchRangeMoving((self.coordinate[self.task.detect_color]),
-                                       -90,
-                                       -90,
-                                       0, 1000)
-                time.sleep(0.8)
-
-                # Step 10: Open Paws and drop object
-                Board.setBusServoPulse(1, self.task.servo1 - 280, 500)
-                time.sleep(0.8)
-
-                # Step 11:
-                AK.setPitchRangeMoving((self.coordinate[self.task.detect_color][0],
-                                        self.coordinate[self.task.detect_color][1],
-                                        12),
-                                       -90, -90, 0, 800)
-                time.sleep(0.8)
+                self.pickAndPlace()
 
                 self.initialPose()
 
@@ -352,7 +293,70 @@ class ArmController():
         Board.setBusServoPulse(2, 500, 500)
         AK.setPitchRangeMoving((0, 10, 10), -30, -30, -90, 1500)
 
-    def pickAndPlace(self, pick_coords, place_coords):
+    def pickAndPlace(self, pick_coords=1, place_coords=2):
+
+        # Open Paws
+        Board.setBusServoPulse(1, self.task.servo1 - 280, 500)
+
+        # Rotate Paws
+        servo2_angle = getAngle(self.task.world_X, self.task.world_Y, self.task.rotation_angle)
+        Board.setBusServoPulse(2, servo2_angle, 500)
+        time.sleep(0.8)
+
+        # Lower Altitude
+        AK.setPitchRangeMoving((self.task.world_X, self.task.world_Y, 2), -90, -90, 0,
+                               1000)
+        time.sleep(2)
+
+        # Close paws
+        Board.setBusServoPulse(1, self.task.servo1, 500)
+        time.sleep(1)
+
+        # Raise arm
+        Board.setBusServoPulse(2, 500, 500)
+        AK.setPitchRangeMoving((self.task.world_X, self.task.world_Y, 12), -90, -90, 0, 1000)  # arm raised
+        time.sleep(1)
+
+        # Take to the target position
+        result = AK.setPitchRangeMoving((self.coordinate[self.task.detect_color][0],
+                                         self.coordinate[self.task.detect_color][1],
+                                         12),
+                                        -90, -90, 0)
+        time.sleep(result[2] / 1000)
+
+        # Rotate to align block with bin
+        servo2_angle = getAngle(self.coordinate[self.task.detect_color][0],
+                                self.coordinate[self.task.detect_color][1],
+                                -90)
+        Board.setBusServoPulse(2, servo2_angle, 500)
+        time.sleep(0.5)
+
+        # Lower block closer
+        AK.setPitchRangeMoving((self.coordinate[self.task.detect_color][0],
+                                self.coordinate[self.task.detect_color][1],
+                                self.coordinate[self.task.detect_color][2] + 3),
+                               -90, -90, 0, 500)
+        time.sleep(0.5)
+
+        # Final approach
+        # Step 9:
+        AK.setPitchRangeMoving((self.coordinate[self.task.detect_color]),
+                               -90,
+                               -90,
+                               0, 1000)
+        time.sleep(0.8)
+
+        # Open Paws and drop object
+        Board.setBusServoPulse(1, self.task.servo1 - 280, 500)
+        time.sleep(0.8)
+
+        # Raise Arm
+        AK.setPitchRangeMoving((self.coordinate[self.task.detect_color][0],
+                                self.coordinate[self.task.detect_color][1],
+                                12),
+                               -90, -90, 0, 800)
+        time.sleep(0.8)
+
 
 
 class ImageVisualizer():
