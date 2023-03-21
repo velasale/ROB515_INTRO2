@@ -234,24 +234,24 @@ class ArmController():
                 place_coords = [self.coordinate[self.task.detect_color][0],
                                 self.coordinate[self.task.detect_color][1],
                                 self.coordinate[self.task.detect_color][2]]
-
                 self.pickAndPlace(pick_coords, place_coords)
-
                 self.initialPose()
-
                 time.sleep(1.5)
-
-                self.task.detect_color = 'None'
-                self.task.first_move = True
-                self.task.get_roi = False
-                self.task.action_finish = True
-                self.start_pick_up = False
-                self.set_rgb(self.task.detect_color)
+                self.resetVariables()
 
             else:
                 time.sleep(0.01)
 
         return self.task
+
+    def resetVariables(self):
+        "Reset perception and actuation variables"
+        self.task.detect_color = 'None'
+        self.task.first_move = True
+        self.task.get_roi = False
+        self.task.action_finish = True
+        self.task.start_pick_up = False
+        self.set_rgb(self.task.detect_color)
 
     def initialMove(self):
         """Performs a first approach to the localized object"""
