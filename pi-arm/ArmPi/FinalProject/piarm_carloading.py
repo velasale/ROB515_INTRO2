@@ -81,7 +81,7 @@ class ArmInterpreter():
 
             # Sweep all colors and find the largest contour
             self.findContour(frame_lab)
-            print("I AM RIGHT HERE.......", self.area_max)
+            print("I AM RIGHT HERE........................", self.area_max, self.task.first_move)
 
             if self.area_max > 2500:
                 # Place label and rectangle around contour
