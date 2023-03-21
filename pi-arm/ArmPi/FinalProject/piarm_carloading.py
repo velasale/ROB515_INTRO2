@@ -81,7 +81,6 @@ class ArmInterpreter():
 
             # Sweep all colors and find the largest contour
             self.findContour(frame_lab)
-            print("I AM RIGHT HERE........................", self.area_max, self.task.first_move)
 
             if self.area_max > 2500:
                 # Place label and rectangle around contour
@@ -244,6 +243,42 @@ class ArmController():
 
         return self.task
 
+
+    def load_car(self, msg):
+
+        self.task.flag = 'Waiting to see cargo'
+        # Wait for car to do one loop carrying one blue or green block
+        if self.task.flag == 'Waiting to see cargo':
+            ...
+            self.task.flag = 'Blocking Road'
+
+        # Place blocking-block on road -> red
+        if self.task.flag == 'Blocking Road':
+            ...
+            self.task.flag = 'Waiting for car to stop'
+
+        # Wait for car to stop on the next loop
+        if self.task.flag == 'Waiting for car to stop':
+            ...
+            self.task.flag = 'Picking cargo from car'
+
+        # Pick-up block from car and bring it to its respective bin
+        if self.task.flag == 'Picking cargo from car':
+            ...
+            self.task.flag = 'Swapping cargo into car'
+
+        # Then pick-up the other block and put it on top of the car
+        if self.task.flag == 'Swapping cargo into car':
+            ...
+            self.task.flag = 'Removing Block'
+
+        # Remove blocking-block on road -> red
+        if self.task.flag == 'Removing Block':
+            ...
+            self.task.flag = ' Waiting to see cargo'
+
+
+
     def resetVariables(self):
         "Reset perception and actuation variables"
         self.task.detect_color = 'None'
@@ -399,6 +434,9 @@ class ArmTask():
         self.world_x, self.world_y = 0, 0
         self.last_x, self.last_y = 0, 0
         self.servo1 = 500
+
+        # State flow variables
+        self.flag = ''
 
     def reset(self):
         ...
