@@ -6,7 +6,6 @@
   <component name="ChangeListManager">
     <list default="true" id="ce17af2d-055a-4cc7-a5a5-9612d636b721" name="Changes" comment="Perception Refactoring">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pi-arm/ArmPi/ROB515_REFACTOR/arm_perception.py" beforeDir="false" afterPath="$PROJECT_DIR$/pi-arm/ArmPi/ROB515_REFACTOR/arm_perception.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -35,7 +34,7 @@
   "keyToString": {
     "RunOnceActivity.OpenProjectViewOnStart": "true",
     "RunOnceActivity.ShowReadmeOnStart": "true",
-    "last_opened_file_path": "/home/alejo/PycharmProjects/RobotSystems",
+    "last_opened_file_path": "/home/alejo/PycharmProjects/code_review",
     "two.files.diff.last.used.file": "/home/alejo/PycharmProjects/RobotSystems/pi-arm/ArmPi/Functions/ColorTracking.py"
   }
 }]]></component>
@@ -56,20 +55,6 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1677792190542</updated>
-    </task>
-    <task id="LOCAL-00173" summary="Perception Refactoring">
-      <created>1678568204841</created>
-      <option name="number" value="00173" />
-      <option name="presentableId" value="LOCAL-00173" />
-      <option name="project" value="LOCAL" />
-      <updated>1678568204841</updated>
-    </task>
-    <task id="LOCAL-00174" summary="Perception Refactoring">
-      <created>1678569617875</created>
-      <option name="number" value="00174" />
-      <option name="presentableId" value="LOCAL-00174" />
-      <option name="project" value="LOCAL" />
-      <updated>1678569617875</updated>
     </task>
     <task id="LOCAL-00175" summary="Perception Refactoring">
       <created>1678569663591</created>
@@ -400,7 +385,21 @@
       <option name="project" value="LOCAL" />
       <updated>1679281701126</updated>
     </task>
-    <option name="localTasksCounter" value="222" />
+    <task id="LOCAL-00222" summary="Perception Refactoring">
+      <created>1679282046153</created>
+      <option name="number" value="00222" />
+      <option name="presentableId" value="LOCAL-00222" />
+      <option name="project" value="LOCAL" />
+      <updated>1679282046153</updated>
+    </task>
+    <task id="LOCAL-00223" summary="Perception Refactoring">
+      <created>1679285233002</created>
+      <option name="number" value="00223" />
+      <option name="presentableId" value="LOCAL-00223" />
+      <option name="project" value="LOCAL" />
+      <updated>1679285233002</updated>
+    </task>
+    <option name="localTasksCounter" value="224" />
     <servers />
   </component>
   <component name="VcsManagerConfiguration">
