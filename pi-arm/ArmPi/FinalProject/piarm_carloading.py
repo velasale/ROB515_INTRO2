@@ -338,7 +338,7 @@ class ArmController():
         # Final approach
         # Step 9:
         AK.setPitchRangeMoving(place_coords, -90, -90, 0, 1000)
-        tiFinal Project scriptsme.sleep(0.8)
+        time.sleep(0.8)
 
         # Open Paws and drop object
         Board.setBusServoPulse(1, self.task.servo1 - 280, 500)
