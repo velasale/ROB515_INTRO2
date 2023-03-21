@@ -7,7 +7,6 @@ import cv2
 import time
 import numpy as np
 import Camera
-import threading
 from LABConfig import *
 from ArmIK.Transform import *
 from ArmIK.ArmMoveIK import *
@@ -15,9 +14,7 @@ import HiwonderSDK.Board as Board
 from CameraCalibration.CalibrationConfig import *
 
 import rossros as rr
-import concurrent.futures
 
-import random
 
 if sys.version_info.major == 2:
     print('Please run this program with python3!')
@@ -229,10 +226,10 @@ class ArmController():
 
             # If object hasnt moved for a while
             if self.task.start_pick_up:
+
                 self.task.action_finish = False
 
-                pick_coords = [self.task.world_X,
-                               self.task.world_Y]
+                pick_coords = [self.task.world_X, self.task.world_Y]
                 place_coords = [self.coordinate[self.task.detect_color][0],
                                 self.coordinate[self.task.detect_color][1],
                                 self.coordinate[self.task.detect_color][2]]
