@@ -79,6 +79,7 @@ class ArmInterpreter():
         self.areaMaxContour = 0
         if not self.task.start_pick_up:
 
+            print("I AM RIGHT HERE..................................................")
             # Sweep all colors and find the largest contour
             self.findContour(frame_lab)
 
