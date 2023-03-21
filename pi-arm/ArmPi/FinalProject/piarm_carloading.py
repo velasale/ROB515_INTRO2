@@ -95,6 +95,14 @@ class ArmInterpreter():
 
         return self.task
 
+    def sense_load(self, msg):
+        """State Machine to perform cargo sensing"""
+
+        print('Thread: Camera Interpreting...')
+        self.task = msg
+
+
+
     def filter(self, frame_gb):
         """Applies filter and Draws a rectangle"""
 
@@ -243,8 +251,11 @@ class ArmController():
 
         return self.task
 
-
     def load_car(self, msg):
+        """State Machine to perform cargo swapping"""
+
+        print("\nThread: Arm Controller:", self.task.flag)
+        self.task = msg
 
         self.task.flag = 'Waiting to see cargo'
         # Wait for car to do one loop carrying one blue or green block
