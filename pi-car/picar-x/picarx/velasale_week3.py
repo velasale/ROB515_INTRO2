@@ -441,7 +441,7 @@ if __name__ == "__main__":
     px = picarx_improved.Picarx()
 
     # week_2(px)
-    week_3(px, "camera")
+    week_3(px, "photosensor")
 
 
 
