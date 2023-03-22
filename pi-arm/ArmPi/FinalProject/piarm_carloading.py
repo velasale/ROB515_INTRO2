@@ -315,7 +315,7 @@ class ArmController():
         # Pick-up block from car and bring it to its respective bin
         elif self.task.sense_flag == 'Picking cargo from car':
 
-            pick_coords = [self.task.world_X, self.task.world_Y, 11]
+            pick_coords = [self.task.world_X, self.task.world_Y, 8]
             place_coords = [self.coordinate['green'][0], self.coordinate['green'][1], self.coordinate['green'][2]]
 
             self.pickAndPlace(pick_coords, place_coords, self.task.rotation_angle)
@@ -326,7 +326,7 @@ class ArmController():
         elif self.task.act_flag == 'Swapping cargo into car':
 
             pick_coords = [self.coordinate['blue'][0], self.coordinate['blue'][1], self.coordinate['blue'][2]]
-            place_coords = [self.task.world_X, self.task.world_Y, 12] # --> to replace with sensed coordinates
+            place_coords = [self.task.world_X, self.task.world_Y, 8] # --> to replace with sensed coordinates
             self.pickAndPlace(pick_coords, place_coords, -90)
             self.task.act_flag = 'Removing Block'
             self.task.sense_flag = 'idle'
