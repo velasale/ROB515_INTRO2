@@ -101,6 +101,20 @@ class ArmInterpreter():
         print('Thread: Camera Interpreting...')
         self.task = msg
 
+        frame_lab = self.filter(self.task.frame_gb)
+        self.area_max = 0
+        self.areaMaxContour = 0
+
+        if self.task.flag == 'Waiting to see cargo':
+
+            self.findContour(frame_lab)
+
+            if self.area_max > 2500:
+                # Place label and rectangle around contour
+                self.labelContour()
+
+
+
 
 
     def filter(self, frame_gb):
