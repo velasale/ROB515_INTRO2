@@ -242,7 +242,8 @@ class ArmController():
 
         # Placement coordinates of wooden blocks of different colors (x,y,z)
         self.coordinate = {
-            'red': (-15 + 0.5, 12 - 0.5, 1.5),
+            #'red': (-15 + 0.5, 12 - 0.5, 1.5),
+            'red': (+15 + 0.5, 6 - 0.5, 1.5),
             'green': (-15 + 0.5, 6 - 0.5, 1.5),
             'blue': (-15 + 0.5, 0 - 0.5, 1.5),
             'block': (-10, 20, 1.5)
@@ -314,7 +315,7 @@ class ArmController():
         # Pick-up block from car and bring it to its respective bin
         elif self.task.sense_flag == 'Picking cargo from car':
 
-            pick_coords = [self.task.world_X, self.task.world_Y, 12]
+            pick_coords = [self.task.world_X, self.task.world_Y, 11]
             place_coords = [self.coordinate['green'][0], self.coordinate['green'][1], self.coordinate['green'][2]]
 
             self.pickAndPlace(pick_coords, place_coords, self.task.rotation_angle)

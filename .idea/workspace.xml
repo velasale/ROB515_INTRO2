@@ -59,27 +59,6 @@
       <option name="presentableId" value="Default" />
       <updated>1677792190542</updated>
     </task>
-    <task id="LOCAL-00229" summary="pick and place coordinates as parameters">
-      <created>1679438328493</created>
-      <option name="number" value="00229" />
-      <option name="presentableId" value="LOCAL-00229" />
-      <option name="project" value="LOCAL" />
-      <updated>1679438328493</updated>
-    </task>
-    <task id="LOCAL-00230" summary="pick and place coordinates as parameters">
-      <created>1679438540318</created>
-      <option name="number" value="00230" />
-      <option name="presentableId" value="LOCAL-00230" />
-      <option name="project" value="LOCAL" />
-      <updated>1679438540318</updated>
-    </task>
-    <task id="LOCAL-00231" summary="pick and place coordinates as parameters">
-      <created>1679438588552</created>
-      <option name="number" value="00231" />
-      <option name="presentableId" value="LOCAL-00231" />
-      <option name="project" value="LOCAL" />
-      <updated>1679438588552</updated>
-    </task>
     <task id="LOCAL-00232" summary="pick and place coordinates as parameters">
       <created>1679439132502</created>
       <option name="number" value="00232" />
@@ -402,7 +381,28 @@
       <option name="project" value="LOCAL" />
       <updated>1679509794345</updated>
     </task>
-    <option name="localTasksCounter" value="278" />
+    <task id="LOCAL-00278" summary="basic flow of car loading function">
+      <created>1679515374805</created>
+      <option name="number" value="00278" />
+      <option name="presentableId" value="LOCAL-00278" />
+      <option name="project" value="LOCAL" />
+      <updated>1679515374805</updated>
+    </task>
+    <task id="LOCAL-00279" summary="basic flow of car loading function">
+      <created>1679515653434</created>
+      <option name="number" value="00279" />
+      <option name="presentableId" value="LOCAL-00279" />
+      <option name="project" value="LOCAL" />
+      <updated>1679515653434</updated>
+    </task>
+    <task id="LOCAL-00280" summary="basic flow of car loading function">
+      <created>1679517012943</created>
+      <option name="number" value="00280" />
+      <option name="presentableId" value="LOCAL-00280" />
+      <option name="project" value="LOCAL" />
+      <updated>1679517012943</updated>
+    </task>
+    <option name="localTasksCounter" value="281" />
     <servers />
   </component>
   <component name="VcsManagerConfiguration">
