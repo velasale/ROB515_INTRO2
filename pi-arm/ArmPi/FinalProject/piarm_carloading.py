@@ -111,6 +111,8 @@ class ArmInterpreter():
 
             self.findContour(frame_lab)
 
+            print('Max senses area: ', self.area_max)
+
             if self.area_max > 2500 and self.count == 0:
                 self.count += 1
                 # Place label and rectangle around contour
