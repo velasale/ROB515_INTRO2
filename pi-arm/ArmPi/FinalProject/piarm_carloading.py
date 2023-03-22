@@ -327,7 +327,7 @@ class ArmController():
 
             pick_coords = [self.coordinate['blue'][0], self.coordinate['blue'][1], self.coordinate['blue'][2]]
             place_coords = [self.task.world_X, self.task.world_Y, 8] # --> to replace with sensed coordinates
-            self.pickAndPlace(pick_coords, place_coords, -90)
+            self.pickAndPlace(pick_coords, place_coords, 0)
             self.task.act_flag = 'Removing Block'
             self.task.sense_flag = 'idle'
 
