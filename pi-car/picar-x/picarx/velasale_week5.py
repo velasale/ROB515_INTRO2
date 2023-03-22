@@ -585,7 +585,7 @@ def week_5(px):
     """ Part 3: Create RossROS Timer object """
     terminationTimer = rr.Timer(
         bTerminate,         # Output data bus
-        20,                  # Duration
+        120,                  # Duration
         0.01,               # Delay between checking termination time
         bTerminate,         # Bus to check for termination signal
         "Termination Timer")
