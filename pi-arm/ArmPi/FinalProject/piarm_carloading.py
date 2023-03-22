@@ -121,6 +121,7 @@ class ArmInterpreter():
         # Proceed to Wait to car to stop
         elif self.task.act_flag == 'Waiting for car to stop':
 
+            print(self.task.start_pick_up)
             self.findContour(frame_lab)
             print('Max sensed area: ', self.area_max)
 
