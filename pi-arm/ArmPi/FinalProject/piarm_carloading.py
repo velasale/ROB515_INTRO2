@@ -116,6 +116,7 @@ class ArmInterpreter():
                 # Place label and rectangle around contour
                 self.labelContour()
             elif self.count == 1 and self.area_max < 2500:
+                self.count = 0
                 self.task.sense_flag = 'Blocking Road'
                 self.task.act_flag = 'idle'
 
@@ -305,7 +306,7 @@ class ArmController():
                             self.coordinate['red'][2]]
 
             place_coords = [-4, 20, 2]
-            self.pickAndPlace(pick_coords, place_coords)
+            self.pickAndPlace(pick_coords, place_coords, -90)
             time.sleep(0.1)
             self.initialPose()
             time.sleep(0.1)
@@ -321,7 +322,7 @@ class ArmController():
                             self.coordinate['green'][1],
                             self.coordinate['green'][2]]
 
-            self.pickAndPlace(pick_coords, place_coords)
+            self.pickAndPlace(pick_coords, place_coords, self.task.rotation_angle)
             self.task.act_flag = 'Swapping cargo into car'
             self.task.sense_flag = 'idle'
 
@@ -333,7 +334,7 @@ class ArmController():
                            self.coordinate['blue'][2]]
 
             place_coords = [self.task.world_X, self.task.world_Y, 2] # --> to replace with sensed coordinates
-            self.pickAndPlace(pick_coords, place_coords)
+            self.pickAndPlace(pick_coords, place_coords, -90)
             self.task.act_flag = 'Removing Block'
             self.task.sense_flag = 'idle'
 
@@ -344,7 +345,7 @@ class ArmController():
                            self.coordinate['red'][2]]
 
             pick_coords = [-4, 20, 2]
-            self.pickAndPlace(pick_coords, place_coords)
+            self.pickAndPlace(pick_coords, place_coords, -90)
             time.sleep(0.1)
             self.initialPose()
             time.sleep(0.1)
@@ -406,13 +407,13 @@ class ArmController():
         Board.setBusServoPulse(2, 500, 500)
         AK.setPitchRangeMoving((0, 10, 10), -30, -30, -90, 1500)
 
-    def pickAndPlace(self, pick_coords, place_coords):
+    def pickAndPlace(self, pick_coords, place_coords, rotation_angle):
 
         # Open Paws
         Board.setBusServoPulse(1, self.task.servo1 - 280, 500)
 
         # Rotate Paws
-        servo2_angle = getAngle(pick_coords[0], pick_coords[1], self.task.rotation_angle)
+        servo2_angle = getAngle(pick_coords[0], pick_coords[1], rotation_angle)
         Board.setBusServoPulse(2, servo2_angle, 500)
         time.sleep(0.8)
 
