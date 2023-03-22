@@ -348,6 +348,7 @@ class ArmController():
         self.task.get_roi = False
         self.task.action_finish = True
         self.task.start_pick_up = False
+        self.task.start_count_t1 = True
         self.set_rgb(self.task.detect_color)
         self.task.world_X = 0
         self.task.world_Y = 0
