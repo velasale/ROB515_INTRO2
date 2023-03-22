@@ -99,7 +99,7 @@ class ArmInterpreter():
     def sense_load(self, msg):
         """State Machine to perform cargo sensing"""
 
-        print('Thread: Camera Interpreting... ', self.task.sense_flag, self.count)
+        print('Thread: Camera Interpreting... ', self.task.act_flag, self.count)
         self.task = msg
 
         frame_lab = self.filter(self.task.frame_gb)
@@ -107,7 +107,7 @@ class ArmInterpreter():
         self.areaMaxContour = 0
 
         # Wait for car to do a loop with cargo
-        if self.task.sense_flag == 'Waiting to see cargo':
+        if self.task.act_flag == 'Waiting to see cargo':
 
             self.findContour(frame_lab)
 
@@ -119,6 +119,7 @@ class ArmInterpreter():
                 self.labelContour()
             elif self.count == 1 and self.area_max < 2500:
                 self.task.sense_flag = 'Blocking Road'
+                self.task.act_flag = 'idle'
 
         # Proceed to Wait to car to stop
         elif self.task.act_flag == 'Waiting for car to stop':
@@ -133,6 +134,7 @@ class ArmInterpreter():
 
                 if self.task.start_pick_up:
                     self.task.sense_flag = 'Picking cargo from car'
+                    self.task.act_flag = 'idle'
 
         return self.task
 
@@ -287,7 +289,7 @@ class ArmController():
     def load_car(self, msg):
         """State Machine to perform cargo swapping"""
 
-        print("\nThread: Arm Controller:", self.task.act_flag)
+        print("\nThread: Arm Controller:", self.task.sense_flag)
         self.task = msg
 
         # Wait for car to do one loop carrying one blue or green block
@@ -303,6 +305,7 @@ class ArmController():
             place_coords = [0, 20, 2]
             self.pickAndPlace(pick_coords, place_coords)
             self.task.act_flag = 'Waiting for car to stop'
+            self.task.sense_flag = 'idle'
 
         # Pick-up block from car and bring it to its respective bin
         elif self.task.sense_flag == 'Picking cargo from car':
@@ -315,6 +318,7 @@ class ArmController():
 
             self.pickAndPlace(pick_coords, place_coords)
             self.task.act_flag = 'Swapping cargo into car'
+            self.task.sense_flag = 'idle'
 
         # Then pick-up the other block and put it on top of the car
         elif self.task.act_flag == 'Swapping cargo into car':
@@ -326,6 +330,7 @@ class ArmController():
             place_coords = [4, 20, 2] # --> to replace with sensed coordinates
             self.pickAndPlace(pick_coords, place_coords)
             self.task.act_flag = 'Removing Block'
+            self.task.sense_flag = 'idle'
 
         # Remove blocking-block on road -> red
         elif self.task.act_flag == 'Removing Block':
@@ -335,7 +340,8 @@ class ArmController():
 
             pick_coords = [0, 20, 2]
             self.pickAndPlace(pick_coords, place_coords)
-            self.task.sense_flag = ' Waiting to see cargo'
+            self.task.act_flag = ' Waiting to see cargo'
+            self.task.sense_flag = 'idle'
 
         return self.task
 
