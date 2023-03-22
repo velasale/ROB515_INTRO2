@@ -211,6 +211,7 @@ class ArmInterpreter():
                 self.task.start_count_t1 = True
                 self.task.count = 0
                 self.task.center_list = []
+                self.task.start_pick_up = False
 
     def labelContour(self):
 
