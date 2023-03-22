@@ -343,8 +343,11 @@ class ArmController():
                            self.coordinate['red'][1],
                            self.coordinate['red'][2]]
 
-            pick_coords = [0, 20, 2]
+            pick_coords = [-4, 20, 2]
             self.pickAndPlace(pick_coords, place_coords)
+            time.sleep(0.1)
+            self.initialPose()
+            time.sleep(0.1)
             self.task.act_flag = ' Waiting to see cargo'
             self.task.sense_flag = 'idle'
 
