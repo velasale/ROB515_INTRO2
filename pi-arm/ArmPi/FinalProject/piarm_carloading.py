@@ -109,7 +109,6 @@ class ArmInterpreter():
         if self.task.act_flag == 'Waiting to see cargo':
 
             self.findContour(frame_lab)
-
             print('Max sensed area: ', self.area_max, )
 
             if self.area_max > 2500 and self.count == 0:
@@ -122,7 +121,9 @@ class ArmInterpreter():
 
         # Proceed to Wait to car to stop
         elif self.task.act_flag == 'Waiting for car to stop':
+
             self.findContour(frame_lab)
+            print('Max sensed area: ', self.area_max, )
 
             if self.area.max > 2500:
                 self.labelContour()
