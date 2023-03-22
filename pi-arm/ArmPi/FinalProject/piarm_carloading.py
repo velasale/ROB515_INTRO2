@@ -249,7 +249,7 @@ class ArmController():
             'block': (-10, 20, 1.5)
         }
 
-        self.z_cargo = 9
+        self.z_cargo = 8
         self.z_way = 14
 
     def function(self, msg):
@@ -413,7 +413,7 @@ class ArmController():
         Board.setBusServoPulse(1, self.task.servo1 - 280, 500)
 
         # Raise for safe
-        AK.setPitchRangeMoving((pick_coords[0], pick_coords[1], 12), -90, -90, 0, 1500)
+        AK.setPitchRangeMoving((pick_coords[0], pick_coords[1], self.z_way), -90, -90, 0, 1500)
         time.sleep(2)
 
         # Rotate Paws
@@ -431,11 +431,11 @@ class ArmController():
 
         # Raise arm
         Board.setBusServoPulse(2, 500, 500)
-        AK.setPitchRangeMoving((pick_coords[0], pick_coords[1], 12), -90, -90, 0, 1500)
+        AK.setPitchRangeMoving((pick_coords[0], pick_coords[1], self.z_way), -90, -90, 0, 1500)
         time.sleep(1)
 
         # Take to the target position
-        result = AK.setPitchRangeMoving((place_coords[0], place_coords[1], 12), -90, -90, 0)
+        result = AK.setPitchRangeMoving((place_coords[0], place_coords[1], self.z_way), -90, -90, 0)
         time.sleep(result[2] / 1000)
 
         # Rotate to align block with bin
@@ -457,7 +457,7 @@ class ArmController():
         time.sleep(0.8)
 
         # Raise Arm
-        AK.setPitchRangeMoving((place_coords[0], place_coords[1], 12), -90, -90, 0, 800)
+        AK.setPitchRangeMoving((place_coords[0], place_coords[1], self.z_way), -90, -90, 0, 800)
         time.sleep(0.8)
 
 
