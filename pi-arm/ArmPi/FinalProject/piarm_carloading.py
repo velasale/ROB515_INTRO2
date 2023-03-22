@@ -297,6 +297,7 @@ class ArmController():
 
         if self.task.sense_flag == 'Waiting to see cargo':
             self.initialPose()
+            time.sleep(0.1)
             self.task.sense_flag = 'idle'
 
         # Place blocking-block on road -> red
@@ -308,6 +309,9 @@ class ArmController():
 
             place_coords = [0, 20, 2]
             self.pickAndPlace(pick_coords, place_coords)
+            time.sleep(0.1)
+            self.initialPose()
+            time.sleep(0.1)
             self.task.act_flag = 'Waiting for car to stop'
             self.task.sense_flag = 'idle'
 
