@@ -295,6 +295,10 @@ class ArmController():
         # Wait for car to do one loop carrying one blue or green block
         print('Waiting to see cargo')
 
+        if self.task.sense_flag == 'Waiting to see cargo':
+            self.initialPose()
+            self.task.sense_flag = 'idle'
+
         # Place blocking-block on road -> red
         if self.task.sense_flag == 'Blocking Road':
 
