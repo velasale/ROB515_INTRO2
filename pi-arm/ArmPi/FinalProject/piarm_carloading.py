@@ -289,7 +289,7 @@ class ArmController():
     def load_car(self, msg):
         """State Machine to perform cargo swapping"""
 
-        print("\nThread: Arm Controller:", self.task.sense_flag)
+        print("\n             Thread: Arm Controller:", self.task.sense_flag)
         self.task = msg
 
         if self.task.sense_flag == 'Waiting to see cargo':
@@ -453,7 +453,6 @@ class ArmController():
         time.sleep(0.8)
 
 
-
 class ImageVisualizer():
 
     def __init__(self):
@@ -563,7 +562,7 @@ def main():
         controller.load_car,
         bInterpreter,
         bController,
-        1.0,
+        0.01,
         bTerminate,
         "Controlling Arm")
 
