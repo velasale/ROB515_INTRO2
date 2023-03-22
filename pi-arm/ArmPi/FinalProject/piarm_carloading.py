@@ -99,7 +99,7 @@ class ArmInterpreter():
     def sense_load(self, msg):
         """State Machine to perform cargo sensing"""
 
-        print('Thread: Camera Interpreting... ', self.task.sense_flag)
+        print('Thread: Camera Interpreting... ', self.task.sense_flag, self.count)
         self.task = msg
 
         frame_lab = self.filter(self.task.frame_gb)
@@ -111,7 +111,7 @@ class ArmInterpreter():
 
             self.findContour(frame_lab)
 
-            print('Max senses area: ', self.area_max)
+            print('Max sensed area: ', self.area_max, )
 
             if self.area_max > 2500 and self.count == 0:
                 self.count += 1
