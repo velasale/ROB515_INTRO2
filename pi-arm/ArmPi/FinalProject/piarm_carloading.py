@@ -125,7 +125,7 @@ class ArmInterpreter():
             self.findContour(frame_lab)
             print('Max sensed area: ', self.area_max)
 
-            if self.area.max > 2500:
+            if self.area_max > 2500:
                 self.labelContour()
 
                 distance_threshold = 0.3
