@@ -116,7 +116,7 @@ class Picarx(object):
             direction = -1 * self.cali_dir_value[motor]
         speed = abs(speed)
         if speed != 0:
-            speed = int(speed /2 ) + 30
+            speed = int(speed /2 ) + 20
         speed = speed - self.cali_speed_value[motor]
         if direction < 0:
             self.motor_direction_pins[motor].high()

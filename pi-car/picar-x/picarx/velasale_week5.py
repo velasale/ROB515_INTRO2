@@ -557,28 +557,28 @@ def week_5(px):
         interpreter.sharp_edge,     # function that processes data
         bGraySensor,                    # input data bus
         bGrayInterpreter,               # output data bus
-        0.001,                           # delay
+        0.01,                           # delay
         bTerminate,                     # bus to watch for termination signal
         "Interpret Grayscale into line position")
 
     ultrasonicSensor = rr.Producer(
         ultrasonic.read,
         bUltrasonic,
-        0.001,
+        0.01,
         bTerminate,
         "Read and Interpret Ultrasound distance")
 
     dirController = rr.Consumer(
         controller.steer_towards_line,
         bGrayInterpreter,
-        0.001,
+        0.01,
         bTerminate,
         "Control steering angle")
 
     distController = rr.Consumer(
         dController.move_stop,
         bUltrasonic,
-        0.001,
+        0.01,
         bTerminate,
         "Watching the distance ahead")
 
