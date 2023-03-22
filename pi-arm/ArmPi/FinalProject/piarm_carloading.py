@@ -474,7 +474,7 @@ class ArmTask():
 
         # General Variables
         self.__isRunning = True
-        self.target_color = ('red',)
+        self.target_color = ('green',)
         self._stop = False
 
         # Perception Parameters
