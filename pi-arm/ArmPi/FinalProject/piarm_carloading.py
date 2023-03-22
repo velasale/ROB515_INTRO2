@@ -554,7 +554,7 @@ def main():
         interpreter.sense_load,
         bSensor,
         bInterpreter,
-        0.01,
+        0.1,
         bTerminate,
         "Interpret Camera")
 
@@ -562,7 +562,7 @@ def main():
         controller.load_car,
         bInterpreter,
         bController,
-        0.01,
+        0.1,
         bTerminate,
         "Controlling Arm")
 
