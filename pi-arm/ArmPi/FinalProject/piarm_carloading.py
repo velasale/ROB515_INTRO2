@@ -414,7 +414,7 @@ class ArmController():
         time.sleep(0.8)
 
         # Lower Altitude
-        AK.setPitchRangeMoving((pick_coords[0], pick_coords[1], 2), -90, -90, 0, 1000)
+        AK.setPitchRangeMoving((pick_coords[0], pick_coords[1], 2), -90, -90, 0, 500)
         time.sleep(2)
 
         # Close paws
@@ -423,7 +423,7 @@ class ArmController():
 
         # Raise arm
         Board.setBusServoPulse(2, 500, 500)
-        AK.setPitchRangeMoving((pick_coords[0], pick_coords[1], 12), -90, -90, 0, 1000)
+        AK.setPitchRangeMoving((pick_coords[0], pick_coords[1], 12), -90, -90, 0, 500)
         time.sleep(1)
 
         # Take to the target position
