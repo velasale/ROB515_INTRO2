@@ -34,7 +34,7 @@ class ArmSensing():
     def function(self, msg):
         self.task = msg
 
-        print('\nThread: Camera Sensing...')
+        # print('\nThread: Camera Sensing...')
         image = self.my_camera.frame
         # image = np.ones((640, 480, 3))
 
@@ -292,9 +292,6 @@ class ArmController():
         print("\nThread: Arm Controller:", self.task.sense_flag)
         self.task = msg
 
-        # Wait for car to do one loop carrying one blue or green block
-        print('Waiting to see cargo')
-
         if self.task.sense_flag == 'Waiting to see cargo':
             self.initialPose()
             time.sleep(0.1)
@@ -463,7 +460,7 @@ class ImageVisualizer():
         ...
 
     def function(self, msg):
-        print("Thread: Displaying image")
+        # print("Thread: Displaying image")
         cv2.imshow('Frame', msg.img)
         cv2.waitKey(1)
 
