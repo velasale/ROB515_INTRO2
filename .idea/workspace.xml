@@ -4,7 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="ce17af2d-055a-4cc7-a5a5-9612d636b721" name="Changes" comment="pick and place coordinates as parameters">
+    <list default="true" id="ce17af2d-055a-4cc7-a5a5-9612d636b721" name="Changes" comment="basic flow of car loading function">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/pi-arm/ArmPi/FinalProject/piarm_carloading.py" beforeDir="false" afterPath="$PROJECT_DIR$/pi-arm/ArmPi/FinalProject/piarm_carloading.py" afterDir="false" />
     </list>
@@ -31,14 +31,14 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "RunOnceActivity.OpenProjectViewOnStart": "true",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "last_opened_file_path": "/home/alejo/PycharmProjects/RobotSystems/pi-arm/ArmPi",
-    "two.files.diff.last.used.file": "/home/alejo/PycharmProjects/RobotSystems/pi-arm/ArmPi/Functions/ColorTracking.py"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;last_opened_file_path&quot;: &quot;/home/alejo/PycharmProjects/RobotSystems/pi-arm/ArmPi&quot;,
+    &quot;two.files.diff.last.used.file&quot;: &quot;/home/alejo/PycharmProjects/RobotSystems/pi-arm/ArmPi/Functions/ColorTracking.py&quot;
   }
-}]]></component>
+}</component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
       <recent name="$PROJECT_DIR$/pi-arm/ArmPi" />
@@ -59,342 +59,6 @@
       <option name="presentableId" value="Default" />
       <updated>1677792190542</updated>
     </task>
-    <task id="LOCAL-00181" summary="Perception Refactoring">
-      <created>1679265646251</created>
-      <option name="number" value="00181" />
-      <option name="presentableId" value="LOCAL-00181" />
-      <option name="project" value="LOCAL" />
-      <updated>1679265646251</updated>
-    </task>
-    <task id="LOCAL-00182" summary="Perception Refactoring">
-      <created>1679265726998</created>
-      <option name="number" value="00182" />
-      <option name="presentableId" value="LOCAL-00182" />
-      <option name="project" value="LOCAL" />
-      <updated>1679265726999</updated>
-    </task>
-    <task id="LOCAL-00183" summary="Perception Refactoring">
-      <created>1679271158963</created>
-      <option name="number" value="00183" />
-      <option name="presentableId" value="LOCAL-00183" />
-      <option name="project" value="LOCAL" />
-      <updated>1679271158963</updated>
-    </task>
-    <task id="LOCAL-00184" summary="Perception Refactoring">
-      <created>1679271234794</created>
-      <option name="number" value="00184" />
-      <option name="presentableId" value="LOCAL-00184" />
-      <option name="project" value="LOCAL" />
-      <updated>1679271234794</updated>
-    </task>
-    <task id="LOCAL-00185" summary="Perception Refactoring">
-      <created>1679271404673</created>
-      <option name="number" value="00185" />
-      <option name="presentableId" value="LOCAL-00185" />
-      <option name="project" value="LOCAL" />
-      <updated>1679271404674</updated>
-    </task>
-    <task id="LOCAL-00186" summary="Perception Refactoring">
-      <created>1679271528173</created>
-      <option name="number" value="00186" />
-      <option name="presentableId" value="LOCAL-00186" />
-      <option name="project" value="LOCAL" />
-      <updated>1679271528173</updated>
-    </task>
-    <task id="LOCAL-00187" summary="Perception Refactoring">
-      <created>1679271637219</created>
-      <option name="number" value="00187" />
-      <option name="presentableId" value="LOCAL-00187" />
-      <option name="project" value="LOCAL" />
-      <updated>1679271637219</updated>
-    </task>
-    <task id="LOCAL-00188" summary="Perception Refactoring">
-      <created>1679271946078</created>
-      <option name="number" value="00188" />
-      <option name="presentableId" value="LOCAL-00188" />
-      <option name="project" value="LOCAL" />
-      <updated>1679271946078</updated>
-    </task>
-    <task id="LOCAL-00189" summary="Perception Refactoring">
-      <created>1679272344995</created>
-      <option name="number" value="00189" />
-      <option name="presentableId" value="LOCAL-00189" />
-      <option name="project" value="LOCAL" />
-      <updated>1679272344995</updated>
-    </task>
-    <task id="LOCAL-00190" summary="Perception Refactoring">
-      <created>1679272750269</created>
-      <option name="number" value="00190" />
-      <option name="presentableId" value="LOCAL-00190" />
-      <option name="project" value="LOCAL" />
-      <updated>1679272750269</updated>
-    </task>
-    <task id="LOCAL-00191" summary="Perception Refactoring">
-      <created>1679273129635</created>
-      <option name="number" value="00191" />
-      <option name="presentableId" value="LOCAL-00191" />
-      <option name="project" value="LOCAL" />
-      <updated>1679273129635</updated>
-    </task>
-    <task id="LOCAL-00192" summary="Perception Refactoring">
-      <created>1679273457268</created>
-      <option name="number" value="00192" />
-      <option name="presentableId" value="LOCAL-00192" />
-      <option name="project" value="LOCAL" />
-      <updated>1679273457268</updated>
-    </task>
-    <task id="LOCAL-00193" summary="Perception Refactoring">
-      <created>1679273903699</created>
-      <option name="number" value="00193" />
-      <option name="presentableId" value="LOCAL-00193" />
-      <option name="project" value="LOCAL" />
-      <updated>1679273903699</updated>
-    </task>
-    <task id="LOCAL-00194" summary="Perception Refactoring">
-      <created>1679274033009</created>
-      <option name="number" value="00194" />
-      <option name="presentableId" value="LOCAL-00194" />
-      <option name="project" value="LOCAL" />
-      <updated>1679274033009</updated>
-    </task>
-    <task id="LOCAL-00195" summary="Perception Refactoring">
-      <created>1679274492804</created>
-      <option name="number" value="00195" />
-      <option name="presentableId" value="LOCAL-00195" />
-      <option name="project" value="LOCAL" />
-      <updated>1679274492804</updated>
-    </task>
-    <task id="LOCAL-00196" summary="Perception Refactoring">
-      <created>1679274772962</created>
-      <option name="number" value="00196" />
-      <option name="presentableId" value="LOCAL-00196" />
-      <option name="project" value="LOCAL" />
-      <updated>1679274772962</updated>
-    </task>
-    <task id="LOCAL-00197" summary="Perception Refactoring">
-      <created>1679274855541</created>
-      <option name="number" value="00197" />
-      <option name="presentableId" value="LOCAL-00197" />
-      <option name="project" value="LOCAL" />
-      <updated>1679274855541</updated>
-    </task>
-    <task id="LOCAL-00198" summary="Perception Refactoring">
-      <created>1679274905289</created>
-      <option name="number" value="00198" />
-      <option name="presentableId" value="LOCAL-00198" />
-      <option name="project" value="LOCAL" />
-      <updated>1679274905289</updated>
-    </task>
-    <task id="LOCAL-00199" summary="Perception Refactoring">
-      <created>1679275296676</created>
-      <option name="number" value="00199" />
-      <option name="presentableId" value="LOCAL-00199" />
-      <option name="project" value="LOCAL" />
-      <updated>1679275296676</updated>
-    </task>
-    <task id="LOCAL-00200" summary="Perception Refactoring">
-      <created>1679275455773</created>
-      <option name="number" value="00200" />
-      <option name="presentableId" value="LOCAL-00200" />
-      <option name="project" value="LOCAL" />
-      <updated>1679275455773</updated>
-    </task>
-    <task id="LOCAL-00201" summary="Perception Refactoring">
-      <created>1679275525714</created>
-      <option name="number" value="00201" />
-      <option name="presentableId" value="LOCAL-00201" />
-      <option name="project" value="LOCAL" />
-      <updated>1679275525714</updated>
-    </task>
-    <task id="LOCAL-00202" summary="Perception Refactoring">
-      <created>1679275602096</created>
-      <option name="number" value="00202" />
-      <option name="presentableId" value="LOCAL-00202" />
-      <option name="project" value="LOCAL" />
-      <updated>1679275602096</updated>
-    </task>
-    <task id="LOCAL-00203" summary="Perception Refactoring">
-      <created>1679275907226</created>
-      <option name="number" value="00203" />
-      <option name="presentableId" value="LOCAL-00203" />
-      <option name="project" value="LOCAL" />
-      <updated>1679275907226</updated>
-    </task>
-    <task id="LOCAL-00204" summary="Perception Refactoring">
-      <created>1679276046265</created>
-      <option name="number" value="00204" />
-      <option name="presentableId" value="LOCAL-00204" />
-      <option name="project" value="LOCAL" />
-      <updated>1679276046265</updated>
-    </task>
-    <task id="LOCAL-00205" summary="Perception Refactoring">
-      <created>1679276184981</created>
-      <option name="number" value="00205" />
-      <option name="presentableId" value="LOCAL-00205" />
-      <option name="project" value="LOCAL" />
-      <updated>1679276184981</updated>
-    </task>
-    <task id="LOCAL-00206" summary="Perception Refactoring">
-      <created>1679276396376</created>
-      <option name="number" value="00206" />
-      <option name="presentableId" value="LOCAL-00206" />
-      <option name="project" value="LOCAL" />
-      <updated>1679276396376</updated>
-    </task>
-    <task id="LOCAL-00207" summary="Perception Refactoring">
-      <created>1679276518031</created>
-      <option name="number" value="00207" />
-      <option name="presentableId" value="LOCAL-00207" />
-      <option name="project" value="LOCAL" />
-      <updated>1679276518031</updated>
-    </task>
-    <task id="LOCAL-00208" summary="Perception Refactoring">
-      <created>1679276652275</created>
-      <option name="number" value="00208" />
-      <option name="presentableId" value="LOCAL-00208" />
-      <option name="project" value="LOCAL" />
-      <updated>1679276652275</updated>
-    </task>
-    <task id="LOCAL-00209" summary="Perception Refactoring">
-      <created>1679276805091</created>
-      <option name="number" value="00209" />
-      <option name="presentableId" value="LOCAL-00209" />
-      <option name="project" value="LOCAL" />
-      <updated>1679276805091</updated>
-    </task>
-    <task id="LOCAL-00210" summary="Perception Refactoring">
-      <created>1679276932257</created>
-      <option name="number" value="00210" />
-      <option name="presentableId" value="LOCAL-00210" />
-      <option name="project" value="LOCAL" />
-      <updated>1679276932257</updated>
-    </task>
-    <task id="LOCAL-00211" summary="Perception Refactoring">
-      <created>1679277222104</created>
-      <option name="number" value="00211" />
-      <option name="presentableId" value="LOCAL-00211" />
-      <option name="project" value="LOCAL" />
-      <updated>1679277222104</updated>
-    </task>
-    <task id="LOCAL-00212" summary="Perception Refactoring">
-      <created>1679277374116</created>
-      <option name="number" value="00212" />
-      <option name="presentableId" value="LOCAL-00212" />
-      <option name="project" value="LOCAL" />
-      <updated>1679277374116</updated>
-    </task>
-    <task id="LOCAL-00213" summary="Perception Refactoring">
-      <created>1679277566045</created>
-      <option name="number" value="00213" />
-      <option name="presentableId" value="LOCAL-00213" />
-      <option name="project" value="LOCAL" />
-      <updated>1679277566045</updated>
-    </task>
-    <task id="LOCAL-00214" summary="Perception Refactoring">
-      <created>1679277998797</created>
-      <option name="number" value="00214" />
-      <option name="presentableId" value="LOCAL-00214" />
-      <option name="project" value="LOCAL" />
-      <updated>1679277998797</updated>
-    </task>
-    <task id="LOCAL-00215" summary="Perception Refactoring">
-      <created>1679278369026</created>
-      <option name="number" value="00215" />
-      <option name="presentableId" value="LOCAL-00215" />
-      <option name="project" value="LOCAL" />
-      <updated>1679278369026</updated>
-    </task>
-    <task id="LOCAL-00216" summary="Perception Refactoring">
-      <created>1679278495651</created>
-      <option name="number" value="00216" />
-      <option name="presentableId" value="LOCAL-00216" />
-      <option name="project" value="LOCAL" />
-      <updated>1679278495651</updated>
-    </task>
-    <task id="LOCAL-00217" summary="Perception Refactoring">
-      <created>1679278634193</created>
-      <option name="number" value="00217" />
-      <option name="presentableId" value="LOCAL-00217" />
-      <option name="project" value="LOCAL" />
-      <updated>1679278634193</updated>
-    </task>
-    <task id="LOCAL-00218" summary="Perception Refactoring">
-      <created>1679278801116</created>
-      <option name="number" value="00218" />
-      <option name="presentableId" value="LOCAL-00218" />
-      <option name="project" value="LOCAL" />
-      <updated>1679278801116</updated>
-    </task>
-    <task id="LOCAL-00219" summary="Perception Refactoring">
-      <created>1679279096677</created>
-      <option name="number" value="00219" />
-      <option name="presentableId" value="LOCAL-00219" />
-      <option name="project" value="LOCAL" />
-      <updated>1679279096677</updated>
-    </task>
-    <task id="LOCAL-00220" summary="Perception Refactoring">
-      <created>1679279141889</created>
-      <option name="number" value="00220" />
-      <option name="presentableId" value="LOCAL-00220" />
-      <option name="project" value="LOCAL" />
-      <updated>1679279141889</updated>
-    </task>
-    <task id="LOCAL-00221" summary="Perception Refactoring">
-      <created>1679281701126</created>
-      <option name="number" value="00221" />
-      <option name="presentableId" value="LOCAL-00221" />
-      <option name="project" value="LOCAL" />
-      <updated>1679281701126</updated>
-    </task>
-    <task id="LOCAL-00222" summary="Perception Refactoring">
-      <created>1679282046153</created>
-      <option name="number" value="00222" />
-      <option name="presentableId" value="LOCAL-00222" />
-      <option name="project" value="LOCAL" />
-      <updated>1679282046153</updated>
-    </task>
-    <task id="LOCAL-00223" summary="Perception Refactoring">
-      <created>1679285233002</created>
-      <option name="number" value="00223" />
-      <option name="presentableId" value="LOCAL-00223" />
-      <option name="project" value="LOCAL" />
-      <updated>1679285233002</updated>
-    </task>
-    <task id="LOCAL-00224" summary="Perception Refactoring">
-      <created>1679427275841</created>
-      <option name="number" value="00224" />
-      <option name="presentableId" value="LOCAL-00224" />
-      <option name="project" value="LOCAL" />
-      <updated>1679427275841</updated>
-    </task>
-    <task id="LOCAL-00225" summary="Perception Refactoring">
-      <created>1679436802169</created>
-      <option name="number" value="00225" />
-      <option name="presentableId" value="LOCAL-00225" />
-      <option name="project" value="LOCAL" />
-      <updated>1679436802169</updated>
-    </task>
-    <task id="LOCAL-00226" summary="Final Project scripts">
-      <created>1679437509177</created>
-      <option name="number" value="00226" />
-      <option name="presentableId" value="LOCAL-00226" />
-      <option name="project" value="LOCAL" />
-      <updated>1679437509177</updated>
-    </task>
-    <task id="LOCAL-00227" summary="Final Project scripts">
-      <created>1679437626370</created>
-      <option name="number" value="00227" />
-      <option name="presentableId" value="LOCAL-00227" />
-      <option name="project" value="LOCAL" />
-      <updated>1679437626370</updated>
-    </task>
-    <task id="LOCAL-00228" summary="Final Project scripts">
-      <created>1679437685777</created>
-      <option name="number" value="00228" />
-      <option name="presentableId" value="LOCAL-00228" />
-      <option name="project" value="LOCAL" />
-      <updated>1679437685777</updated>
-    </task>
     <task id="LOCAL-00229" summary="pick and place coordinates as parameters">
       <created>1679438328493</created>
       <option name="number" value="00229" />
@@ -402,7 +66,343 @@
       <option name="project" value="LOCAL" />
       <updated>1679438328493</updated>
     </task>
-    <option name="localTasksCounter" value="230" />
+    <task id="LOCAL-00230" summary="pick and place coordinates as parameters">
+      <created>1679438540318</created>
+      <option name="number" value="00230" />
+      <option name="presentableId" value="LOCAL-00230" />
+      <option name="project" value="LOCAL" />
+      <updated>1679438540318</updated>
+    </task>
+    <task id="LOCAL-00231" summary="pick and place coordinates as parameters">
+      <created>1679438588552</created>
+      <option name="number" value="00231" />
+      <option name="presentableId" value="LOCAL-00231" />
+      <option name="project" value="LOCAL" />
+      <updated>1679438588552</updated>
+    </task>
+    <task id="LOCAL-00232" summary="pick and place coordinates as parameters">
+      <created>1679439132502</created>
+      <option name="number" value="00232" />
+      <option name="presentableId" value="LOCAL-00232" />
+      <option name="project" value="LOCAL" />
+      <updated>1679439132502</updated>
+    </task>
+    <task id="LOCAL-00233" summary="pick and place coordinates as parameters">
+      <created>1679439636469</created>
+      <option name="number" value="00233" />
+      <option name="presentableId" value="LOCAL-00233" />
+      <option name="project" value="LOCAL" />
+      <updated>1679439636469</updated>
+    </task>
+    <task id="LOCAL-00234" summary="pick and place coordinates as parameters">
+      <created>1679439825268</created>
+      <option name="number" value="00234" />
+      <option name="presentableId" value="LOCAL-00234" />
+      <option name="project" value="LOCAL" />
+      <updated>1679439825268</updated>
+    </task>
+    <task id="LOCAL-00235" summary="pick and place coordinates as parameters">
+      <created>1679439958298</created>
+      <option name="number" value="00235" />
+      <option name="presentableId" value="LOCAL-00235" />
+      <option name="project" value="LOCAL" />
+      <updated>1679439958298</updated>
+    </task>
+    <task id="LOCAL-00236" summary="pick and place coordinates as parameters">
+      <created>1679440290384</created>
+      <option name="number" value="00236" />
+      <option name="presentableId" value="LOCAL-00236" />
+      <option name="project" value="LOCAL" />
+      <updated>1679440290384</updated>
+    </task>
+    <task id="LOCAL-00237" summary="basic flow of car loading function">
+      <created>1679442835599</created>
+      <option name="number" value="00237" />
+      <option name="presentableId" value="LOCAL-00237" />
+      <option name="project" value="LOCAL" />
+      <updated>1679442835599</updated>
+    </task>
+    <task id="LOCAL-00238" summary="basic flow of car loading function">
+      <created>1679443133047</created>
+      <option name="number" value="00238" />
+      <option name="presentableId" value="LOCAL-00238" />
+      <option name="project" value="LOCAL" />
+      <updated>1679443133047</updated>
+    </task>
+    <task id="LOCAL-00239" summary="basic flow of car loading function">
+      <created>1679443230903</created>
+      <option name="number" value="00239" />
+      <option name="presentableId" value="LOCAL-00239" />
+      <option name="project" value="LOCAL" />
+      <updated>1679443230903</updated>
+    </task>
+    <task id="LOCAL-00240" summary="basic flow of car loading function">
+      <created>1679443924990</created>
+      <option name="number" value="00240" />
+      <option name="presentableId" value="LOCAL-00240" />
+      <option name="project" value="LOCAL" />
+      <updated>1679443924991</updated>
+    </task>
+    <task id="LOCAL-00241" summary="basic flow of car loading function">
+      <created>1679444065732</created>
+      <option name="number" value="00241" />
+      <option name="presentableId" value="LOCAL-00241" />
+      <option name="project" value="LOCAL" />
+      <updated>1679444065732</updated>
+    </task>
+    <task id="LOCAL-00242" summary="basic flow of car loading function">
+      <created>1679460184048</created>
+      <option name="number" value="00242" />
+      <option name="presentableId" value="LOCAL-00242" />
+      <option name="project" value="LOCAL" />
+      <updated>1679460184048</updated>
+    </task>
+    <task id="LOCAL-00243" summary="basic flow of car loading function">
+      <created>1679462654883</created>
+      <option name="number" value="00243" />
+      <option name="presentableId" value="LOCAL-00243" />
+      <option name="project" value="LOCAL" />
+      <updated>1679462654883</updated>
+    </task>
+    <task id="LOCAL-00244" summary="basic flow of car loading function">
+      <created>1679462789746</created>
+      <option name="number" value="00244" />
+      <option name="presentableId" value="LOCAL-00244" />
+      <option name="project" value="LOCAL" />
+      <updated>1679462789746</updated>
+    </task>
+    <task id="LOCAL-00245" summary="basic flow of car loading function">
+      <created>1679462944894</created>
+      <option name="number" value="00245" />
+      <option name="presentableId" value="LOCAL-00245" />
+      <option name="project" value="LOCAL" />
+      <updated>1679462944894</updated>
+    </task>
+    <task id="LOCAL-00246" summary="basic flow of car loading function">
+      <created>1679463114553</created>
+      <option name="number" value="00246" />
+      <option name="presentableId" value="LOCAL-00246" />
+      <option name="project" value="LOCAL" />
+      <updated>1679463114553</updated>
+    </task>
+    <task id="LOCAL-00247" summary="basic flow of car loading function">
+      <created>1679463461737</created>
+      <option name="number" value="00247" />
+      <option name="presentableId" value="LOCAL-00247" />
+      <option name="project" value="LOCAL" />
+      <updated>1679463461737</updated>
+    </task>
+    <task id="LOCAL-00248" summary="basic flow of car loading function">
+      <created>1679463824229</created>
+      <option name="number" value="00248" />
+      <option name="presentableId" value="LOCAL-00248" />
+      <option name="project" value="LOCAL" />
+      <updated>1679463824229</updated>
+    </task>
+    <task id="LOCAL-00249" summary="basic flow of car loading function">
+      <created>1679463934346</created>
+      <option name="number" value="00249" />
+      <option name="presentableId" value="LOCAL-00249" />
+      <option name="project" value="LOCAL" />
+      <updated>1679463934346</updated>
+    </task>
+    <task id="LOCAL-00250" summary="basic flow of car loading function">
+      <created>1679464094217</created>
+      <option name="number" value="00250" />
+      <option name="presentableId" value="LOCAL-00250" />
+      <option name="project" value="LOCAL" />
+      <updated>1679464094217</updated>
+    </task>
+    <task id="LOCAL-00251" summary="basic flow of car loading function">
+      <created>1679464596561</created>
+      <option name="number" value="00251" />
+      <option name="presentableId" value="LOCAL-00251" />
+      <option name="project" value="LOCAL" />
+      <updated>1679464596561</updated>
+    </task>
+    <task id="LOCAL-00252" summary="basic flow of car loading function">
+      <created>1679464851194</created>
+      <option name="number" value="00252" />
+      <option name="presentableId" value="LOCAL-00252" />
+      <option name="project" value="LOCAL" />
+      <updated>1679464851194</updated>
+    </task>
+    <task id="LOCAL-00253" summary="basic flow of car loading function">
+      <created>1679465187445</created>
+      <option name="number" value="00253" />
+      <option name="presentableId" value="LOCAL-00253" />
+      <option name="project" value="LOCAL" />
+      <updated>1679465187446</updated>
+    </task>
+    <task id="LOCAL-00254" summary="basic flow of car loading function">
+      <created>1679465451100</created>
+      <option name="number" value="00254" />
+      <option name="presentableId" value="LOCAL-00254" />
+      <option name="project" value="LOCAL" />
+      <updated>1679465451100</updated>
+    </task>
+    <task id="LOCAL-00255" summary="basic flow of car loading function">
+      <created>1679465572712</created>
+      <option name="number" value="00255" />
+      <option name="presentableId" value="LOCAL-00255" />
+      <option name="project" value="LOCAL" />
+      <updated>1679465572712</updated>
+    </task>
+    <task id="LOCAL-00256" summary="basic flow of car loading function">
+      <created>1679465749517</created>
+      <option name="number" value="00256" />
+      <option name="presentableId" value="LOCAL-00256" />
+      <option name="project" value="LOCAL" />
+      <updated>1679465749517</updated>
+    </task>
+    <task id="LOCAL-00257" summary="basic flow of car loading function">
+      <created>1679465970927</created>
+      <option name="number" value="00257" />
+      <option name="presentableId" value="LOCAL-00257" />
+      <option name="project" value="LOCAL" />
+      <updated>1679465970927</updated>
+    </task>
+    <task id="LOCAL-00258" summary="basic flow of car loading function">
+      <created>1679466517607</created>
+      <option name="number" value="00258" />
+      <option name="presentableId" value="LOCAL-00258" />
+      <option name="project" value="LOCAL" />
+      <updated>1679466517607</updated>
+    </task>
+    <task id="LOCAL-00259" summary="basic flow of car loading function">
+      <created>1679466594725</created>
+      <option name="number" value="00259" />
+      <option name="presentableId" value="LOCAL-00259" />
+      <option name="project" value="LOCAL" />
+      <updated>1679466594725</updated>
+    </task>
+    <task id="LOCAL-00260" summary="basic flow of car loading function">
+      <created>1679466728999</created>
+      <option name="number" value="00260" />
+      <option name="presentableId" value="LOCAL-00260" />
+      <option name="project" value="LOCAL" />
+      <updated>1679466728999</updated>
+    </task>
+    <task id="LOCAL-00261" summary="basic flow of car loading function">
+      <created>1679467037453</created>
+      <option name="number" value="00261" />
+      <option name="presentableId" value="LOCAL-00261" />
+      <option name="project" value="LOCAL" />
+      <updated>1679467037453</updated>
+    </task>
+    <task id="LOCAL-00262" summary="basic flow of car loading function">
+      <created>1679467109293</created>
+      <option name="number" value="00262" />
+      <option name="presentableId" value="LOCAL-00262" />
+      <option name="project" value="LOCAL" />
+      <updated>1679467109293</updated>
+    </task>
+    <task id="LOCAL-00263" summary="basic flow of car loading function">
+      <created>1679467327294</created>
+      <option name="number" value="00263" />
+      <option name="presentableId" value="LOCAL-00263" />
+      <option name="project" value="LOCAL" />
+      <updated>1679467327294</updated>
+    </task>
+    <task id="LOCAL-00264" summary="basic flow of car loading function">
+      <created>1679467644642</created>
+      <option name="number" value="00264" />
+      <option name="presentableId" value="LOCAL-00264" />
+      <option name="project" value="LOCAL" />
+      <updated>1679467644642</updated>
+    </task>
+    <task id="LOCAL-00265" summary="basic flow of car loading function">
+      <created>1679467783980</created>
+      <option name="number" value="00265" />
+      <option name="presentableId" value="LOCAL-00265" />
+      <option name="project" value="LOCAL" />
+      <updated>1679467783980</updated>
+    </task>
+    <task id="LOCAL-00266" summary="basic flow of car loading function">
+      <created>1679468997993</created>
+      <option name="number" value="00266" />
+      <option name="presentableId" value="LOCAL-00266" />
+      <option name="project" value="LOCAL" />
+      <updated>1679468997993</updated>
+    </task>
+    <task id="LOCAL-00267" summary="basic flow of car loading function">
+      <created>1679469447034</created>
+      <option name="number" value="00267" />
+      <option name="presentableId" value="LOCAL-00267" />
+      <option name="project" value="LOCAL" />
+      <updated>1679469447034</updated>
+    </task>
+    <task id="LOCAL-00268" summary="basic flow of car loading function">
+      <created>1679470289787</created>
+      <option name="number" value="00268" />
+      <option name="presentableId" value="LOCAL-00268" />
+      <option name="project" value="LOCAL" />
+      <updated>1679470289787</updated>
+    </task>
+    <task id="LOCAL-00269" summary="basic flow of car loading function">
+      <created>1679470869765</created>
+      <option name="number" value="00269" />
+      <option name="presentableId" value="LOCAL-00269" />
+      <option name="project" value="LOCAL" />
+      <updated>1679470869765</updated>
+    </task>
+    <task id="LOCAL-00270" summary="basic flow of car loading function">
+      <created>1679471252366</created>
+      <option name="number" value="00270" />
+      <option name="presentableId" value="LOCAL-00270" />
+      <option name="project" value="LOCAL" />
+      <updated>1679471252366</updated>
+    </task>
+    <task id="LOCAL-00271" summary="basic flow of car loading function">
+      <created>1679471664020</created>
+      <option name="number" value="00271" />
+      <option name="presentableId" value="LOCAL-00271" />
+      <option name="project" value="LOCAL" />
+      <updated>1679471664020</updated>
+    </task>
+    <task id="LOCAL-00272" summary="basic flow of car loading function">
+      <created>1679471912193</created>
+      <option name="number" value="00272" />
+      <option name="presentableId" value="LOCAL-00272" />
+      <option name="project" value="LOCAL" />
+      <updated>1679471912193</updated>
+    </task>
+    <task id="LOCAL-00273" summary="basic flow of car loading function">
+      <created>1679472453850</created>
+      <option name="number" value="00273" />
+      <option name="presentableId" value="LOCAL-00273" />
+      <option name="project" value="LOCAL" />
+      <updated>1679472453850</updated>
+    </task>
+    <task id="LOCAL-00274" summary="basic flow of car loading function">
+      <created>1679472780156</created>
+      <option name="number" value="00274" />
+      <option name="presentableId" value="LOCAL-00274" />
+      <option name="project" value="LOCAL" />
+      <updated>1679472780156</updated>
+    </task>
+    <task id="LOCAL-00275" summary="basic flow of car loading function">
+      <created>1679473087407</created>
+      <option name="number" value="00275" />
+      <option name="presentableId" value="LOCAL-00275" />
+      <option name="project" value="LOCAL" />
+      <updated>1679473087407</updated>
+    </task>
+    <task id="LOCAL-00276" summary="basic flow of car loading function">
+      <created>1679473274229</created>
+      <option name="number" value="00276" />
+      <option name="presentableId" value="LOCAL-00276" />
+      <option name="project" value="LOCAL" />
+      <updated>1679473274229</updated>
+    </task>
+    <task id="LOCAL-00277" summary="basic flow of car loading function">
+      <created>1679509794344</created>
+      <option name="number" value="00277" />
+      <option name="presentableId" value="LOCAL-00277" />
+      <option name="project" value="LOCAL" />
+      <updated>1679509794345</updated>
+    </task>
+    <option name="localTasksCounter" value="278" />
     <servers />
   </component>
   <component name="VcsManagerConfiguration">
@@ -412,6 +412,7 @@
     <MESSAGE value="Perception Refactoring" />
     <MESSAGE value="Final Project scripts" />
     <MESSAGE value="pick and place coordinates as parameters" />
-    <option name="LAST_COMMIT_MESSAGE" value="pick and place coordinates as parameters" />
+    <MESSAGE value="basic flow of car loading function" />
+    <option name="LAST_COMMIT_MESSAGE" value="basic flow of car loading function" />
   </component>
 </project>
