@@ -298,7 +298,7 @@ class ArmController():
             self.task.sense_flag = 'idle'
 
         # Place blocking-block on road -> red
-        if self.task.sense_flag == 'Blocking Road':
+        elif self.task.sense_flag == 'Blocking Road':
 
             pick_coords = [self.coordinate['red'][0],
                             self.coordinate['red'][1],
