@@ -353,6 +353,8 @@ class ArmController():
         self.task.center_list = []
         self.task.world_X = 0
         self.task.world_Y = 0
+        self.task.world_x = 0
+        self.task.world_y = 0
         self.task.rect = None
         self.task.box = None
 
