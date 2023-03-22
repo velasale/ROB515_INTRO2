@@ -488,8 +488,8 @@ def main():
     # Instances of Buses
     print('Instances of buses')
     bSensor = rr.Bus(sensor.function(task), "Camera Sensor Bus")
-    bInterpreter = rr.Bus(interpreter.function(bSensor.message), "Interpreter Sensor Bus")
-    bController = rr.Bus(controller.function(bInterpreter.message), "Controller Sensor Bus")
+    bInterpreter = rr.Bus(interpreter.sense_load(bSensor.message), "Interpreter Sensor Bus")
+    bController = rr.Bus(controller.load_car(bInterpreter.message), "Controller Sensor Bus")
     bTerminate = rr.Bus(0, "Termination Bus")
 
     # --- PART 2 ---
@@ -505,7 +505,7 @@ def main():
         "Read Camera Sensor")
 
     wInterpreter = rr.ConsumerProducer(
-        interpreter.function,
+        interpreter.sense_load,
         bSensor,
         bInterpreter,
         0.01,
@@ -513,7 +513,7 @@ def main():
         "Interpret Camera")
 
     wController = rr.ConsumerProducer(
-        controller.function,
+        controller.load_car,
         bInterpreter,
         bController,
         1.0,
