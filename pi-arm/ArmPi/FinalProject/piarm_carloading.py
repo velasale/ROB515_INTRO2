@@ -318,7 +318,7 @@ class ArmController():
             pick_coords = [self.task.world_X, self.task.world_Y, 8]
             place_coords = [self.coordinate['green'][0], self.coordinate['green'][1], self.coordinate['green'][2]]
 
-            self.pickAndPlace(pick_coords, place_coords, self.task.rotation_angle+90)
+            self.pickAndPlace(pick_coords, place_coords, self.task.rotation_angle - 90)
             self.task.act_flag = 'Swapping cargo into car'
             self.task.sense_flag = 'idle'
 
