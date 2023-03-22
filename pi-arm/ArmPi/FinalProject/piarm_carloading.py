@@ -64,8 +64,6 @@ class ArmInterpreter():
         self.task = task
         self.area_max = 0
         self.areaMaxContour = 0
-        self.rect = None
-        self.box = None
         self.count = 0
 
     def function(self, msg):
@@ -200,7 +198,7 @@ class ArmInterpreter():
                     self.task.start_count_t1 = False
                     self.task.t1 = time.time()
                 if time.time() - self.task.t1 > t_threshold:
-                    self.task.rotation_angle = self.rect[2]
+                    self.task.rotation_angle = self.task.rect[2]
                     self.task.start_count_t1 = True
                     self.task.world_X, self.task.world_Y = np.mean(
                         np.array(self.task.center_list).reshape(self.task.count, 2), axis=0)
@@ -215,21 +213,21 @@ class ArmInterpreter():
 
     def labelContour(self):
 
-        self.rect = cv2.minAreaRect(self.areaMaxContour)
-        self.box = np.int0(cv2.boxPoints(self.rect))
+        self.task.rect = cv2.minAreaRect(self.areaMaxContour)
+        self.task.box = np.int0(cv2.boxPoints(self.task.rect))
 
-        self.task.roi = getROI(self.box)
+        self.task.roi = getROI(self.task.box)
         self.task.get_roi = True
 
         # Get the coordinates of the center of the block
-        img_centerx, img_centery = getCenter(self.rect, self.task.roi, self.task.size, square_length)
+        img_centerx, img_centery = getCenter(self.task.rect, self.task.roi, self.task.size, square_length)
         # Convert to real world coordinates
         self.task.world_x, self.task.world_y = convertCoordinate(img_centerx, img_centery, self.task.size)
 
         # Draw Contours
-        cv2.drawContours(self.task.img, [self.box], -1, self.task.range_rgb[self.task.detect_color], 2)
+        cv2.drawContours(self.task.img, [self.task.box], -1, self.task.range_rgb[self.task.detect_color], 2)
         cv2.putText(self.task.img, '(' + str(self.task.world_x) + ',' + str(self.task.world_y) + ')',
-                    (min(self.box[0, 0], self.box[2, 0]), self.box[2, 1] - 10),
+                    (min(self.task.box[0, 0], self.task.box[2, 0]), self.task.box[2, 1] - 10),
                     cv2.FONT_HERSHEY_SIMPLEX, 0.5, self.task.range_rgb[self.task.detect_color], 1)  # draw center point
 
 
@@ -354,6 +352,8 @@ class ArmController():
         self.task.center_list = []
         self.task.world_X = 0
         self.task.world_Y = 0
+        self.task.rect = None
+        self.task.box = None
 
     def initialMove(self):
         """Performs a first approach to the localized object"""
@@ -495,6 +495,8 @@ class ArmTask():
 
         # Actuation Variables
         self.rotation_angle = 0
+        self.rect = None
+        self.box = None
         self.unreachable = False
         self.world_X, self.world_Y = 0, 0
         self.world_x, self.world_y = 0, 0
