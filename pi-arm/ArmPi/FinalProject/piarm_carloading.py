@@ -67,6 +67,7 @@ class ArmInterpreter():
         self.areaMaxContour = 0
         self.rect = None
         self.box = None
+        self.count = 0
 
     def function(self, msg):
         print('Thread: Camera Interpreting...')
@@ -105,13 +106,34 @@ class ArmInterpreter():
         self.area_max = 0
         self.areaMaxContour = 0
 
-        if self.task.flag == 'Waiting to see cargo':
+        # Wait for car to do a loop with cargo
+        if self.task.sense_flag == 'Waiting to see cargo':
 
             self.findContour(frame_lab)
 
-            if self.area_max > 2500:
+            if self.area_max > 2500 and self.count == 0:
+                self.count += 1
                 # Place label and rectangle around contour
                 self.labelContour()
+            elif self.count == 1 and self.area_max < 2500:
+                self.task.sense_flag == 'Blocking Road'
+
+        # Proceed to Wait to car to stop
+        elif self.task.act_flag == 'Waiting for car to stop':
+            self.findContour(frame_lab)
+
+            if self.area.max > 2500:
+                self.labelContour()
+
+                distance_threshold = 0.3
+                time_threshold = 1.5
+                self.decideToMove(distance_threshold, time_threshold)
+
+                if self.task.start_pick_up:
+                    self.task.sense_flag == 'Picking cargo from car'
+
+
+
 
 
 
@@ -273,36 +295,51 @@ class ArmController():
         self.task = msg
 
         # Wait for car to do one loop carrying one blue or green block
-        if self.task.flag == 'Waiting to see cargo':
-            ...
-            self.task.flag = 'Blocking Road'
+        print('Waiting to see cargo')
 
         # Place blocking-block on road -> red
-        if self.task.flag == 'Blocking Road':
-            ...
-            self.task.flag = 'Waiting for car to stop'
+        if self.task.sense_flag == 'Blocking Road':
 
-        # Wait for car to stop on the next loop
-        if self.task.flag == 'Waiting for car to stop':
-            ...
-            self.task.flag = 'Picking cargo from car'
+            pick_coords = [self.coordinate['red'][0],
+                            self.coordinate['red'][1],
+                            self.coordinate['red'][2]]
+
+            place_coords = [0, 20, 2]
+            self.pickAndPlace(pick_coords, place_coords)
+            self.task.act_flag = 'Waiting for car to stop'
 
         # Pick-up block from car and bring it to its respective bin
-        if self.task.flag == 'Picking cargo from car':
-            ...
-            self.task.flag = 'Swapping cargo into car'
+        elif self.task.sense_flag == 'Picking cargo from car':
+
+            pick_coords = [4, 20, 2] # --> to replace with sensed coordinates
+
+            place_coords = [self.coordinate['green'][0],
+                            self.coordinate['green'][1],
+                            self.coordinate['green'][2]]
+
+            self.pickAndPlace(pick_coords, place_coords)
+            self.task.act_flag = 'Swapping cargo into car'
 
         # Then pick-up the other block and put it on top of the car
-        if self.task.flag == 'Swapping cargo into car':
-            ...
-            self.task.flag = 'Removing Block'
+        elif self.task.act_flag == 'Swapping cargo into car':
+
+            pick_coords = [self.coordinate['blue'][0],
+                           self.coordinate['blue'][1],
+                           self.coordinate['blue'][2]]
+
+            place_coords = [4, 20, 2] # --> to replace with sensed coordinates
+            self.pickAndPlace(pick_coords, place_coords)
+            self.task.act_flag = 'Removing Block'
 
         # Remove blocking-block on road -> red
-        if self.task.flag == 'Removing Block':
-            ...
-            self.task.flag = ' Waiting to see cargo'
+        elif self.task.act_flag == 'Removing Block':
+            place_coords = [self.coordinate['red'][0],
+                           self.coordinate['red'][1],
+                           self.coordinate['red'][2]]
 
-
+            pick_coords = [0, 20, 2]
+            self.pickAndPlace(pick_coords, place_coords)
+            self.task.sense_flag = ' Waiting to see cargo'
 
     def resetVariables(self):
         "Reset perception and actuation variables"
@@ -439,7 +476,7 @@ class ArmTask():
 
         # General Variables
         self.__isRunning = True
-        self.target_color = ('red',)
+        self.target_color = ('green',)
         self._stop = False
 
         # Perception Parameters
@@ -461,7 +498,8 @@ class ArmTask():
         self.servo1 = 500
 
         # State flow variables
-        self.flag = 'Waiting to see cargo'
+        self.act_flag = 'Waiting to see cargo'
+        self.sense_flag = 'Waiting to see cargo'
 
     def reset(self):
         ...
