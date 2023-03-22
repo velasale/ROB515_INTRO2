@@ -245,6 +245,7 @@ class ArmController():
             'red': (-15 + 0.5, 12 - 0.5, 1.5),
             'green': (-15 + 0.5, 6 - 0.5, 1.5),
             'blue': (-15 + 0.5, 0 - 0.5, 1.5),
+            'block': (-4, 20, 1.5)
         }
 
     def function(self, msg):
@@ -301,11 +302,8 @@ class ArmController():
         # Place blocking-block on road -> red
         elif self.task.sense_flag == 'Blocking Road':
 
-            pick_coords = [self.coordinate['red'][0],
-                            self.coordinate['red'][1],
-                            self.coordinate['red'][2]]
-
-            place_coords = [-4, 20, 2]
+            pick_coords = [self.coordinate['red'][0], self.coordinate['red'][1], self.coordinate['red'][2]]
+            place_coords = [self.coordinate['block'][0], self.coordinate['block'][1], self.coordinate['block'][2]]
             self.pickAndPlace(pick_coords, place_coords, -90)
             time.sleep(0.1)
             self.initialPose()
@@ -317,10 +315,7 @@ class ArmController():
         elif self.task.sense_flag == 'Picking cargo from car':
 
             pick_coords = [self.task.world_X, self.task.world_Y]
-
-            place_coords = [self.coordinate['green'][0],
-                            self.coordinate['green'][1],
-                            self.coordinate['green'][2]]
+            place_coords = [self.coordinate['green'][0], self.coordinate['green'][1], self.coordinate['green'][2]]
 
             self.pickAndPlace(pick_coords, place_coords, self.task.rotation_angle)
             self.task.act_flag = 'Swapping cargo into car'
@@ -329,10 +324,7 @@ class ArmController():
         # Then pick-up the other block and put it on top of the car
         elif self.task.act_flag == 'Swapping cargo into car':
 
-            pick_coords = [self.coordinate['blue'][0],
-                           self.coordinate['blue'][1],
-                           self.coordinate['blue'][2]]
-
+            pick_coords = [self.coordinate['blue'][0], self.coordinate['blue'][1], self.coordinate['blue'][2]]
             place_coords = [self.task.world_X, self.task.world_Y, 2] # --> to replace with sensed coordinates
             self.pickAndPlace(pick_coords, place_coords, -90)
             self.task.act_flag = 'Removing Block'
@@ -340,11 +332,8 @@ class ArmController():
 
         # Remove blocking-block on road -> red
         elif self.task.act_flag == 'Removing Block':
-            place_coords = [self.coordinate['red'][0],
-                           self.coordinate['red'][1],
-                           self.coordinate['red'][2]]
-
-            pick_coords = [-4, 20, 2]
+            place_coords = [self.coordinate['red'][0], self.coordinate['red'][1], self.coordinate['red'][2]]
+            pick_coords = [self.coordinate['block'][0], self.coordinate['block'][1], self.coordinate['block'][2]]
             self.pickAndPlace(pick_coords, place_coords, -90)
             time.sleep(0.1)
             self.task.act_flag = 'Waiting to see cargo'
