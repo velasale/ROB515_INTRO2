@@ -132,7 +132,7 @@ class ArmInterpreter():
                 if self.task.start_pick_up:
                     self.task.sense_flag == 'Picking cargo from car'
 
-
+        return self.task
 
     def filter(self, frame_gb):
         """Applies filter and Draws a rectangle"""
@@ -334,6 +334,8 @@ class ArmController():
             pick_coords = [0, 20, 2]
             self.pickAndPlace(pick_coords, place_coords)
             self.task.sense_flag = ' Waiting to see cargo'
+
+        return self.task
 
     def resetVariables(self):
         "Reset perception and actuation variables"
