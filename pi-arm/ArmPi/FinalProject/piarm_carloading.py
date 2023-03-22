@@ -250,6 +250,7 @@ class ArmController():
         }
 
         self.z_cargo = 9
+        self.z_way = 14
 
     def function(self, msg):
         print("\nThread: Arm Controller:", self.task.first_move)
@@ -410,6 +411,10 @@ class ArmController():
 
         # Open Paws
         Board.setBusServoPulse(1, self.task.servo1 - 280, 500)
+
+        # Raise for safe
+        AK.setPitchRangeMoving((pick_coords[0], pick_coords[1], 12), -90, -90, 0, 1500)
+        time.sleep(2)
 
         # Rotate Paws
         servo2_angle = getAngle(pick_coords[0], pick_coords[1], rotation_angle)
