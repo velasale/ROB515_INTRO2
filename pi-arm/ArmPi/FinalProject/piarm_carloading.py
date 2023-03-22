@@ -117,6 +117,7 @@ class ArmInterpreter():
 
 
 
+
     def filter(self, frame_gb):
         """Applies filter and Draws a rectangle"""
 
@@ -271,7 +272,6 @@ class ArmController():
         print("\nThread: Arm Controller:", self.task.flag)
         self.task = msg
 
-        self.task.flag = 'Waiting to see cargo'
         # Wait for car to do one loop carrying one blue or green block
         if self.task.flag == 'Waiting to see cargo':
             ...
@@ -461,7 +461,7 @@ class ArmTask():
         self.servo1 = 500
 
         # State flow variables
-        self.flag = ''
+        self.flag = 'Waiting to see cargo'
 
     def reset(self):
         ...
