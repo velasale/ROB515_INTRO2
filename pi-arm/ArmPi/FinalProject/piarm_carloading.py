@@ -99,7 +99,7 @@ class ArmInterpreter():
     def sense_load(self, msg):
         """State Machine to perform cargo sensing"""
 
-        print('Thread: Camera Interpreting...')
+        print('Thread: Camera Interpreting... ', self.task.sense_flag)
         self.task = msg
 
         frame_lab = self.filter(self.task.frame_gb)
@@ -131,12 +131,6 @@ class ArmInterpreter():
 
                 if self.task.start_pick_up:
                     self.task.sense_flag == 'Picking cargo from car'
-
-
-
-
-
-
 
 
 
@@ -291,7 +285,7 @@ class ArmController():
     def load_car(self, msg):
         """State Machine to perform cargo swapping"""
 
-        print("\nThread: Arm Controller:", self.task.flag)
+        print("\nThread: Arm Controller:", self.task.act_flag)
         self.task = msg
 
         # Wait for car to do one loop carrying one blue or green block
