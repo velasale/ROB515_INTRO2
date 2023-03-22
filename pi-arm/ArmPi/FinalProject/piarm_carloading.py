@@ -315,7 +315,7 @@ class ArmController():
         # Pick-up block from car and bring it to its respective bin
         elif self.task.sense_flag == 'Picking cargo from car':
 
-            pick_coords = [self.task.world_X, self.task.world_Y, 8]
+            pick_coords = [self.task.world_X, self.task.world_Y, 9]
             place_coords = [self.coordinate['green'][0], self.coordinate['green'][1], self.coordinate['green'][2]]
 
             self.pickAndPlace(pick_coords, place_coords, self.task.rotation_angle - 90)
@@ -326,7 +326,7 @@ class ArmController():
         elif self.task.act_flag == 'Swapping cargo into car':
 
             pick_coords = [self.coordinate['blue'][0], self.coordinate['blue'][1], self.coordinate['blue'][2]]
-            place_coords = [self.task.world_X, self.task.world_Y, 8] # --> to replace with sensed coordinates
+            place_coords = [self.task.world_X, self.task.world_Y, 9] # --> to replace with sensed coordinates
             self.pickAndPlace(pick_coords, place_coords, 0)
             self.task.act_flag = 'Removing Block'
             self.task.sense_flag = 'idle'
@@ -432,7 +432,7 @@ class ArmController():
         time.sleep(result[2] / 1000)
 
         # Rotate to align block with bin
-        servo2_angle = getAngle(place_coords[0], place_coords[1], -90)
+        servo2_angle = getAngle(place_coords[0], place_coords[1], 0)
         Board.setBusServoPulse(2, servo2_angle, 500)
         time.sleep(0.5)
 
