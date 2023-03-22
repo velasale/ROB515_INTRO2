@@ -325,7 +325,7 @@ class ArmController():
         elif self.task.act_flag == 'Swapping cargo into car':
 
             pick_coords = [self.coordinate['blue'][0], self.coordinate['blue'][1], self.coordinate['blue'][2]]
-            place_coords = [self.task.world_X, self.task.world_Y, 2] # --> to replace with sensed coordinates
+            place_coords = [self.task.world_X, self.task.world_Y, 12] # --> to replace with sensed coordinates
             self.pickAndPlace(pick_coords, place_coords, -90)
             self.task.act_flag = 'Removing Block'
             self.task.sense_flag = 'idle'
