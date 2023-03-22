@@ -118,7 +118,7 @@ class ArmInterpreter():
                 # Place label and rectangle around contour
                 self.labelContour()
             elif self.count == 1 and self.area_max < 2500:
-                self.task.sense_flag == 'Blocking Road'
+                self.task.sense_flag = 'Blocking Road'
 
         # Proceed to Wait to car to stop
         elif self.task.act_flag == 'Waiting for car to stop':
@@ -132,7 +132,7 @@ class ArmInterpreter():
                 self.decideToMove(distance_threshold, time_threshold)
 
                 if self.task.start_pick_up:
-                    self.task.sense_flag == 'Picking cargo from car'
+                    self.task.sense_flag = 'Picking cargo from car'
 
         return self.task
 
