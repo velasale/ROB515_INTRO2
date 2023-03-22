@@ -414,7 +414,7 @@ class ArmController():
         time.sleep(0.8)
 
         # Lower Altitude
-        AK.setPitchRangeMoving((pick_coords[0], pick_coords[1], 2), -90, -90, 0, 1500)
+        AK.setPitchRangeMoving((pick_coords[0], pick_coords[1], pick_coords[2]), -90, -90, 0, 1500)
         time.sleep(2)
 
         # Close paws
