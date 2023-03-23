@@ -562,7 +562,7 @@ def week_5(px):
         interpreter.sharp_edge,     # function that processes data
         bGraySensor,                    # input data bus
         bGrayInterpreter,               # output data bus
-        0.01,                           # delay
+        0.001,                           # delay
         bTerminate,                     # bus to watch for termination signal
         "Interpret Grayscale into line position")
 
@@ -576,7 +576,7 @@ def week_5(px):
     dirController = rr.Consumer(
         controller.steer_towards_line,
         bGrayInterpreter,
-        0.01,
+        0.001,
         bTerminate,
         "Control steering angle")
 
@@ -590,7 +590,7 @@ def week_5(px):
     """ Part 3: Create RossROS Timer object """
     terminationTimer = rr.Timer(
         bTerminate,         # Output data bus
-        120,                  # Duration
+        60,                  # Duration
         0.01,               # Delay between checking termination time
         bTerminate,         # Bus to check for termination signal
         "Termination Timer")
