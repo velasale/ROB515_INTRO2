@@ -553,7 +553,7 @@ def week_5(px):
     graySensor = rr.Producer(
         sensor.adc_list,                # function that will generate data
         bGraySensor,                    # output data bus
-        0.0001,                           # delay between data generation
+        0.001,                           # delay between data generation
         bTerminate,                     # bus to watch for termination signal
         "Read GrayScale sensor signal")
 
@@ -568,21 +568,21 @@ def week_5(px):
     ultrasonicSensor = rr.Producer(
         ultrasonic.read,
         bUltrasonic,
-        0.05,
+        0.01,
         bTerminate,
         "Read and Interpret Ultrasound distance")
 
     dirController = rr.Consumer(
         controller.steer_towards_line,
         bGrayInterpreter,
-        0.0001,
+        0.001,
         bTerminate,
         "Control steering angle")
 
     distController = rr.Consumer(
         dController.move_stop,
         bUltrasonic,
-        0.05,
+        0.01,
         bTerminate,
         "Watching the distance ahead")
 
