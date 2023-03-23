@@ -442,7 +442,7 @@ def week_3(px, sensor="photosensor"):
 if __name__ == "__main__":
     px = picarx_improved.Picarx()
 
-    # week_2(px)
+    # week_2(px)vccvvbc
     week_3(px, "camera")
 
 
