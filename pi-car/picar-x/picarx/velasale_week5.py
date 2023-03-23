@@ -95,11 +95,16 @@ class GrayInterpreter():
         max_reading = max(means)
         # print(min_reading)
 
-        n_mean1 = (mean1 - min_reading) / (max_reading - min_reading)
-        n_mean2 = (mean2 - min_reading) / (max_reading - min_reading)
-        n_mean3 = (mean3 - min_reading) / (max_reading - min_reading)
+        try:
+            n_mean1 = (mean1 - min_reading) / (max_reading - min_reading)
+            n_mean2 = (mean2 - min_reading) / (max_reading - min_reading)
+            n_mean3 = (mean3 - min_reading) / (max_reading - min_reading)
 
-        n_centroid = (n_mean3 - n_mean1) / (n_mean1 + n_mean2 + n_mean3)
+            n_centroid = (n_mean3 - n_mean1) / (n_mean1 + n_mean2 + n_mean3)
+        except ZeroDivisionError:
+            n_centroid = 0
+
+
         print("\nInterpreter - Position of the line: %.2f \n" % n_centroid)
 
         # return means, centroid, n_centroid
