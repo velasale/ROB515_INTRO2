@@ -129,7 +129,7 @@ class ArmInterpreter():
                 self.labelContour()
 
                 distance_threshold = 0.3
-                time_threshold = 2
+                time_threshold = 3
                 self.decideToMove(distance_threshold, time_threshold)
 
                 if self.task.start_pick_up:
