@@ -134,9 +134,9 @@ class DistanceController():
         self.picar_object = picar_object
 
     def move_stop(self, distance):
-        if distance > 10:
-            self.picar_object.forward(10)
-        elif distance < 10:
+        if distance > 5:
+            self.picar_object.forward(1)
+        elif distance < 5:
             self.picar_object.stop()
 
 
