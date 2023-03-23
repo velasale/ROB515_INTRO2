@@ -132,11 +132,21 @@ class DistanceController():
     def __init__(self,
                  picar_object):
         self.picar_object = picar_object
+        self.distances = []
 
     def move_stop(self, distance):
-        if distance > 10:
+
+        self.distances.append(distance)
+
+        if len(self.distance) > 10:
+            self.distances.pop(0)
+
+        mean = st.mean(self.distances)
+
+
+        if mean > 10:
             self.picar_object.forward(1)
-        elif distance < 10:
+        elif mean < 10:
             self.picar_object.stop()
 
 
