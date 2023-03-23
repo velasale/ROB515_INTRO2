@@ -48,6 +48,7 @@ class GrayInterpreter():
     """ Consumer - Producer Class """
 
     def __init__(self, dark_threshold=600, light_threshold=1400, polarity="line_darker"):
+
         self.dark_threshold = dark_threshold
         self.light_threshold = light_threshold
         self.polarity = polarity
@@ -87,8 +88,8 @@ class GrayInterpreter():
         means = [int(mean1), int(mean2), int(mean3)]
 
         # --- Approach 1: Calculates the centroid of the means with respect to the center
-        centroid = (mean3 - mean1) / (mean1 + mean2 + mean3)
-        centroid = centroid / self.normalizer
+        # centroid = (mean3 - mean1) / (mean1 + mean2 + mean3)
+        # centroid = centroid / self.normalizer
 
         # --- Approach 2: Trying to make it more robust for different light conditions
         # It calculates the centroid w.r.t the min and max readings, and therefore is more robust
@@ -97,11 +98,15 @@ class GrayInterpreter():
         max_reading = max(means)
         # print(min_reading)
 
-        n_mean1 = (mean1 - min_reading) / (max_reading - min_reading)
-        n_mean2 = (mean2 - min_reading) / (max_reading - min_reading)
-        n_mean3 = (mean3 - min_reading) / (max_reading - min_reading)
+        try:
+            n_mean1 = (mean1 - min_reading) / (max_reading - min_reading)
+            n_mean2 = (mean2 - min_reading) / (max_reading - min_reading)
+            n_mean3 = (mean3 - min_reading) / (max_reading - min_reading)
 
-        n_centroid = (n_mean3 - n_mean1) / (n_mean1 + n_mean2 + n_mean3)
+            n_centroid = (n_mean3 - n_mean1) / (n_mean1 + n_mean2 + n_mean3)
+        except ZeroDivisionError:
+            n_centroid = 0
+
         print("\nInterpreter - Position of the line: %.2f \n" % n_centroid)
 
         # return means, centroid, n_centroid
@@ -129,12 +134,22 @@ class DistanceController():
     def __init__(self,
                  picar_object):
         self.picar_object = picar_object
+        self.distances = []
 
     def move_stop(self, distance):
-        if distance > 10:
-            self.picar_object.forward(10)
-        elif distance < 10:
+
+        self.distances.append(distance)
+
+        if len(self.distances) > 2:
+            self.distances.pop(0)
+
+        mean = st.mean(self.distances)
+
+        if mean > 10:
+            self.picar_object.forward(1)
+        elif mean < 10:
             self.picar_object.stop()
+            # time.sleep(20)
 
 
 class PicarCamera():
@@ -533,7 +548,7 @@ def week_5(px):
     # Instances of sensor, interpreter and controller
     sensor = GraySensing()
     interpreter = GrayInterpreter()
-    controller = GrayController(px, 20)
+    controller = GrayController(px, 25)
     dController = DistanceController(px)
     ultrasonic = Ultrasonic(Pin('D2'), Pin('D3'))
 
@@ -556,14 +571,14 @@ def week_5(px):
         interpreter.sharp_edge,  # function that processes data
         bGraySensor,  # input data bus
         bGrayInterpreter,  # output data bus
-        0.001,  # delay
+        0.0001,  # delay
         bTerminate,  # bus to watch for termination signal
         "Interpret Grayscale into line position")
 
     ultrasonicSensor = rr.Producer(
         ultrasonic.read,
         bUltrasonic,
-        0.001,
+        0.01,
         bTerminate,
         "Read and Interpret Ultrasound distance")
 
@@ -577,14 +592,14 @@ def week_5(px):
     distController = rr.Consumer(
         dController.move_stop,
         bUltrasonic,
-        0.001,
+        0.01,
         bTerminate,
         "Watching the distance ahead")
 
     """ Part 3: Create RossROS Timer object """
     terminationTimer = rr.Timer(
         bTerminate,  # Output data bus
-        20,  # Duration
+        60,  # Duration
         0.01,  # Delay between checking termination time
         bTerminate,  # Bus to check for termination signal
         "Termination Timer")
