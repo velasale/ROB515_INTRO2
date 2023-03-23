@@ -375,7 +375,7 @@ def week_3(px, sensor="photosensor"):
         e_time = 0
         start = time.time()
 
-        while e_time < 60:
+        while e_time < 120:
             os.system('clear')
             data = px.get_grayscale_data()
 
