@@ -146,8 +146,8 @@ class DistanceController():
         if mean > 10:
             self.picar_object.forward(1)
         elif mean < 10:
-            # self.picar_object.stop()
-            time.sleep(20)
+            self.picar_object.stop()
+            # time.sleep(20)
 
 
 class PicarCamera():
