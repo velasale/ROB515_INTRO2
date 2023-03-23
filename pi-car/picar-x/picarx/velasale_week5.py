@@ -138,7 +138,7 @@ class DistanceController():
 
         self.distances.append(distance)
 
-        if len(self.distances) > 5:
+        if len(self.distances) > 2:
             self.distances.pop(0)
 
         mean = st.mean(self.distances)
@@ -146,7 +146,7 @@ class DistanceController():
         if mean > 10:
             self.picar_object.forward(1)
         elif mean < 10:
-            self.picar_object.stop()
+            # self.picar_object.stop()
             time.sleep(20)
 
 
