@@ -104,7 +104,6 @@ class GrayInterpreter():
         except ZeroDivisionError:
             n_centroid = 0
 
-
         print("\nInterpreter - Position of the line: %.2f \n" % n_centroid)
 
         # return means, centroid, n_centroid
@@ -539,7 +538,7 @@ def week_5(px):
     # Instances of sensor, interpreter and controller
     sensor = GraySensing()
     interpreter = GrayInterpreter()
-    controller = GrayController(px, 20)
+    controller = GrayController(px, 25)
     dController = DistanceController(px)
     ultrasonic = Ultrasonic(Pin('D2'), Pin('D3'))
 
