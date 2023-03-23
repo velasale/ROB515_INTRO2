@@ -85,8 +85,8 @@ class GrayInterpreter():
         means = [int(mean1), int(mean2), int(mean3)]
 
         # --- Approach 1: Calculates the centroid of the means with respect to the center
-        centroid = (mean3 - mean1) / (mean1 + mean2 + mean3)
-        centroid = centroid / self.normalizer
+        # centroid = (mean3 - mean1) / (mean1 + mean2 + mean3)
+        # centroid = centroid / self.normalizer
 
         # --- Approach 2: Trying to make it more robust for different light conditions
         # It calculates the centroid w.r.t the min and max readings, and therefore is more robust
