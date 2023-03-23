@@ -431,7 +431,7 @@ def week_3(px, sensor="photosensor"):
                 if k == 27:
                     break
 
-                if (time.time() - start) >= 4:
+                if (time.time() - start) >= 40:
                     break
 
             print('quit ...')
