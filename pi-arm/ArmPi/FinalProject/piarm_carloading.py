@@ -249,7 +249,7 @@ class ArmController():
             'block': (-10, 20, 1.5)
         }
 
-        self.z_cargo = 8.5
+        self.z_cargo = 7.5
         self.z_way = 14
 
     def function(self, msg):
