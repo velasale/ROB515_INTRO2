@@ -568,7 +568,7 @@ def week_5(px):
     ultrasonicSensor = rr.Producer(
         ultrasonic.read,
         bUltrasonic,
-        0.01,
+        0.02,
         bTerminate,
         "Read and Interpret Ultrasound distance")
 
@@ -582,7 +582,7 @@ def week_5(px):
     distController = rr.Consumer(
         dController.move_stop,
         bUltrasonic,
-        0.01,
+        0.02,
         bTerminate,
         "Watching the distance ahead")
 
