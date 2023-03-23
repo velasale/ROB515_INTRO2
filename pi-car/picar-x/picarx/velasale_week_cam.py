@@ -405,6 +405,8 @@ def week_3(px, sensor="photosensor"):
                 print("The commanded steer angle is: %.2f" % steer_angle)
                 px.forward(1)
 
+                k = cv2.waitKey(1) & 0xFF
+
 
     elif sensor == "camera":
 
