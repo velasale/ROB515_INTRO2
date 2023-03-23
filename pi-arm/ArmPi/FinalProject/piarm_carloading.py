@@ -243,14 +243,14 @@ class ArmController():
         # Placement coordinates of wooden blocks of different colors (x,y,z)
         self.coordinate = {
             #'red': (-15 + 0.5, 12 - 0.5, 1.5),
-            'green': (+15 + 0.5, 6 - 0.5, 1.5),
-            'red': (-15 + 0.5, 8 - 0.5, 1.5),
-            'blue': (-15 + 0.5, 0 - 0.5, 1.5),
+            'green': (+15 + 0.5, 6 - 0.5, 1.0),
+            'red': (-15 + 0.5, 8 - 0.5, 1.0),
+            'blue': (-15 + 0.5, 0 - 0.5, 1.0),
             'block': (-10, 20, 1.5)
         }
 
-        self.z_cargo = 7.5
-        self.z_way = 14
+        self.z_cargo = 7
+        self.z_way = 15
 
     def function(self, msg):
         print("\nThread: Arm Controller:", self.task.first_move)
